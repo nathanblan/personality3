@@ -1,3 +1,4 @@
+#time responses r_time
 # load packages
 library(tidyverse)
 library(ggplot2)
@@ -6,21 +7,14 @@ library(stringr)
 library(modelr)
 
 # load data
-p_data <- 
+r_time <- 
   read_tsv("data-raw/data-final.csv") %>% 
   na.omit() %>% 
   mutate(id = row_number()) %>% 
   select(id, everything())
-View(p_data)
-names(p_data)
 
-# split data into 4 data sets !! Add column "id" to all dataframes !!
-
-# 1 raw responses
-
-# 2 response time
-
-# 3 everything else
-
-# 4 summary stats
-
+#subset time response data
+r_time <- r_time %>% 
+  select(52:101) 
+View(r_time)
+names(r_time)
