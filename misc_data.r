@@ -1,4 +1,4 @@
-#Raw responses
+#other columns(?)
 # load packages
 library(tidyverse)
 library(ggplot2)
@@ -7,14 +7,14 @@ library(stringr)
 library(modelr)
 
 # load data
-responses <- 
+misc <- 
   read_tsv("data-raw/data-final.csv") %>% 
   na.omit()
 
-#subset raw response data
-responses <- responses %>% 
-  select(1:50) %>% 
+#subset time response data
+misc <- misc %>% 
+  select(101:110) %>% 
   mutate(id = row_number()) %>% 
   select(id, everything())
-View(responses)
-names(responses)
+View(misc)
+names(misc)

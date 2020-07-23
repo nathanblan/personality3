@@ -9,12 +9,12 @@ library(modelr)
 # load data
 r_time <- 
   read_tsv("data-raw/data-final.csv") %>% 
-  na.omit() %>% 
-  mutate(id = row_number()) %>% 
-  select(id, everything())
+  na.omit()
 
 #subset time response data
 r_time <- r_time %>% 
-  select(52:101) 
+  select(51:100) %>% 
+  mutate(id = row_number()) %>% 
+  select(id, everything())
 View(r_time)
 names(r_time)
