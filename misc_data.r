@@ -13,7 +13,7 @@ misc <-
 
 #subset time response data
 misc <- misc %>% 
-  select(101:110) %>% 
+  select(dateload:long_appx_lots_of_err) %>% 
   mutate(id = row_number()) %>% 
   select(id, everything())
 View(misc)

@@ -13,7 +13,7 @@ r_time <-
 
 #subset time response data
 r_time <- r_time %>% 
-  select(51:100) %>% 
+  select(EXT1_E:OPN10_E) %>% 
   mutate(id = row_number()) %>% 
   select(id, everything())
 View(r_time)
