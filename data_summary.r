@@ -24,3 +24,7 @@ names(data_sum)
 # Each parameter (column) requires a sumamry and other summaries can be created as see fit
 # Each data group (ie raw_respones) requires a summary
 # Each subset in a group (ie raw_responses$EXT1) should get a summary
+
+EXT1_sum <- data_sum %>%
+  summarise(avg = mean(EXT1),
+            response_sd = sd(EXT1))
