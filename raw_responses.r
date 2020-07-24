@@ -1,12 +1,12 @@
 # Raw responses
-# load packages
+# load packages ----------------------------------------------------------------
 library(tidyverse)
 library(ggplot2)
 library(dplyr)
 library(stringr)
 library(modelr)
 
-# load data
+# load data --------------------------------------------------------------------
 r_data <- 
   read_tsv("data-raw/data-final.csv") %>% 
   na.omit()
@@ -19,9 +19,12 @@ r_data <- r_data %>%
 View(r_data)
 names(r_data)
 
-# response distributions
+# response distributions -------------------------------------------------------
 (EXT1_data <- r_data %>% 
    count(EXT1) %>% 
    filter(EXT1 != 0)) 
 ggplot(data = EXT1_data) +
   geom_bar(mapping = aes(x=EXT1, y=n), stat = "identity")
+
+# response distribution function
+resp_dist(x)
