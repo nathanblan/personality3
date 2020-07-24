@@ -27,4 +27,13 @@ ggplot(data = EXT1_data) +
   geom_bar(mapping = aes(x=EXT1, y=n), stat = "identity")
 
 # response distribution function
-resp_dist(x)
+resp_dist(x)  {
+  
+}
+
+# data summary 
+time_summary <- p_data %>%
+  summarise(avg_time = mean(testelapse),
+            time_sd = sd(testelapse),
+            min_time = min(testelapse),
+            max_time = max(testelapse))
