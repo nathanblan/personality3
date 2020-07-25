@@ -40,10 +40,10 @@ GG_save_pdf = function(list, filename){
 
 f <- function(one_column){
   column_data <- r_data %>% 
-    count(EXT1) %>% 
-    filter(EXT1 != 0)
+    count(one_column) %>% 
+    filter(one_column != 0)
     ggplot(column_data) +
-      geom_bar(mapping = aes(x=EXT1, y=n), stat = "identity")
+      geom_bar(mapping = aes(x=one_column, y=n), stat = "identity")
 }
 
 allplots <- map(r_data, f)
