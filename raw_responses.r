@@ -39,11 +39,15 @@ GG_save_pdf = function(list, filename){
 }
 
 f <- function(one_column){
-  column_data <- r_data %>% 
+  data <- r_data %>% 
     count(one_column) %>% 
     filter(one_column != 0)
-    ggplot(column_data) +
-      geom_bar(mapping = aes(x=one_column, y=n), stat = "identity")
+    ggplot(data) + 
+      geom_bar(aes(one_column, n), stat = "identity")
+}
+
+for (column in r_data) {
+  f(column)
 }
 
 allplots <- map(r_data, f)
