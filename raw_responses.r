@@ -27,9 +27,15 @@ ggplot(data = EXT1_data) +
   geom_bar(mapping = aes(x=EXT1, y=n), stat = "identity")
 
 # response distribution function
-resp_dist(x)  {
-  
+f = function(r_data){
+  r_data %>%
+    count(EXT1) %>%
+    filter(EXT1 != 0)
+ggplot(data = EXT1_data) +
+  geom_bar(mapping = aes(x=EXT1, y=n), stat = "identity")
 }
+
+r_data %>% map(f)
 
 # data summary 
 time_summary <- p_data %>%
