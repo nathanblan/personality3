@@ -5,6 +5,7 @@ library(ggplot2)
 library(dplyr)
 library(stringr)
 library(modelr)
+library(purrr)
 
 # load data --------------------------------------------------------------------
 r_data <- 
@@ -26,20 +27,27 @@ names(r_data)
 ggplot(data = EXT1_data) +
   geom_bar(mapping = aes(x=EXT1, y=n), stat = "identity")
 
-# response distribution function
-f = function(r_data){
-  r_data %>%
-    count(EXT1) %>%
-    filter(EXT1 != 0)
-ggplot(data = EXT1_data) +
-  geom_bar(mapping = aes(x=EXT1, y=n), stat = "identity")
+# response distribution function -----------------------------------------------
+GG_save_pdf = function(list, filename){
+  pdf(filename)
+  for (p in list) {
+    print(p)
+  }
+  
+  dev.off()
+  invisible(NULL)
 }
 
-r_data %>% map(f)
+f <- function(one_column){
+  column_data <- r_data %>% 
+    count(EXT1) %>% 
+    filter(EXT1 != 0)
+    ggplot(column_data) +
+      geom_bar(mapping = aes(x=EXT1, y=n), stat = "identity")
+}
 
-# data summary 
-time_summary <- p_data %>%
-  summarise(avg_time = mean(testelapse),
-            time_sd = sd(testelapse),
-            min_time = min(testelapse),
-            max_time = max(testelapse))
+allplots <- map(r_data, f)
+View(allplots)
+GG_save_pdf(allplots, "plots.pdf")
+
+# ------------------------------------------------------------------------------
