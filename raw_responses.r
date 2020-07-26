@@ -20,13 +20,6 @@ r_data <- r_data %>%
 View(r_data)
 names(r_data)
 
-# response distributions -------------------------------------------------------
-(EXT1_data <- r_data %>% 
-   count(EXT1) %>% 
-   filter(EXT1 != 0)) 
-ggplot(data = EXT1_data) +
-  geom_bar(mapping = aes(x=EXT1, y=n), stat = "identity")
-
 # response distribution function -----------------------------------------------
 GG_save_pdf = function(list, filename){
   pdf(filename)

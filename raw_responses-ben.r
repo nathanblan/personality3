@@ -41,7 +41,8 @@ GG_save_pdf = function(list, filename){
 f <- function(one_column){
   tibble(tmp = one_column) %>% 
     ggplot(aes(x = tmp)) +
-    geom_bar()
+    geom_bar() +
+    ggtitle(one_column)
 }
 
 all_plots <- list()
@@ -49,4 +50,4 @@ for (i in 2:ncol(r_data)) {
   all_plots[[i - 1]] <- f(r_data[[i]])
 }
 
-GG_save_pdf(all_plots, "~/Desktop/plots.pdf")
+GG_save_pdf(all_plots, "plots.pdf")
