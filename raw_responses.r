@@ -46,11 +46,11 @@ f <- function(one_column){
       geom_bar(aes(one_column, n), stat = "identity")
 }
 
-for (column in r_data) {
+allplots <- for (column in r_data) {
   f(column)
 }
 
-allplots <- map(r_data, f)
+#allplots <- map(r_data, f)
 View(allplots)
 GG_save_pdf(allplots, "plots.pdf")
 
