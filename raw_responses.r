@@ -21,30 +21,14 @@ View(r_data)
 names(r_data)
 
 # response distribution function -----------------------------------------------
-GG_save_pdf = function(list, filename){
-  pdf(filename)
-  for (p in list) {
-    print(p)
-  }
-  
-  dev.off()
-  invisible(NULL)
-}
-
-f <- function(one_column){
-  data <- r_data %>% 
-    count(one_column) %>% 
-    filter(one_column != 0)
-    ggplot(data) + 
-      geom_bar(aes(one_column, n), stat = "identity")
-}
-
-allplots <- for (column in r_data) {
-  f(column)
-}
-
-#allplots <- map(r_data, f)
-View(allplots)
-GG_save_pdf(allplots, "plots.pdf")
+r_data %>% 
+  sample_frac(0.01) %>% 
+  select(-id) %>% 
+  gather(question, response) %>% 
+  count(question, response) %>% 
+  mutate(n = n / 1000) %>%  # lets work in thousands
+  ggplot(aes(x = response, y = n)) +
+  geom_col() +
+  facet_wrap(~ question, scales = "free")
 
 # ------------------------------------------------------------------------------
