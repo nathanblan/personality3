@@ -14,6 +14,7 @@ r_time <-
 #subset time response data
 r_time <- r_time %>% 
   select(EXT1_E:OPN10_E) %>% 
+  sample_frac(0.01) %>%
   mutate(id = row_number()) %>% 
   select(id, everything())
 #View(r_time)
@@ -34,7 +35,7 @@ f <- function(one_column){
   tibble(tmp = one_column) %>%
     ggplot(aes(x = tmp)) +
     geom_bar() +
-    ggtitle(sprintf("%s",))
+    ggtitle(sprintf("%s", r_data[[i]]))
 }
 
 time_plots <- list()
