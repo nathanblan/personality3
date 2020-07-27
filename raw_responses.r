@@ -21,7 +21,7 @@ View(r_data)
 names(r_data)
 
 # response distribution function -----------------------------------------------
-# harder way (that saves a PDF of all plots to desktop)
+# save as pdf
 GG_save_pdf = function(list, filename){
   pdf(filename)
   for (p in list) {

@@ -31,10 +31,10 @@ GG_save_pdf = function(list, filename){
 }
 
 f <- function(one_column){
-  tibble(tmp = one_column) %>% 
+  tibble(tmp = one_column) %>%
     ggplot(aes(x = tmp)) +
     geom_bar() +
-    ggtitle(sprintf("%s", one_column))
+    ggtitle(sprintf("%s",))
 }
 
 time_plots <- list()
