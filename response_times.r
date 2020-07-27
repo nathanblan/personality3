@@ -16,5 +16,30 @@ r_time <- r_time %>%
   select(EXT1_E:OPN10_E) %>% 
   mutate(id = row_number()) %>% 
   select(id, everything())
-View(r_time)
+#View(r_time)
 names(r_time)
+
+# response distribution function -----------------------------------------------
+GG_save_pdf = function(list, filename){
+  pdf(filename)
+  for (p in list) {
+    print(p)
+  }
+  
+  dev.off()
+  invisible(NULL)
+}
+
+f <- function(one_column){
+  tibble(tmp = one_column) %>% 
+    ggplot(aes(x = tmp)) +
+    geom_bar() +
+    ggtitle(sprintf("%s", one_column))
+}
+
+time_plots <- list()
+for (i in 2:ncol(r_data)) {
+  time_plots[[i - 1]] <- f(r_data[[i]])
+}
+
+GG_save_pdf(time_plots, "time_plots.pdf")
