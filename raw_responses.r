@@ -10,9 +10,10 @@ r_data <-
 # subset raw response data
 r_data <- r_data %>% 
   select(EXT1:OPN10) %>% 
-  sample_frac(0.10) %>% 
   mutate(id = row_number()) %>% 
   select(id, everything())
+
+
 View(r_data)
 names(r_data)
 
