@@ -1,12 +1,6 @@
  # Raw responses
 # load packages ----------------------------------------------------------------
 library(tidyverse)
-library(ggplot2)
-library(dplyr)
-library(stringr)
-library(modelr)
-library(purrr)
-library(class)
 
 # load data --------------------------------------------------------------------
 r_data <- 
