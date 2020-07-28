@@ -17,6 +17,16 @@ r_data <- r_data %>%
 View(r_data)
 names(r_data)
 
+# - keyed ----------------------------------------------------------------------
+inv_keyed <- list(EXT2, EXT4, EXT6,
+                  EXT8, EXT10, EST1,
+                  EST3, EST5, EST6, 
+                  EST7, EST8, EST9, 
+                  EST10, AGR1, AGR3,
+                  AGR5, AGR7, CSN2, 
+                  CSN4, CSN6, CSN8, 
+                  OPN2, OPN4, OPN6)
+
 # add totals for each column ---------------------------------------------------
 r_data$EXT_sum <- rowSums(r_data[,2:11])
 r_data$EST_sum <- rowSums(r_data[,12:21])
