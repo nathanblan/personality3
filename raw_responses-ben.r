@@ -18,7 +18,7 @@ r_data %>%
 
 # easy way (that just creates a plot in R)
 r_data %>% 
-  sample_frac(0.01) %>% 
+  sample_frac(0.10) %>% 
   select(-id) %>% 
   gather(question, response) %>% 
   count(question, response) %>% 
@@ -26,6 +26,8 @@ r_data %>%
   ggplot(aes(x = response, y = n)) +
   geom_col() +
   facet_wrap(~ question, scales = "free")
+
+ggsave("plots/plotsallinone.pdf")
 
 # harder way (that saves a PDF of all plots to desktop)
 GG_save_pdf = function(list, filename){
