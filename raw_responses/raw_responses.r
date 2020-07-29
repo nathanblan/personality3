@@ -17,6 +17,16 @@ r_data <- r_data %>%
 View(r_data)
 names(r_data)
 
+
+# bens suggested code -----------------------------------------------------
+r_data %>% 
+  select(id:OPN6) %>% 
+  mutate_at( # mutate_at applies a function to each column you tell it to
+    vars(EXT2, EXT4, OPN6), # within vars() you'll want to list all reverse coded questions
+    ~ recode(., `1` = 5, `2` = 4, `4` = 2, `5` = 1)
+  )
+
+
 # - keyed ----------------------------------------------------------------------
 inv_data <- r_data %>% 
   select(EXT2, EXT4, EXT6,
