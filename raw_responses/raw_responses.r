@@ -59,7 +59,7 @@ r_data <- r_data %>%
     ) %>% 
   mutate(id = row_number()) %>% 
   select(id, everything())
-
+r_data[r_data == 0] <- NA
 names(r_data)
 
 
@@ -117,7 +117,7 @@ GG_save_pdf(response_plots, "response_plots.pdf")
 set.seed(1)
 r_data_small <- r_data %>% 
   sample_frac(0.2) %>% 
-  replace_with_na_all(~.x == 0)
+
 
 k_model <- r_data_small %>% 
   select(-id) %>% 
