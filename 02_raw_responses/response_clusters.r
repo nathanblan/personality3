@@ -13,7 +13,7 @@ r_data_small <- scale(r_data_small)
 names(r_data_small)
 
 #Principle Component Analysis -------------------------------------------------- 
-S <- cov(r_data_small[,50:56]) #S matrix covariance
+S <- cov(r_data_small[,51:56]) #S matrix covariance
 S.variance <- sum(diag(S)) #total variance or sum of eigenvalues of S
 S.eigen <-  eigen(S) #compute eigenvalues and vectors of S
 S.variance # view results of eigen() and variance
@@ -23,7 +23,7 @@ for (s in S.eigen$values) { #print eigenvalues
 plot(S.eigen$values, xlab = 'Eigenvalue Number', ylab = 'Eigenvalue Size', main = 'Scree Graph') +
   lines(S.eigen$values) 
 
-R <- cor(r_data_small[,50:56]) #R matrix correlation
+R <- cor(r_data_small[,51:56]) #R matrix correlation
 R.eigen <-eigen(R)
 for (r in R.eigen$values) { #print eigenvalues
   print(r / sum(R.eigen$values))
@@ -32,7 +32,7 @@ plot(R.eigen$values, xlab = 'Eigenvalue Number', ylab = 'Eigenvalue Size', main 
   lines(R.eigen$values) 
 
 #calculate pca 
-r_data_small.pca <- prcomp(r_data_small[,50:56])
+r_data_small.pca <- prcomp(r_data_small[,51:56])
 summary(r_data_small.pca)
 names(r_data_small.pca)
 #Principal Variance Explained
