@@ -1,14 +1,15 @@
 # classification models --------------------------------------------------------
 #load libraries ----------------------------------------------------------------
 library(ggfortify)
-
+library(cluster)
+library(fpc)
 #set up clustering data --------------------------------------------------------
 set.seed(1)
 r_data_small <- r_data %>% 
-  sample_frac(0.2) %>% 
-  na.omit(r_data)
+  sample_frac(0.2) 
 
-scale(r_data_small)
+r_data_small <- na.omit(r_data_small)
+r_data_small <- scale(r_data_small)
 names(r_data_small)
 
 #Principle Component Analysis -------------------------------------------------- 
@@ -36,10 +37,29 @@ summary(r_data_small.pca)
 pca.plot <- autoplot(r_data_small.pca, data = r_data_small, colour = 'id')
 pca.plot
 
-#initial model -----------------------------------------------------------------  
-k_model <- r_data_small %>% 
-  select(-id) %>% 
-  kmeans(50, nstart = 50)
+#initial model -----------------------------------------------------------------
+# Determine number of clusters
+wss <- (nrow(r_data_small)-1)*sum(apply(r_data_small,2,var))
+for (i in 2:15) wss[i] <- sum(kmeans(r_data_small,
+                                     centers=i)$withinss)
+plot(1:15, wss, type="b", xlab="Number of Clusters",
+     ylab="Within groups sum of squares")
 
-k_model$tot.withinss
-# read islr and determine number of clusters we need, and how much of the data we really need to explain
+# K-Means Cluster Analysis
+fit <- kmeans(r_data_small, 5) # 5 cluster solution
+# get cluster means
+aggregate(r_data_small,by=list(fit$cluster),FUN=mean)
+# append cluster assignment
+r_data_small <- data.frame(r_data_small, fit$cluster)
+
+# K-Means Clustering with 5 clusters
+fit <- kmeans(r_data_small, 5)
+
+# Cluster Plot against 1st 2 principal components
+
+# vary parameters for most readable graph
+clusplot(r_data_small, fit$cluster, color=TRUE, shade=TRUE,
+         labels=2, lines=0)
+
+# Centroid Plot against 1st 2 discriminant functions
+plotcluster(r_data_small, fit$cluster)
