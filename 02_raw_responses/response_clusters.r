@@ -40,7 +40,7 @@ pca.plot
 #initial model -----------------------------------------------------------------
 # Determine number of clusters
 wss <- (nrow(r_data_small)-1)*sum(apply(r_data_small,2,var))
-for (i in 2:15) wss[i] <- sum(kmeans(r_data_small,
+ for (i in 2:15) wss[i] <- sum(kmeans(r_data_small,
                                      centers=i)$withinss)
 plot(1:15, wss, type="b", xlab="Number of Clusters",
      ylab="Within groups sum of squares")
