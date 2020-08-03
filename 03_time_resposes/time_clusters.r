@@ -61,7 +61,8 @@ fit2 <- kmeans(r_time_small, 3)
 fit2$tot.withinss
 fit2$withinss 
 
-i <- c(1,2,3,4)
-x <- r_time_small[,i]
-cl <- kmeans(x, 3, nstart = 50)
-plot(x, col = cl$cluster, main = "Time Sums")
+ext_times <- c(2,3,4,5,6,7,8,9,10,11)
+ext.x <- r_time_small[,ext_times]
+cl <- kmeans(ext.x, 2, nstart = 50)
+plot(ext.x, col = cl$cluster, main = "Time Sums")
+print(cl)
