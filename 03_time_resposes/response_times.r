@@ -63,11 +63,11 @@ r_time[r_time == 0] <- NA
 names(r_time)
 
 # add totals for each column ---------------------------------------------------
-r_data$EXT_sum <- rowSums(r_data[,2:11])
-r_data$EST_sum <- rowSums(r_data[,12:21])
-r_data$AGR_sum <- rowSums(r_data[,22:31])
-r_data$CSN_sum <- rowSums(r_data[,32:41])
-r_data$OPN_sum <- rowSums(r_data[,42:51])
+r_time$EXT_sum <- rowSums(r_time[,2:11])
+r_time$EST_sum <- rowSums(r_time[,12:21])
+r_time$AGR_sum <- rowSums(r_time[,22:31])
+r_time$CSN_sum <- rowSums(r_time[,32:41])
+r_time$OPN_sum <- rowSums(r_time[,42:51])
 
 # response distribution function -----------------------------------------------
 GG_save_pdf = function(list, filename){

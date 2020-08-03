@@ -8,10 +8,11 @@ set.seed(2)
 r_time_small <- r_time %>% 
   sample_frac(0.2) 
 
+names(r_time_small)
 r_time_small <- na.omit(r_time_small)
 r_time_small <- scale(r_time_small)
-names(r_time_small)
 
+View(r_time_small)
 #Principle Component Analysis -------------------------------------------------- 
 time_S <- cov(r_time_small[,52:56]) #S matrix covariance
 time_S.variance <- sum(diag(time_S)) #total variance or sum of eigenvalues of S
@@ -26,7 +27,7 @@ plot(time_S.eigen$values, xlab = 'Eigenvalue Number', ylab = 'Eigenvalue Size', 
 #calculate pca 
 r_time_small.pca <- prcomp(r_time_small[,52:56])
 summary(r_time_small.pca)
-names(r_time_small.pca)
+
 #Principal Variance Explained
 time.var <- r_time_small.pca$sdev
 time_pve <- time.var/sum(time.var)
@@ -49,13 +50,13 @@ plot(1:15, wss, type="b", xlab="Number of Clusters",
      ylab="Within groups sum of squares")
 
 # K-Means Cluster Analysis
-fit <- kmeans(r_time_small, 5) # 5 cluster solution
+fit <- kmeans(r_time_small, 2) # 5 cluster solution
 # get cluster means
 aggregate(r_time_small,by=list(fit$cluster),FUN=mean)
 # append cluster assignment
 r_time_small <- data.frame(r_time_small, fit$cluster)
 
 # K-Means Clustering with 5 clusters
-fit <- kmeans(r_time_small, 3)
-fit$tot.withinss
-fit$withinss #The variation is *quite* large, maybe we didn't scale and center it right? 
+fit2 <- kmeans(r_time_small, 3)
+fit2$tot.withinss
+fit2$withinss 
