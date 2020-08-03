@@ -60,3 +60,8 @@ r_time_small <- data.frame(r_time_small, fit$cluster)
 fit2 <- kmeans(r_time_small, 3)
 fit2$tot.withinss
 fit2$withinss 
+
+i <- c(1,2,3,4)
+x <- r_time_small[,i]
+cl <- kmeans(x, 3, nstart = 50)
+plot(x, col = cl$cluster, main = "Time Sums")
