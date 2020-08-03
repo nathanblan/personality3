@@ -57,7 +57,7 @@ plot(1:15, wss, type="b", xlab="Number of Clusters",
      ylab="Within groups sum of squares")
 
 # K-Means Cluster Analysis
-fit <- kmeans(r_data_small, 5) # 5 cluster solution
+fit <- kmeans(r_data_small, 2) # 5 cluster solution
 # get cluster means
 aggregate(r_data_small,by=list(fit$cluster),FUN=mean)
 # append cluster assignment
