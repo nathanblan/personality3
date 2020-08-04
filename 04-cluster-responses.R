@@ -18,3 +18,5 @@ tibble(
   geom_point()
 
 # K means TO DO
+fit <- kmeans(small, 3)
+fit$centers %>% View()
