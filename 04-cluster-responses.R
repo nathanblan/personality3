@@ -18,3 +18,12 @@ tibble(
   geom_point()
 
 # K means TO DO
+fit <- kmeans(small, 3)
+fit$centers %>% 
+  as_tibble() %>% 
+  select(1:10) %>% 
+  mutate(id = row_number()) %>% 
+  gather(var, val, -id) %>% 
+  ggplot(aes(x = var, y = val, fill = as.factor(id))) +
+  geom_col(position = "dodge") + 
+  coord_flip()
