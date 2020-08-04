@@ -63,3 +63,4 @@ raw_time <-
   mutate_at(vars(EXT01_E:OPN10_E), replace_with_NA)
 
 raw_time %>% write_rds("data-clean/raw_time.rds")
+
