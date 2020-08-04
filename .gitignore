@@ -2,4 +2,6 @@
 .RData
 .Rproj.user
 data-raw/
+data-clean/
+01_data-raw/
 .DS_Store
