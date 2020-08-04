@@ -1,3 +1,5 @@
+# response clusters ------------------------------------------------------------
+
 library(tidyverse)
 raw <- 
   read_rds("data-clean/raw.rds") %>% 
@@ -13,13 +15,14 @@ cum_perc_var_explained <- cumsum(small.pca$sdev / sum(small.pca$sdev))
 tibble(
   component = 1:length(cum_perc_var_explained),
   cum_perc_var_explained
-) %>% 
+) %>% #Look for elbow, find number of components / clusters that explain large portions of the data
   ggplot(aes(x = component, y  = cum_perc_var_explained)) +
   geom_point()
 
 # K means TO DO
+
 fit <- kmeans(small, 3)
-fit$centers %>% 
+fit$centers %>% #plot means of each cluster, representing how high people each cluster scored
   as_tibble() %>% 
   select(1:10) %>% 
   mutate(id = row_number()) %>% 
