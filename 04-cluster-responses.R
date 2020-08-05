@@ -20,6 +20,7 @@ small <- raw %>% sample_frac(0.05) %>% select(-id)
 
 # PCA
 small.pca <- prcomp(small)
+names(small.pca)
 cum_perc_var_explained <- cumsum(small.pca$sdev / sum(small.pca$sdev))
 
 tibble(
@@ -33,13 +34,15 @@ tibble(
 names(small)
 # Determine number of clusters
 wss <- (nrow(ext))*sum(apply(ext,2,var))
+wss
 for (i in 2:10) wss[i] <- sum(kmeans(ext,
                                      centers=i)$withinss)
+wss
 plot(1:10, wss, type="b", xlab="Number of Clusters",
      ylab="Within groups sum of squares")
 
 fit.ext <- kmeans(small, 5)
-p1 <- fit.ext$centers %>% #plot means of each cluster, representing how high people each cluster scored
+fit.ext$centers %>% #plot means of each cluster, representing how high people each cluster scored
   as_tibble() %>% 
   select(EXT01:EXT10) %>% 
   mutate(id = row_number()) %>% 
@@ -49,7 +52,7 @@ p1 <- fit.ext$centers %>% #plot means of each cluster, representing how high peo
   coord_flip()
 
 fit.est <- kmeans(small, 5)
-p2 <- fit.est$centers %>% #plot means of each cluster, representing how high people each cluster scored
+fit.est$centers %>% #plot means of each cluster, representing how high people each cluster scored
   as_tibble() %>% 
   select(EST01:EST10) %>% 
   mutate(id = row_number()) %>% 
@@ -59,7 +62,7 @@ p2 <- fit.est$centers %>% #plot means of each cluster, representing how high peo
   coord_flip()
 
 fit.agr <- kmeans(small, 5)
-p3 <- fit.agr$centers %>% #plot means of each cluster, representing how high people each cluster scored
+fit.agr$centers %>% #plot means of each cluster, representing how high people each cluster scored
   as_tibble() %>% 
   select(AGR01:AGR10) %>% 
   mutate(id = row_number()) %>% 
@@ -69,7 +72,8 @@ p3 <- fit.agr$centers %>% #plot means of each cluster, representing how high peo
   coord_flip()
 
 fit.csn <- kmeans(small, 5)
-p4 <- fit.csn$centers %>% #plot means of each cluster, representing how high people each cluster scored
+fit.csn
+fit.csn$centers %>% #plot means of each cluster, representing how high people each cluster scored
   as_tibble() %>% 
   select(CSN01:CSN10) %>% 
   mutate(id = row_number()) %>% 
@@ -79,7 +83,7 @@ p4 <- fit.csn$centers %>% #plot means of each cluster, representing how high peo
   coord_flip()
 
 fit.opn <- kmeans(small, 5)
-p5 <- fit.opn$centers %>% #plot means of each cluster, representing how high people each cluster scored
+fit.opn$centers %>% #plot means of each cluster, representing how high people each cluster scored
   as_tibble() %>% 
   select(OPN01:OPN10) %>% 
   mutate(id = row_number()) %>% 
