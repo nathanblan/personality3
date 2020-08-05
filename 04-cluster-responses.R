@@ -20,11 +20,31 @@ tibble(
   geom_point()
 
 # K means TO DO
-
-fit <- kmeans(small, 3)
-fit$centers %>% #plot means of each cluster, representing how high people each cluster scored
+names(small)
+fit.ext <- kmeans(small, 5)
+fit.ext$centers %>% #plot means of each cluster, representing how high people each cluster scored
   as_tibble() %>% 
-  select(1:10) %>% 
+  select(EXT01:EXT10) %>% 
+  mutate(id = row_number()) %>% 
+  gather(var, val, -id) %>% 
+  ggplot(aes(x = var, y = val, fill = as.factor(id))) +
+  geom_col(position = "dodge") + 
+  coord_flip()
+
+fit.est <- kmeans(small, 5)
+fit.est$centers %>% #plot means of each cluster, representing how high people each cluster scored
+  as_tibble() %>% 
+  select(EST01:EST10) %>% 
+  mutate(id = row_number()) %>% 
+  gather(var, val, -id) %>% 
+  ggplot(aes(x = var, y = val, fill = as.factor(id))) +
+  geom_col(position = "dodge") + 
+  coord_flip()
+
+fit.agr <- kmeans(small, 5)
+fit.agr$centers %>% #plot means of each cluster, representing how high people each cluster scored
+  as_tibble() %>% 
+  select(AGR01:AGR10) %>% 
   mutate(id = row_number()) %>% 
   gather(var, val, -id) %>% 
   ggplot(aes(x = var, y = val, fill = as.factor(id))) +
