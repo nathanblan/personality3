@@ -32,14 +32,6 @@ tibble(
 
 # K means TO DO
 names(small)
-# Determine number of clusters
-wss <- (nrow(ext))*sum(apply(ext,2,var))
-wss
-for (i in 2:10) wss[i] <- sum(kmeans(ext,
-                                     centers=i)$withinss)
-wss
-plot(1:10, wss, type="b", xlab="Number of Clusters",
-     ylab="Within groups sum of squares")
 
 fit.ext <- kmeans(small, 5)
 fit.ext$centers %>% #plot means of each cluster, representing how high people each cluster scored
