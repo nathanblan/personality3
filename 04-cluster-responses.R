@@ -1,5 +1,6 @@
 # response clusters ------------------------------------------------------------
 library(tidyverse)
+library(broom)
 
 raw <- 
   read_rds("data-clean/raw.rds") %>% 
