@@ -50,3 +50,23 @@ fit.agr$centers %>% #plot means of each cluster, representing how high people ea
   ggplot(aes(x = var, y = val, fill = as.factor(id))) +
   geom_col(position = "dodge") + 
   coord_flip()
+
+fit.csn <- kmeans(small, 5)
+fit.csn$centers %>% #plot means of each cluster, representing how high people each cluster scored
+  as_tibble() %>% 
+  select(CSN01:CSN10) %>% 
+  mutate(id = row_number()) %>% 
+  gather(var, val, -id) %>% 
+  ggplot(aes(x = var, y = val, fill = as.factor(id))) +
+  geom_col(position = "dodge") + 
+  coord_flip()
+
+fit.opn <- kmeans(small, 5)
+fit.opn$centers %>% #plot means of each cluster, representing how high people each cluster scored
+  as_tibble() %>% 
+  select(OPN01:OPN10) %>% 
+  mutate(id = row_number()) %>% 
+  gather(var, val, -id) %>% 
+  ggplot(aes(x = var, y = val, fill = as.factor(id))) +
+  geom_col(position = "dodge") + 
+  coord_flip()
