@@ -33,6 +33,8 @@ tibble(
 # K means TO DO
 names(small)
 
+# use cumsum of withiness to determine best number of clusters
+
 fit.ext <- kmeans(small, 5)
 fit.ext$centers %>% #plot means of each cluster, representing how high people each cluster scored
   as_tibble() %>% 
