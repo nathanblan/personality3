@@ -1,5 +1,7 @@
 # response clusters ------------------------------------------------------------
-library(tidyverse)
+library(tidyverse)  # data manipulation
+library(cluster)    # clustering algorithms
+library(factoextra) # clustering algorithms & visualization
 library(broom)
 
 raw <- 
@@ -31,11 +33,12 @@ tibble(
   ggplot(aes(x = component, y  = cum_perc_var_explained)) +
   geom_point()
 
-# K means TO DO
+# K means TO DO ----------------------------------------------------------------
 names(small)
 
 # use cumsum of withiness to determine best number of clusters
 
+# ext --------------------------------------------------------------------------
 fit.ext <- kmeans(ext, 5)
 fit.ext$centers %>% #plot means of each cluster, representing how high people each cluster scored
   as_tibble() %>% 
@@ -48,6 +51,7 @@ fit.ext$centers %>% #plot means of each cluster, representing how high people ea
 
 
 
+# est --------------------------------------------------------------------------
 fit.est <- kmeans(small, 5)
 fit.est$centers %>% #plot means of each cluster, representing how high people each cluster scored
   as_tibble() %>% 
