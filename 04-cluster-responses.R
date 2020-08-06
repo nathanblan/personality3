@@ -14,13 +14,13 @@ agr <- raw %>%
   select(AGR01:AGR10)
 csn <- raw %>% 
   select(CSN01:CSN10)
-ext <- raw %>% 
+opn <- raw %>% 
   select(OPN01:OPN10)
 # run code below with ALL data not just small
 small <- raw %>% sample_frac(0.05) %>% select(-id)
 
-# PCA
-small.pca <- prcomp(small)
+# PCA using 
+small.pca <- prcomp(ext)
 names(small.pca)
 cum_perc_var_explained <- cumsum(small.pca$sdev / sum(small.pca$sdev))
 
@@ -36,7 +36,7 @@ names(small)
 
 # use cumsum of withiness to determine best number of clusters
 
-fit.ext <- kmeans(small, 5)
+fit.ext <- kmeans(ext, 5)
 fit.ext$centers %>% #plot means of each cluster, representing how high people each cluster scored
   as_tibble() %>% 
   select(EXT01:EXT10) %>% 
@@ -45,6 +45,8 @@ fit.ext$centers %>% #plot means of each cluster, representing how high people ea
   ggplot(aes(x = var, y = val, fill = as.factor(id))) +
   geom_col(position = "dodge") + 
   coord_flip()
+
+
 
 fit.est <- kmeans(small, 5)
 fit.est$centers %>% #plot means of each cluster, representing how high people each cluster scored
@@ -67,7 +69,6 @@ fit.agr$centers %>% #plot means of each cluster, representing how high people ea
   coord_flip()
 
 fit.csn <- kmeans(small, 5)
-fit.csn
 fit.csn$centers %>% #plot means of each cluster, representing how high people each cluster scored
   as_tibble() %>% 
   select(CSN01:CSN10) %>% 
