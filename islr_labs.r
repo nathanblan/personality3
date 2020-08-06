@@ -38,5 +38,3 @@ set.seed(4)
 km.2=kmeans (x,5, nstart =20) # arg2 signinifies no. of cluster sizes to try, 
                               # nstart signifies pool of cluster sizes to choose from
 km.2
-km.2$tot.withinss# the total within-cluster sum of squares,
-                 # which we seek to minimize by performing K-means clustering 
