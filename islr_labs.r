@@ -38,3 +38,16 @@ set.seed(4)
 km.2=kmeans (x,5, nstart =20) # arg2 signinifies no. of cluster sizes to try, 
                               # nstart signifies pool of cluster sizes to choose from
 km.2
+km.2$centers
+plot(cumsum(km.2$tot.withinss), xlab="Clusters", ylab=" Cumulative withinss", type='b')
+
+withinss <- list(c())
+km3=kmeans(x,2)
+withinss[1] <- km3$tot.withinss
+km4=kmeans(x,3)
+withinss[2] <- km4$tot.withinss
+km5=kmeans(x,4)
+withinss[3] <- km5$tot.withinss
+km6=kmeans(x,5)
+withinss[4] <- km6$tot.withinss
+plot(cumsum(withinss), xlab="Clusters", ylab=" Cumulative withinss", type='b')
