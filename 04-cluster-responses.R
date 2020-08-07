@@ -21,7 +21,7 @@ opn <- raw %>%
 # run code below with ALL data not just small
 small <- raw %>% sample_frac(0.05) %>% select(-id)
 
-# PCA using 
+# PCA 
 small.pca <- prcomp(ext)
 names(small.pca)
 cum_perc_var_explained <- cumsum(small.pca$sdev / sum(small.pca$sdev))
