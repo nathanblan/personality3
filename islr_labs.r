@@ -73,3 +73,15 @@ x=matrix(rnorm (30*3), ncol=3)
 dd=as.dist(1-cor(t(x)))
 plot(hclust(dd, method ="complete"), main=" Complete Linkage with Correlation -Based Distance ", 
      xlab="", sub ="")
+
+### https://uc-r.github.io/kmeans_clustering#replication ### tutorial ----------
+library(tidyverse)  # data manipulation
+library(cluster)    # clustering algorithms
+library(factoextra) # clustering algorithms & visualization
+
+df <- USArrests
+df <- na.omit(df)
+df <- scale(df)
+head(df)
+distance <- get_dist(df) #for computing a distance matrix between the rows of a data matrix
+fviz_dist(distance, gradient = list(low = "#00AFBB", mid = "white", high = "#FC4E07"))#visualizing distance matrix
