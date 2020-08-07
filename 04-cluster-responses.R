@@ -22,9 +22,9 @@ opn <- raw %>%
 small <- raw %>% sample_frac(0.05) %>% select(-id)
 
 # PCA 
-small.pca <- prcomp(ext)
-names(small.pca)
-cum_perc_var_explained <- cumsum(small.pca$sdev / sum(small.pca$sdev))
+ext.pca <- prcomp(ext)
+names(ext.pca)
+cum_perc_var_explained <- cumsum(ext.pca$sdev / sum(ext.pca$sdev))
 
 tibble(
   component = 1:length(cum_perc_var_explained),
