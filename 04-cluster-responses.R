@@ -38,6 +38,17 @@ names(small)
 
 # use cumsum of withiness to determine best number of clusters
 
+# small
+fit <- kmeans(small, 3)
+fit$centers %>% 
+  as_tibble() %>% 
+  select(1:10) %>% 
+  mutate(id = row_number()) %>% 
+  gather(var, val, -id) %>% 
+  ggplot(aes(x = var, y = val, fill = as.factor(id))) +
+  geom_col(position = "dodge") + 
+  coord_flip()
+
 # ext --------------------------------------------------------------------------
 fit.ext <- kmeans(ext, 5)
 fit.ext$centers %>% #plot means of each cluster, representing how high people each cluster scored
@@ -48,8 +59,6 @@ fit.ext$centers %>% #plot means of each cluster, representing how high people ea
   ggplot(aes(x = var, y = val, fill = as.factor(id))) +
   geom_col(position = "dodge") + 
   coord_flip()
-
-
 
 # est --------------------------------------------------------------------------
 fit.est <- kmeans(small, 5)
