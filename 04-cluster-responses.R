@@ -39,7 +39,7 @@ names(small)
 # use cumsum of withiness to determine best number of clusters
 
 # small
-fit <- kmeans(small, 3)
+fit <- kmeans(raw, 5)
 fit$centers %>% 
   as_tibble() %>% 
   select(1:10) %>% 
