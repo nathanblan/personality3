@@ -28,8 +28,12 @@ results %>%
   geom_point()
 
 # Step 2: Now fit k-means with the optimal number of clusters
-
+kmout <- kmeans(results, 3)
 # Step 3: Use the code that you sent me to interpret the clusters
+#04 cluster responses for each set if questions
 # For example, get conclusions such as "the first cluster is low on extroversion questions"
 
 # Step 4: Look at how clusters vary across countries etc.
+
+group_by(country)
+plot(color = country)
