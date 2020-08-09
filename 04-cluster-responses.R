@@ -8,100 +8,32 @@ raw <-
   read_rds("data-clean/raw.rds") %>% 
   na.omit()
 
-ext <- raw %>% 
-  select(EXT01:EXT10)
-est <- raw %>% 
-  select(EST01:EST10)
-agr <- raw %>% 
-  select(AGR01:AGR10)
-csn <- raw %>% 
-  select(CSN01:CSN10)
-opn <- raw %>% 
-  select(OPN01:OPN10)
-# run code below with ALL data not just small
-small <- raw %>% sample_frac(0.05) %>% select(-id)
+# K-means -------------------------------
 
-# PCA 
-ext.pca <- prcomp(ext)
-names(ext.pca)
-cum_perc_var_explained <- cumsum(ext.pca$sdev / sum(ext.pca$sdev))
+# Step 1: Find the optimal number of clusters
+# I wrote some code to get started
 
-tibble(
-  component = 1:length(cum_perc_var_explained),
-  cum_perc_var_explained
-) %>% #Look for elbow, find number of components / clusters that explain large portions of the data
-  ggplot(aes(x = component, y  = cum_perc_var_explained)) +
+custom_kmeans <- function(clusters, data){
+  fit <- kmeans(data, clusters, nstart = 10)
+  percent <- fit$betweenss / fit$totss
+  tibble(clusters = clusters, fit = list(fit), percent = percent)
+}
+
+results <- 
+  1:10 %>% 
+  map_df(custom_kmeans, raw)
+
+results %>% 
+  ggplot(aes(x = clusters, y = percent)) +
   geom_point()
 
-# K means TO DO ----------------------------------------------------------------
-names(small)
+# Step 2: Now fit k-means with the optimal number of clusters
+kmout <- kmeans(results, 3)
+# Step 3: Use the code that you sent me to interpret the clusters
+#04 cluster responses for each set if questions
+# For example, get conclusions such as "the first cluster is low on extroversion questions"
 
-# use cumsum of withiness to determine best number of clusters
+# Step 4: Look at how clusters vary across countries etc.
 
-# small
-fit <- kmeans(raw, 5)
-fit$centers %>% 
-  as_tibble() %>% 
-  select(1:10) %>% 
-  mutate(id = row_number()) %>% 
-  gather(var, val, -id) %>% 
-  ggplot(aes(x = var, y = val, fill = as.factor(id))) +
-  geom_col(position = "dodge") + 
-  coord_flip()
-
-# ext --------------------------------------------------------------------------
-fit.ext <- kmeans(ext, 5)
-fit.ext$centers %>% #plot means of each cluster, representing how high people each cluster scored
-  as_tibble() %>% 
-  select(EXT01:EXT10) %>% 
-  mutate(id = row_number()) %>% 
-  gather(var, val, -id) %>% 
-  ggplot(aes(x = var, y = val, fill = as.factor(id))) +
-  geom_col(position = "dodge") + 
-  coord_flip()
-
-# est --------------------------------------------------------------------------
-fit.est <- kmeans(est, 5)
-fit.est$centers %>% #plot means of each cluster, representing how high people each cluster scored
-  as_tibble() %>% 
-  select(EST01:EST10) %>% 
-  mutate(id = row_number()) %>% 
-  gather(var, val, -id) %>% 
-  ggplot(aes(x = var, y = val, fill = as.factor(id))) +
-  geom_col(position = "dodge") + 
-  coord_flip()
-
-# agr --------------------------------------------------------------------------
-fit.agr <- kmeans(agr, 5)
-fit.agr$centers %>% #plot means of each cluster, representing how high people each cluster scored
-  as_tibble() %>% 
-  select(AGR01:AGR10) %>% 
-  mutate(id = row_number()) %>% 
-  gather(var, val, -id) %>% 
-  ggplot(aes(x = var, y = val, fill = as.factor(id))) +
-  geom_col(position = "dodge") + 
-  coord_flip()
-
-# csn --------------------------------------------------------------------------
-fit.csn <- kmeans(csn, 5)
-fit.csn$centers %>% #plot means of each cluster, representing how high people each cluster scored
-  as_tibble() %>% 
-  select(CSN01:CSN10) %>% 
-  mutate(id = row_number()) %>% 
-  gather(var, val, -id) %>% 
-  ggplot(aes(x = var, y = val, fill = as.factor(id))) +
-  geom_col(position = "dodge") + 
-  coord_flip()
-
-# opn --------------------------------------------------------------------------
-fit.opn <- kmeans(opn, 5)
-fit.opn$centers %>% #plot means of each cluster, representing how high people each cluster scored
-  as_tibble() %>% 
-  select(OPN01:OPN10) %>% 
-  mutate(id = row_number()) %>% 
-  gather(var, val, -id) %>% 
-  ggplot(aes(x = var, y = val, fill = as.factor(id))) +
-  geom_col(position = "dodge") + 
-  coord_flip()
-
-# hierarchical clustering ------------------------------------------------------
+group_by(country)
+plot(color = country)
