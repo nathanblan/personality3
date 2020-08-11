@@ -35,5 +35,6 @@ kmout <- kmeans(results, 3)
 
 # Step 4: Look at how clusters vary across countries etc.
 
-group_by(country)
-plot(color = country)
+group_by(raw$country)
+raw %>% 
+  plot(color = country)
