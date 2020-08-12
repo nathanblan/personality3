@@ -9,7 +9,8 @@ raw <-
   na.omit()
 
 # K-means ----------------------------------------------------------------------
-
+distance <- get_dist(raw)
+fviz_dist(distance, gradient = list(low = "#00AFBB", mid = "white", high = "#FC4E07"))
 # Step 1: Find the optimal number of clusters
 # I wrote some code to get started
 
@@ -31,6 +32,9 @@ results %>%
 # Step 2: Now fit k-means with the optimal number of clusters
 kmout <- kmeans(results, 3)
 kmout
+
+kmraw <- kmeans(raw, 3, 25)
+str(kmraw)
 # Step 3: Use the code that you sent me to interpret the clusters
 kmout$centers %>% 
   as_tibble() %>% 
