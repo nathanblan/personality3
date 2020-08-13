@@ -26,6 +26,7 @@ results <-
 
 results %>% 
   ggplot(aes(x = clusters, y = percent)) +
+  geom_line() + S
   geom_point()
 #>>> The plot reveals that the first 2 clusters explain ~88% of the withiness <<<#
 
@@ -34,7 +35,10 @@ kmout <- kmeans(results, 3)
 kmout
 
 kmraw <- kmeans(raw, 3, 25)
-str(kmraw)
+kmraw
+
+fviz_nbclust(raw, kmeans, method = "silhouette")
+
 # Step 3: Use the code that you sent me to interpret the clusters
 kmout$centers %>% 
   as_tibble() %>% 
