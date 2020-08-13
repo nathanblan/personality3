@@ -8,6 +8,7 @@ raw <-
   read_rds("data-clean/raw.rds") %>% 
   na.omit()
 
+set.seed(10)
 # K-means ----------------------------------------------------------------------
 
 # Step 1: Find the optimal number of clusters
