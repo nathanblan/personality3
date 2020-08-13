@@ -12,9 +12,6 @@ small <- raw %>% sample_frac(0.01) %>% select(-id)
 
 set.seed(5)
 # K-means ----------------------------------------------------------------------
-distance <- get_dist(small)
-fviz_dist(distance, gradient = list(low = "#00AFBB", mid = "white", high = "#FC4E07"))
-fviz_nbclust(small, kmeans, method = "wss")
 
 # Step 1: Find the optimal number of clusters
 # I wrote some code to get started
@@ -38,11 +35,6 @@ results %>%
 # Step 2: Now fit k-means with the optimal number of clusters
 kmout <- kmeans(results, 3)
 kmout
-
-kmraw <- kmeans(small, 3, 25)
-kmraw
-
-fviz_nbclust(small, kmeans, method = "silhouette")
 
 # Step 3: Use the code that you sent me to interpret the clusters
 kmout$centers %>% 
