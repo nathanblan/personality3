@@ -19,12 +19,12 @@ csn <- raw %>%
 opn <- raw %>% 
   select(OPN01:OPN10)
 # run code below with ALL data not just small
-small <- raw %>% sample_frac(0.05) %>% select(-id)
+#using all data is too large
 
 # PCA 
-ext.pca <- prcomp(ext)
-names(ext.pca)
-cum_perc_var_explained <- cumsum(ext.pca$sdev / sum(ext.pca$sdev))
+raw.pca <- prcomp(raw)
+names(raw.pca)
+cum_perc_var_explained <- cumsum(raw.pca$sdev / sum(raw.pca$sdev))
 
 tibble(
   component = 1:length(cum_perc_var_explained),
@@ -39,10 +39,9 @@ names(small)
 # use cumsum of withiness to determine best number of clusters
 
 # small
-fit <- kmeans(raw, 5)
+fit <- kmeans(raw, 6)
 fit$centers %>% 
   as_tibble() %>% 
-  select(1:10) %>% 
   mutate(id = row_number()) %>% 
   gather(var, val, -id) %>% 
   ggplot(aes(x = var, y = val, fill = as.factor(id))) +
@@ -50,7 +49,7 @@ fit$centers %>%
   coord_flip()
 
 # ext --------------------------------------------------------------------------
-fit.ext <- kmeans(ext, 5)
+fit.ext <- kmeans(ext, 6)
 fit.ext$centers %>% #plot means of each cluster, representing how high people each cluster scored
   as_tibble() %>% 
   select(EXT01:EXT10) %>% 
