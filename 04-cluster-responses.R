@@ -8,6 +8,8 @@ raw <-
   read_rds("data-clean/raw.rds") %>% 
   na.omit()
 
+small <- raw %>% sample_frac(0.05) %>% select(-id)
+
 # K-means ----------------------------------------------------------------------
 distance <- get_dist(raw)
 fviz_dist(distance, gradient = list(low = "#00AFBB", mid = "white", high = "#FC4E07"))
@@ -26,7 +28,7 @@ results <-
 
 results %>% 
   ggplot(aes(x = clusters, y = percent)) +
-  geom_line() + S
+  geom_line() +
   geom_point()
 #>>> The plot reveals that the first 2 clusters explain ~88% of the withiness <<<#
 

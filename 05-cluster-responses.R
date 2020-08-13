@@ -20,7 +20,6 @@ opn <- raw %>%
   select(OPN01:OPN10)
 # run code below with ALL data not just small
 #using all data is too large
-small <- raw %>% sample_frac(0.05) %>% select(-id)
 
 # PCA 
 raw.pca <- prcomp(raw)
