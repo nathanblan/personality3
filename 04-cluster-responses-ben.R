@@ -27,6 +27,20 @@ results <-
 results %>% 
   ggplot(aes(x = clusters, y = percent)) +
   geom_point()
+#PCA
+# PCA 
+small.pca <- prcomp(small)
+names(small.pca)
+cum_perc_var_explained <- cumsum(small.pca$sdev / sum(small.pca$sdev))
+
+tibble(
+  component = 1:length(cum_perc_var_explained),
+  cum_perc_var_explained
+) %>% #Look for elbow, find number of components / clusters that explain large portions of the data
+  ggplot(aes(x = component, y  = cum_perc_var_explained)) +
+  geom_point() + 
+  geom_line()
+
 #>>> The plot reveals that the first 2 clusters explain ~88% of the withiness <<<#
 
 # Step 2: Now fit k-means with the optimal number of clusters
