@@ -6,7 +6,8 @@ library(broom)
 
 raw <- 
   read_rds("data-clean/raw.rds") %>% 
-  na.omit()
+  na.omit() %>% 
+  select(-id)
 
 set.seed(5)
 # PCA --------------------------------------------------------------------------
@@ -24,8 +25,10 @@ pr.out$sdev
 
 
 #cov matrix?
-cov(raw, t(raw), use="complete.obs")
-
-(Cl <- cov(raw))
-## Graphical Correlation Matrix:
-symnum(Cl) # 
+traw <- as_tibble(t(raw))
+dim(traw)
+dim(raw)
+raw_cov <- as_tibble(cor(raw))
+names(raw_cov)
+raw_cov
+symnum(raw_cov) # highly correlated
