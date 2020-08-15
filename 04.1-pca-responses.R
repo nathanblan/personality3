@@ -12,6 +12,8 @@ set.seed(5)
 # PCA --------------------------------------------------------------------------
 pr.out=prcomp(raw)
 names(pr.out)
+dim(raw)
+dim(pr.out$x) #check that we now have a 2 x n matrix
 pr.out$center
 pr.out$rotation
 pr.out$sdev
@@ -21,5 +23,9 @@ pr.out$sdev
 (pve=pr.var/sum(pr.var))
 
 
-#plot PVE explained by each component, as well as the cumulative PVE
+#cov matrix?
+cov(raw, t(raw), use="complete.obs")
 
+(Cl <- cov(raw))
+## Graphical Correlation Matrix:
+symnum(Cl) # 
