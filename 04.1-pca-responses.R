@@ -29,6 +29,16 @@ traw <- as_tibble(t(raw))
 dim(traw)
 dim(raw)
 raw_cov <- as_tibble(cov(raw))
-range(eigen(raw_cov, only=T)$val) # 
+dim(raw_cov)
+eg <- as_tibble(eigen(raw_cov)$vectors) 
 names(raw_cov)
 raw_cov
+dim(eg)
+eg <- eg %>% 
+  select(1:2) %>% 
+  t()
+dim(eg)
+raw <- raw %>% 
+  as_tibble() %>% 
+  t()
+mm <- raw%*%eg
