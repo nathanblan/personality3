@@ -6,9 +6,10 @@ library(broom)
 
 raw <- 
   read_rds("data-clean/raw.rds") %>% 
-  na.omit()
+  na.omit() %>% 
+  select(-id)
 
-set.seed(10)
+set.seed(5)
 # K-means ----------------------------------------------------------------------
 
 # Step 1: Find the optimal number of clusters
@@ -28,11 +29,16 @@ results %>%
   ggplot(aes(x = clusters, y = percent)) +
   geom_point()
 
-#>>> The plot reveals that the first 2 clusters explain ~88% of the withiness <<<#
-
+#>>> The plot reveals that the first 2 clusters explain ~75% of the withiness <<<#
+names(kmout)
 # Step 2: Now fit k-means with the optimal number of clusters
-kmout <- kmeans(results, 3)
-kmout
+kmout <- kmeans(raw, 2)
+#compress centers vectors
+dim(kmout$centers) # 2 50
+dim(eg) # 2 50
+kmcomp <- kmout$centers%*%t(eg) #compress centroid vectors
+plot(kmcomp)
+
 # Step 3: Use the code that you sent me to interpret the clusters
 kmout$centers %>% 
   as_tibble() %>% 
