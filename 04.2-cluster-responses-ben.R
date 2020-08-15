@@ -33,10 +33,10 @@ results %>%
 names(kmout)
 
 # Step 2: Now fit k-means with the optimal number of clusters
-kmout <- kmeans(raw, 3)
+kmout <- kmeans(raw, 2)
 plot(kmout$cluster)
 
-#compress centers vectors
+#compress centers vectors for visualization
 kmcomp <- as_tibble(t(kmout$centers)%*%eg) #compress centroid vectors
 compout <- kmeans(kmcomp, 2)
 names(compout)
