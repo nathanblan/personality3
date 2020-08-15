@@ -43,4 +43,7 @@ raw <- raw %>%
   as_tibble() %>% 
   as.matrix()
 dim(raw)
-mm <- raw%*%t(eg)
+mm <- raw%*%t(eg) #matrix multiplication result for PCA from raw, compressed for visualization
+plot(mm)
+# from this graph we can determine that 2 clusters does seem to reflect a good portion of the data
+# We can use kmeans on "raw" using 2 clusters
