@@ -28,7 +28,7 @@ pr.out$sdev
 traw <- as_tibble(t(raw))
 dim(traw)
 dim(raw)
-raw_cov <- as_tibble(cor(raw))
+raw_cov <- as_tibble(cov(raw))
+range(eigen(raw_cov, only=T)$val) # 
 names(raw_cov)
 raw_cov
-symnum(raw_cov) # highly correlated
