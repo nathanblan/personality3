@@ -34,18 +34,32 @@ names(kmout)
 
 # Step 2: Now fit k-means with the optimal number of clusters
 kmout <- kmeans(raw, 2)
+plot(kmout$cluster)
+assignments <- augment(kmout, raw)
+names(assignments)
+ggplot(data = assignments) +
+  geom_point(aes(kmout, color = .cluster)) +
+  labs(color = "Cluster Assignment",
+       title = "K-Means Clustering Results with K = 2")
+
 #compress centers vectors
-dim(kmout$centers) # 2 50
-dim(eg) # 2 50
-kmcomp <- as_tibble(kmout$centers%*%t(eg)) #compress centroid vectors
-names(kmcomp)
-dim(kmcomp)
-assignments <- augment(kmout, kmcomp)
+kmcomp <- as_tibble(t(kmout$centers)%*%eg) #compress centroid vectors
+compout <- kmeans(kmcomp, 2)
+names(compout)
+assignments <- augment(compout, kmcomp)
 ggplot(data = assignments) +
   geom_point(aes(x = V1, y = V2, color = .cluster)) +
   labs(color = "Cluster Assignment",
        title = "K-Means Clustering Results with K = 2")
 
+# Coordinates of individuals
+ind.coord <- as.data.frame(get_pca_ind(res.pca)$coord)
+# Add clusters obtained using the K-means algorithm
+ind.coord$cluster <- factor(res.km$cluster)
+# Add Species groups from the original data sett
+ind.coord$Species <- df$Species
+# Data inspection
+head(ind.coord)
 # Step 3: Use the code that you sent me to interpret the clusters
 final$centers %>% 
   as_tibble() %>% 
