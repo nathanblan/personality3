@@ -31,19 +31,23 @@ results %>%
 
 #>>> The plot reveals that the first 2 clusters explain ~75% of the withiness <<<#
 names(kmout)
+
 # Step 2: Now fit k-means with the optimal number of clusters
 kmout <- kmeans(raw, 2)
 #compress centers vectors
 dim(kmout$centers) # 2 50
 dim(eg) # 2 50
-kmcomp <- kmout$centers%*%t(eg) #compress centroid vectors
-plot(x, data = NULL, class = NULL, size = 2,
-     legend.position = c("right", "bottom", "left", "top", "none"),
-     title = "K-Means Results", xlab = "Principal Component 1",
-     ylab = "Principal Component 2")
+kmcomp <- as_tibble(kmout$centers%*%t(eg)) #compress centroid vectors
+names(kmcomp)
+dim(kmcomp)
+assignments <- augment(kmout, kmcomp)
+ggplot(data = assignments) +
+  geom_point(aes(x = V1, y = V2, color = .cluster)) +
+  labs(color = "Cluster Assignment",
+       title = "K-Means Clustering Results with K = 2")
 
 # Step 3: Use the code that you sent me to interpret the clusters
-kmout$centers %>% 
+final$centers %>% 
   as_tibble() %>% 
   select(1:10) %>% 
   mutate(id = row_number()) %>% 
@@ -57,6 +61,7 @@ kmout$centers %>%
 
 # Step 4: Look at how clusters vary across countries etc.
 
-group_by(raw$country)
-raw %>% 
-  plot(color = country)
+raw %>%
+  mutate(Cluster = final$cluster) %>%
+  group_by(Cluster) %>%
+  summarise_all("mean")
