@@ -37,7 +37,10 @@ kmout <- kmeans(raw, 2)
 dim(kmout$centers) # 2 50
 dim(eg) # 2 50
 kmcomp <- kmout$centers%*%t(eg) #compress centroid vectors
-plot(kmcomp)
+plot(x, data = NULL, class = NULL, size = 2,
+     legend.position = c("right", "bottom", "left", "top", "none"),
+     title = "K-Means Results", xlab = "Principal Component 1",
+     ylab = "Principal Component 2")
 
 # Step 3: Use the code that you sent me to interpret the clusters
 kmout$centers %>% 
