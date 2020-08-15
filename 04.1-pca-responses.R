@@ -36,9 +36,11 @@ raw_cov
 dim(eg)
 eg <- eg %>% 
   select(1:2) %>% 
-  t()
+  t() %>% 
+  as.matrix()
 dim(eg)
 raw <- raw %>% 
   as_tibble() %>% 
-  t()
-mm <- raw%*%eg
+  as.matrix()
+dim(raw)
+mm <- raw%*%t(eg)
