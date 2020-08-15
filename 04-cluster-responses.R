@@ -8,7 +8,7 @@ raw <-
   read_rds("data-clean/raw.rds") %>% 
   na.omit()
 
-small <- raw %>% sample_frac(0.01) %>% select(-id)
+small <- raw %>% sample_frac(0.1) %>% select(-id)
 
 set.seed(5)
 # K-means ----------------------------------------------------------------------
@@ -33,8 +33,13 @@ results %>%
 #>>> The plot reveals that the first 2 clusters explain ~88% of the withiness <<<#
 
 # Step 2: Now fit k-means with the optimal number of clusters
-kmout <- kmeans(results, 3)
-kmout
+kmout <- kmeans(results, 2)
+small %>%
+  as_tibble() %>%
+  mutate(cluster = kmout$cluster,
+         state = row.names(id)) %>%
+  ggplot(aes(UrbanPop, Murder, color = factor(cluster), label = state)) +
+  geom_text()
 
 # Step 3: Use the code that you sent me to interpret the clusters
 kmout$centers %>% 
