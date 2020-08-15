@@ -46,7 +46,7 @@ ggplot(data = assignments) +
   labs(color = "Cluster Assignment",
        title = "K-Means Clustering Results with K = 2")
 
-#step 3: interpret using the code you sent me
+#step 3: kmeans as a bar graph
 kmout$centers %>% 
   as_tibble() %>% 
   mutate(id = row_number()) %>% 
