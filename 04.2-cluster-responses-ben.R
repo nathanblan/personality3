@@ -55,7 +55,7 @@ kmout$centers %>%
   geom_col(position = "dodge") + 
   coord_flip()
 
-#04 cluster responses for each set if questions
+#04 cluster responses for each set if questions?
 # For example, get conclusions such as "the first cluster is low on extroversion questions"
 
 # Step 4: Look at how clusters vary across countries etc.
