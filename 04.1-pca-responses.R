@@ -24,7 +24,8 @@ pr.out$sdev
 (pve=pr.var/sum(pr.var))
 
 
-#manually perform PCA as prcomp does not seem to have any effect
+# manually perform PCA ---------------------------------------------------------
+# as prcomp does not seem to have any effect
 traw <- as_tibble(t(raw))
 dim(traw)
 dim(raw)
