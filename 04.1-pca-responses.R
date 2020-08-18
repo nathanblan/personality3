@@ -24,7 +24,7 @@ pr.out$sdev
 (pve=pr.var/sum(pr.var))
 
 
-#cov matrix?
+#manually perform PCA as prcomp does not seem to have any effect
 traw <- as_tibble(t(raw))
 dim(traw)
 dim(raw)
@@ -44,6 +44,7 @@ raw <- raw %>%
   as.matrix()
 dim(raw)
 mm <- raw%*%t(eg) #matrix multiplication result for PCA from raw, compressed for visualization
-plot(mm)
+plot(mm) # plot resulting from PCA
+
 # from this graph we can determine that 2 clusters does seem to reflect a good portion of the data
 # We can use kmeans on "raw" using 2 clusters
