@@ -86,4 +86,8 @@ raw_sums <-
 r_data %>% write_rds("data-clean/r_data.rds")
 raw %>% write_rds("data-clean/raw.rds")
 raw_sums %>% write_rds("data-clean/raw_sums.rds")
-View(r_data)
+
+r_data %>% 
+  names()
+  
+View(r_data$country)
