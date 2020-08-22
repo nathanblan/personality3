@@ -82,6 +82,11 @@ raw_sums <-
     OPN_sum = rowSums(raw[ , 42:51])
   )
 
+#filter for 0 observaions
+
+r_data_0 <- r_data %>% 
+  filter(r_data =="0")
+View(r_data_0)
 # export
 r_data %>% write_rds("data-clean/r_data.rds")
 raw %>% write_rds("data-clean/raw.rds")
