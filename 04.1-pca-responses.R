@@ -7,7 +7,8 @@ library(broom)
 raw <- 
   read_rds("data-clean/raw.rds") %>% 
   na.omit() %>% 
-  select(-id)
+  select(-id) %>% 
+  sample_frac(0.01)
 
 set.seed(5)
 # PCA --------------------------------------------------------------------------
@@ -18,6 +19,8 @@ dim(pr.out$x) #check that we now have a 2 x n matrix
 pr.out$center
 pr.out$rotation
 pr.out$sdev
+
+pr.out$x
 
 #  variance explained by each principal component
 (pr.var=pr.out$sdev ^2)
