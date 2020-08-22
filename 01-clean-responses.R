@@ -83,10 +83,11 @@ raw_sums <-
   )
 
 #filter for 0 observaions
-
 r_data_0 <- r_data %>% 
   filter(r_data == 0)
 View(r_data_0)
+#! No observations containing 0 exist
+
 # export
 r_data %>% write_rds("data-clean/r_data.rds")
 raw %>% write_rds("data-clean/raw.rds")
