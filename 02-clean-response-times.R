@@ -6,7 +6,7 @@ r_data <- read_rds("data-clean/r_data.rds")
 replace_with_NA <- function(x){
   x[x < 500] <- NA
   x
-}
+} # replace_with_NA(c(1, 600, 1))
 
 raw_time <- 
   r_data %>% 

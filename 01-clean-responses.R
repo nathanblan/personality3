@@ -82,18 +82,18 @@ raw_sums <-
     OPN_sum = rowSums(raw[ , 42:51])
   )
 
-#filter for 0 observaions
-r_data_0 <- r_data %>% 
-  filter(r_data == 0)
-View(r_data_0)
-#! No observations containing 0 exist
+r_data <- 
+  r_data %>% 
+  filter_all(all_vars(. != 0))
 
 # export
-r_data %>% write_rds("data-clean/r_data.rds")
-raw %>% write_rds("data-clean/raw.rds")
-raw_sums %>% write_rds("data-clean/raw_sums.rds")
-
 r_data %>% 
-  names()
-  
-View(r_data$country)
+  write_rds("data-clean/r_data.rds")
+
+raw %>% 
+  filter(id %in% r_data$id) %>% 
+  write_rds("data-clean/raw.rds")
+
+raw_sums %>% 
+  filter(id %in% r_data$id) %>% 
+  write_rds("data-clean/raw_sums.rds")
