@@ -11,9 +11,9 @@ pisa <-
 
 #rename columns
 names(pisa)[1] <- "country"
-names(pisa)[2] <- "c-code"
+names(pisa)[2] <- "c_code"
 names(pisa)[3] <- "series"
-names(pisa)[4] <- "s-code"
+names(pisa)[4] <- "s_code"
 names(pisa)[5] <- "2013"
 names(pisa)[6] <- "2014"
 names(pisa)[7] <- "2015"
@@ -23,7 +23,18 @@ pisa <- pisa %>%
   filter(2015 != "..")
 
 #separate tests
-pisa_math
+#math
+pisa_math <- pisa %>% 
+  filter(s_code == "LO.PISA.MAT")
+
+#reading
+pisa_read <- pisa %>% 
+  filter(s_code == "LO.PISA.REA")
+
+#science
+pisa_sci <- pisa %>% 
+  filter(s_code == "LO.PISA.SCI")
+
 # export as .rds
 pisa %>% write_rds("data-clean/pisa.rds")
 
