@@ -25,18 +25,24 @@ pisa <- pisa %>%
 #separate tests
 #math
 pisa_math <- pisa %>% 
-  filter(s_code == "LO.PISA.MAT")
+  filter(s_code == "LO.PISA.MAT") %>% 
+  arrange(country)
 
 #reading
 pisa_read <- pisa %>% 
-  filter(s_code == "LO.PISA.REA")
+  filter(s_code == "LO.PISA.REA") %>% 
+  arrange(country)
 
 #science
 pisa_sci <- pisa %>% 
-  filter(s_code == "LO.PISA.SCI")
+  filter(s_code == "LO.PISA.SCI") %>% 
+  arrange(country)
 
 # export as .rds
 pisa %>% write_rds("data-clean/pisa.rds")
+pisa_math %>% write_rds("data-clean/pisa_math.rds")
+pisa_read %>% write_rds("data-clean/pisa_read.rds")
+pisa_sci %>% write_rds("data-clean/pisa_sci.rds")
 
 #load Country Code data --------------------------------------------------------
 #read country code data
