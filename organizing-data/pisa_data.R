@@ -22,5 +22,13 @@ names(pisa)[7] <- "2015"
 pisa <- pisa %>% 
   filter(2015 != "..")
 
-# export as .rds ---------------------------------------------------------------
-r_data %>% write_rds("data-clean/r_data.rds")
+# export as .rds
+pisa %>% write_rds("data-clean/pisa.rds")
+
+#load Country Code data --------------------------------------------------------
+#read country code data
+codes <- 
+  read_csv("data-raw/country_code.csv") %>% 
+  select(-X1)
+
+codes
