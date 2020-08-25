@@ -22,6 +22,8 @@ names(pisa)[7] <- "2015"
 pisa <- pisa %>% 
   filter(2015 != "..")
 
+#separate tests
+pisa_math
 # export as .rds
 pisa %>% write_rds("data-clean/pisa.rds")
 
@@ -31,4 +33,3 @@ codes <-
   read_csv("data-raw/country_code.csv") %>% 
   select(-X1)
 
-codes
