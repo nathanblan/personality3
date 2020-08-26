@@ -1,7 +1,6 @@
 .Rhistory
 .RData
 .Rproj.user
-data-raw/
-data-clean/
-01_data-raw/
+01.1-data-raw
+01.2-data-clean
 .DS_Store
