@@ -36,3 +36,12 @@ flights %>%
 
 flights %>% 
   filter(dest == "IAH" | dest == "HOU")
+
+(flights %>% 
+  filter(carrier %in% c("United", "American", "Delta")))
+?between
+
+arrange(flights, year, month, day)
+arrange(flights, desc(dep_delay))
+arrange(flights, is.na(flights))
+?one_of
