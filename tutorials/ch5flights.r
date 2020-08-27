@@ -20,3 +20,19 @@ near(sqrt(2) ^ 2,  2)
 #> [1] TRUE
 near(1 / 49 * 49, 1)
 #> [1] TRUE
+filter(flights, month == 11 | month == 12)
+nov_dec <- filter(flights, month %in% c(11, 12))
+filter(flights, !(arr_delay > 120 | dep_delay > 120))
+filter(flights, arr_delay <= 120, dep_delay <= 120)
+
+df <- tibble(x = c(1, NA, 3))
+filter(df, x > 1)
+filter(df, is.na(x) | x > 1)
+
+names(flights)
+
+flights %>% 
+  filter(arr_delay >= 120)
+
+flights %>% 
+  filter(dest == "IAH" | dest == "HOU")
