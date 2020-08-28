@@ -8,6 +8,13 @@ r_data <-
   mutate(id = row_number()) %>% 
   select(id, everything())
 
+#look for countries with a reasonable sample size
+r_data %>% 
+  count(country) %>% 
+  ggplot(aes(x=n)) + 
+  geom_histogram()
+
+#create subsetted dataset for raw responses
 raw <- 
   r_data %>% 
   select(EXT1:OPN10) %>% 
@@ -72,6 +79,8 @@ raw <-
     ~ recode(., `1` = 5, `2` = 4, `4` = 2, `5` = 1)
   )
 
+#aggregate raw to find average scores per trait 
+#REWRITE THIS CODE TO USE GROUPBY COUNTRY
 raw_sums <- 
   tibble(id = raw$id) %>% 
   mutate(
