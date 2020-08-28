@@ -8,7 +8,7 @@ library(naniar)
 #read pisa data
 pisa <- 
   read_csv("01.1-data-raw/pisa-data.csv")
-
+pisa
 #rename columns
 names(pisa)[1] <- "country"
 names(pisa)[2] <- "c_code"
@@ -48,6 +48,14 @@ pisa_sci %>% write_rds("01.2-data-clean/pisa_sci.rds")
 #read country code data
 codes <- 
   read_csv("01.1-data-raw/country_code.csv") %>% 
-  select(-X1)
+  select(-X1, -code_2digit)
+names(codes)
+#rename columns
+names(codes)[1] <- "country"
+names(codes)[2] <- "c_code"
 
-#join country data w/ pisa -----------------------------------------------------
+#join country data w/ r_data -----------------------------------------------------
+pisa <- pisa %>% 
+  left_join(codes, by = "c_code") %>% 
+  select(-country.y)
+View(pisa)
