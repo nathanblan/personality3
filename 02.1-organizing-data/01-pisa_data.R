@@ -49,5 +49,3 @@ pisa_sci %>% write_rds("data-clean/pisa_sci.rds")
 codes <- 
   read_csv("data-raw/country_code.csv") %>% 
   select(-X1)
-
-##
