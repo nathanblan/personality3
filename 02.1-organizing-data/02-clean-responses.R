@@ -4,7 +4,7 @@ library(tidyverse)
 library(naniar)
 
 r_data <- 
-  read_tsv("data-raw/data-final.csv") %>% 
+  read_tsv("01.1-data-raw/data-final.csv") %>% 
   mutate(id = row_number()) %>% 
   select(id, everything())
 
@@ -88,12 +88,14 @@ r_data <-
 
 # export
 r_data %>% 
-  write_rds("data-clean/r_data.rds")
+  write_rds("01.2-data-clean/r_data.rds")
 
 raw %>% 
   filter(id %in% r_data$id) %>% 
-  write_rds("data-clean/raw.rds")
+  write_rds("01.2-data-clean/raw.rds")
 
 raw_sums %>% 
   filter(id %in% r_data$id) %>% 
-  write_rds("data-clean/raw_sums.rds")
+  write_rds("01.2-data-clean/raw_sums.rds")
+
+r_data
