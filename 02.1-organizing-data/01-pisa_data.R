@@ -48,14 +48,16 @@ pisa_sci %>% write_rds("01.2-data-clean/pisa_sci.rds")
 #read country code data
 codes <- 
   read_csv("01.1-data-raw/country_code.csv") %>% 
-  select(-X1, -code_2digit)
+  select(-X1, code_2digit)
 names(codes)
 #rename columns
 names(codes)[1] <- "country"
-names(codes)[2] <- "c_code"
+names(codes)[2] <- "c_code2"
+names(codes)[3] <- "c_code3"
+View(codes)
 
 #join country data w/ r_data -----------------------------------------------------
-pisa <- r_data %>% 
-  left_join(codes, by = "c_code") %>% 
-  select(-country.y)
-View(pisa)
+#pisa <- r_data %>% 
+#  left_join(codes, by = "c_code") %>% 
+# select(-country.y)
+# View(pisa)

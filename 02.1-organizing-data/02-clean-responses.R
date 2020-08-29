@@ -13,8 +13,9 @@ r_data <-
 
 #join country data w/ r_data 
 r_data <- r_data %>% 
-  rename(c_code = country) %>% 
-  left_join(codes, by = "c_code")
+  rename(c_code2 = country) %>% 
+  left_join(codes, by = "c_code2") %>% 
+  select(-c_code3)
 
 View(r_data)
 
