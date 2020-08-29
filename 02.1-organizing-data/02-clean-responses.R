@@ -4,19 +4,25 @@
 library(tidyverse)
 library(naniar)
 
-# load data --------------------------------------------------------------------
+# prepare big5 data ------------------------------------------------------------
+#load data
 r_data <- 
   read_tsv("01.1-data-raw/data-final.csv") %>% 
   mutate(id = row_number()) %>% 
   select(id, everything())
 
-names(r_data)
-names(codes)
 #join country data w/ r_data 
 r_data <- r_data %>% 
   rename(c_code = country) %>% 
-  left_join(codes, by = "c_code")
+  left_join(codes, by = "c_code") %>% 
+  select(country, everything())
+
+#remove na observations
+r_data <- r_data %>%
+  filter_all(all_vars(. != 0))
+
 names(r_data)
+count(r_data)
 
 #look for countries with a reasonable sample size
 #r_data %>% 
@@ -86,7 +92,7 @@ raw <-
          EST10, AGR01, AGR03,
          AGR05, AGR07, CSN02,
          CSN04, CSN06, CSN08,
-         OPN02, OPN04, OPN06), # within vars() you'll want to list all reverse coded questions
+         OPN02, OPN04, OPN06), # within vars(), list all reverse coded questions
     ~ recode(., `1` = 5, `2` = 4, `4` = 2, `5` = 1)
   )
 
@@ -101,19 +107,9 @@ raw_sums <- raw %>%
     avg_OPN = mean(c(OPN01:OPN10))
   )
 
-#join country data w/ raw ------------------------------------------------------
-pisa <- r_data %>% 
-  left_join(codes, by = "c_code") %>% 
-  select(-country.y)
-
 raw_sums
 
-r_data <- 
-  r_data %>% 
-  filter_all(all_vars(. != 0))
-count(r_data)
-
-# export
+# export -----------------------------------------------------------------------
 r_data %>% 
   write_rds("01.2-data-clean/r_data.rds")
 
