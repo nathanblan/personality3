@@ -113,7 +113,6 @@ raw_sums <- raw %>%
     avg_OPN = mean(c(OPN01:OPN10)),
     med_OPN = median(c(OPN01:OPN10)),
   )
-
 raw_sums
 
 # export -----------------------------------------------------------------------
@@ -128,7 +127,13 @@ raw_sums %>%
   write_rds("01.2-data-clean/raw_sums.rds")
 
 # join big5 and PISA data -------------------------------------------------------------------
-joint <- r_data %>% 
+joint <- raw_sums %>% 
   left_join(pisa_math, by = "country") %>% 
   left_join(pisa_read, by = "country") %>% 
-  left_join(pisa_sci, by = "country")
+  left_join(pisa_sci, by = "country") %>% 
+  rename(science = `2015`,
+         reading = `2015.y`,
+         math = `2015.x`) %>% 
+  select(-contains(c("c_code", "2013", "2014", "series", "s_code")))
+
+View(joint)
