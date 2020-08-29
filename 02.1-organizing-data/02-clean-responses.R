@@ -82,16 +82,16 @@ raw <-
 
 #aggregate raw to find average scores per trait 
 #REWRITE THIS CODE TO USE GROUPBY COUNTRY
-raw_sums <- 
-  tibble(id = raw$id) %>% 
-  group_by(raw$country)
-  mutate(
-    EXT_sum = rowSums(raw[ , 2:11]),
-    EST_sum = rowSums(raw[ , 12:21]),
-    AGR_sum = rowSums(raw[ , 22:31]),
-    CSN_sum = rowSums(raw[ , 32:41]),
-    OPN_sum = rowSums(raw[ , 42:51])
+raw_sums <- raw %>% 
+  group_by(country) %>% 
+  summarise(
+    avg_EXT = mean(c(EXT01:EXT10)),
+    avg_EST = mean(c(EST01:EST10)),
+    avg_AGR = mean(c(AGR01:AGR10)),
+    avg_CSN = mean(c(CSN01:CSN10)),
+    avg_OPN = mean(c(OPN01:OPN10))
   )
+raw_sums
 
 r_data <- 
   r_data %>% 
