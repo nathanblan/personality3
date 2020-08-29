@@ -14,8 +14,9 @@ r_data <-
 #join country data w/ r_data 
 r_data <- r_data %>% 
   rename(c_code = country) %>% 
-  left_join(codes, by = "c_code") %>% 
-  select(country, everything())
+  left_join(codes, by = "c_code")
+
+View(r_data)
 
 #remove na observations
 r_data <- r_data %>%
@@ -96,15 +97,20 @@ raw <-
     ~ recode(., `1` = 5, `2` = 4, `4` = 2, `5` = 1)
   )
 
-#aggregate raw to find average scores per trait per country
+#aggregate raw to find average and median scores per trait per country
 raw_sums <- raw %>% 
   group_by(country) %>% 
   summarise(
     avg_EXT = mean(c(EXT01:EXT10)),
+    med_EXT = median(c(EXT01:EXT10)),
     avg_EST = mean(c(EST01:EST10)),
+    med_EST = median(c(EST01:EST10)),
     avg_AGR = mean(c(AGR01:AGR10)),
+    med_AGR = median(c(AGR01:AGR10)),
     avg_CSN = mean(c(CSN01:CSN10)),
-    avg_OPN = mean(c(OPN01:OPN10))
+    med_CSN = median(c(CSN01:CSN10)),
+    avg_OPN = mean(c(OPN01:OPN10)),
+    med_OPN = median(c(OPN01:OPN10)),
   )
 
 raw_sums
@@ -118,5 +124,4 @@ raw %>%
   write_rds("01.2-data-clean/raw.rds")
 
 raw_sums %>% 
-  filter(id %in% r_data$id) %>% 
   write_rds("01.2-data-clean/raw_sums.rds")
