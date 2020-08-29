@@ -18,7 +18,7 @@ r_data %>%
 #create subsetted dataset for raw responses
 raw <- 
   r_data %>% 
-  select(EXT1:OPN10) %>% 
+  select(EXT1:OPN10, country) %>% 
   rename(
     EXT01 = EXT1,
     EXT02 = EXT2,
@@ -84,6 +84,7 @@ raw <-
 #REWRITE THIS CODE TO USE GROUPBY COUNTRY
 raw_sums <- 
   tibble(id = raw$id) %>% 
+  group_by(raw$country)
   mutate(
     EXT_sum = rowSums(raw[ , 2:11]),
     EST_sum = rowSums(raw[ , 12:21]),
@@ -95,6 +96,7 @@ raw_sums <-
 r_data <- 
   r_data %>% 
   filter_all(all_vars(. != 0))
+count(r_data)
 
 # export
 r_data %>% 
@@ -107,5 +109,3 @@ raw %>%
 raw_sums %>% 
   filter(id %in% r_data$id) %>% 
   write_rds("01.2-data-clean/raw_sums.rds")
-
-r_data
