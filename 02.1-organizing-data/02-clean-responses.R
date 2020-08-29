@@ -1,21 +1,31 @@
-# response data ----------------------------------------------------------------
+#Big 5 Data
 
+# import libraries -------------------------------------------------------------
 library(tidyverse)
 library(naniar)
 
+# load data --------------------------------------------------------------------
 r_data <- 
   read_tsv("01.1-data-raw/data-final.csv") %>% 
   mutate(id = row_number()) %>% 
   select(id, everything())
 
-#look for countries with a reasonable sample size
-r_data %>% 
-  count(country) %>% 
-  ggplot(aes(x=n)) + 
-  geom_histogram() +
-  ggsave("plots/country_response_count.pdf")
+names(r_data)
+names(codes)
+#join country data w/ r_data 
+r_data <- r_data %>% 
+  rename(c_code = country) %>% 
+  left_join(codes, by = "c_code")
+names(r_data)
 
-#create subsetted dataset for raw responses
+#look for countries with a reasonable sample size
+#r_data %>% 
+#  count(country) %>% 
+#  ggplot(aes(x=n)) + 
+#  geom_histogram() +
+#  ggsave("plots/country_response_count.pdf")
+
+# subset raw response data -----------------------------------------------------
 raw <- 
   r_data %>% 
   select(EXT1:OPN10, country) %>% 
@@ -80,8 +90,7 @@ raw <-
     ~ recode(., `1` = 5, `2` = 4, `4` = 2, `5` = 1)
   )
 
-#aggregate raw to find average scores per trait 
-#REWRITE THIS CODE TO USE GROUPBY COUNTRY
+#aggregate raw to find average scores per trait per country
 raw_sums <- raw %>% 
   group_by(country) %>% 
   summarise(
@@ -91,6 +100,12 @@ raw_sums <- raw %>%
     avg_CSN = mean(c(CSN01:CSN10)),
     avg_OPN = mean(c(OPN01:OPN10))
   )
+
+#join country data w/ raw ------------------------------------------------------
+pisa <- r_data %>% 
+  left_join(codes, by = "c_code") %>% 
+  select(-country.y)
+
 raw_sums
 
 r_data <- 
