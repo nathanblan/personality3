@@ -55,7 +55,7 @@ names(codes)[1] <- "country"
 names(codes)[2] <- "c_code"
 
 #join country data w/ r_data -----------------------------------------------------
-pisa <- pisa %>% 
+pisa <- r_data %>% 
   left_join(codes, by = "c_code") %>% 
   select(-country.y)
 View(pisa)
