@@ -126,3 +126,9 @@ raw %>%
 
 raw_sums %>% 
   write_rds("01.2-data-clean/raw_sums.rds")
+
+# join big5 and PISA data -------------------------------------------------------------------
+joint <- r_data %>% 
+  left_join(pisa_math, by = "country") %>% 
+  left_join(pisa_read, by = "country") %>% 
+  left_join(pisa_sci, by = "country")
