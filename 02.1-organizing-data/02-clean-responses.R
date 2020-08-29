@@ -12,7 +12,8 @@ r_data <-
 r_data %>% 
   count(country) %>% 
   ggplot(aes(x=n)) + 
-  geom_histogram()
+  geom_histogram() +
+  ggsave("plots/country_response_count.pdf")
 
 #create subsetted dataset for raw responses
 raw <- 
