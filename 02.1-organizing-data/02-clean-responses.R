@@ -7,6 +7,13 @@ library(ggplot2)
 theme_set(theme_bw())
 library(sf)
 
+#set up ggplot world
+library("rnaturalearth")
+library("rnaturalearthdata")
+
+world <- ne_countries(scale = "medium", returnclass = "sf")
+class(world)
+
 # prepare big5 data ------------------------------------------------------------
 #load data
 r_data <- 
