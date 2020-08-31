@@ -3,6 +3,9 @@
 # import libraries -------------------------------------------------------------
 library(tidyverse)
 library(naniar)
+library(ggplot2)
+theme_set(theme_bw())
+library(sf)
 
 # prepare big5 data ------------------------------------------------------------
 #load data
@@ -137,3 +140,5 @@ joint <- raw_sums %>%
   select(-contains(c("c_code", "2013", "2014", "series", "s_code")))
 
 View(joint)
+ggplot(data = joint) +
+  geom_sf()
