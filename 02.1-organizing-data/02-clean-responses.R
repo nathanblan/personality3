@@ -147,5 +147,5 @@ joint <- raw_sums %>%
   select(-contains(c("c_code", "2013", "2014", "series", "s_code")))
 
 View(joint)
-ggplot(data = joint) +
+ggplot(data = world) +
   geom_sf()
