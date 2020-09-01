@@ -29,6 +29,8 @@ r_data <- r_data %>%
   select(-c_code3) %>% 
   rename(country = countries)
 
+"United States" %in% r_data$country
+
 #remove "0" and na observations
 r_data <- r_data %>%
   filter_all(all_vars(. != 0)) %>% 
@@ -163,7 +165,7 @@ world <-
 #   vars(avg_EXT:science),
 #   ~ . != "..") %>% 
   as_tibble()
-class(world)
+
 #plot world by average math
 ggplot(data = world) +
   geom_sf(aes(fill = as.factor(math), geometry = geometry)) +
