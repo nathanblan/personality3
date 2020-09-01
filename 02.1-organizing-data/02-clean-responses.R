@@ -27,7 +27,7 @@ r_data <- r_data %>%
   left_join(codes, by = "c_code2") %>% 
   select(-c_code3) %>% 
 
-r_data[r_data == 0] <- NA
+r_data[r_data == ".."] <- NA
 
 View(r_data)
 
@@ -159,9 +159,9 @@ world <-
   left_join(joint, by = "country") %>% 
 #  drop_na(c(avg_EXT:science)) %>%
 #  filter_at(
- #   vars(avg_EXT:science),
-  #  ~ . != "..") %>% 
-  as_tibble()
+#    vars(avg_EXT:science),
+#    ~ . != "..") %>% 
+   as_tibble()
 
 #plot world by average math
 ggplot(data = world) +
