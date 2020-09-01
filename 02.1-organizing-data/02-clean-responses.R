@@ -11,7 +11,12 @@ library(sf)
 library("rnaturalearth")
 library("rnaturalearthdata")
 
-world <- ne_countries(scale = "medium", returnclass = "sf")
+#collect world data and joint data
+world <- 
+  ne_countries(scale = "medium", returnclass = "sf") %>% 
+  rename(country = sovereignt) %>% 
+  left_join(joint, by = "country")
+
 class(world)
 ?ne_countries
 names(world)
