@@ -62,3 +62,4 @@ pisa_read %>% write_rds("01.2-data-clean/pisa_read.rds")
 pisa_sci %>% write_rds("01.2-data-clean/pisa_sci.rds")
 
 "United States" %in% codes$countries
+"United States" %in% pisa$country

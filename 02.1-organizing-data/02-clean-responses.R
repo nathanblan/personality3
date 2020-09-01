@@ -29,7 +29,7 @@ r_data <- r_data %>%
   select(-c_code3) %>% 
   rename(country = countries)
 
-"United States" %in% r_data$country
+"United States of America" %in% r_data$country
 
 #remove "0" and na observations
 r_data <- r_data %>%
@@ -156,20 +156,29 @@ View(joint)
 # plot world averages ----------------------------------------------------------
 # extract world data and join with joint
 world <- 
-  ne_countries(scale = "medium", returnclass = "sf") %>% 
+  ne_countries(scale = "medium", returnclass = "sf") %>%
   filter(sovereignt == admin) %>% 
   rename(country = sovereignt) %>% 
-  left_join(joint, by = "country") %>% 
+  right_join(joint, by = "country") %>%
 # drop_na(c(avg_EXT:science)) %>%
 # filter_at(
 #   vars(avg_EXT:science),
 #   ~ . != "..") %>% 
   as_tibble()
-
+  
+class(world)
 #plot world by average math
 ggplot(data = world) +
-  geom_sf(aes(fill = as.factor(math), geometry = geometry)) +
+  geom_sf(aes(fill = as.factor(avg_EXT), geometry = geometry)) +
   xlab("Longitude") + ylab("Latitude") +
   ggtitle("World map", 
-          subtitle = paste0("(", length(unique(world$name)), " countries)")) +
-  ggsave("plots/world-education-2015.pdf")
+          subtitle = paste0("(", length(unique(world$name)), " countries)")) 
+#  ggsave("plots/world-education-2015.pdf")
+
+names(world)
+
+ggplot(world) +
+  geom_point(aes(x = avg_EXT, y = math)) +
+  geom_smooth(aes(x = avg_EXT, y = math), method = "lm") +
+  geom_text(aes(x = avg_EXT, y = math, label = country)) 
+ # ggsave()
