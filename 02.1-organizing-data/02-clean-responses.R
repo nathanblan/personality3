@@ -11,14 +11,6 @@ library(sf)
 library("rnaturalearth")
 library("rnaturalearthdata")
 
-#collect world data and joint data
-world <- 
-  ne_countries(scale = "medium", returnclass = "sf") %>% 
-  filter(sovereignt == admin) %>% 
-  rename(country = sovereignt) %>% 
-  left_join(joint, by = "country") %>% 
-  as_tibble()
-
 # prepare big5 data ------------------------------------------------------------
 #load data
 r_data <- 
@@ -158,11 +150,12 @@ View(joint)
 world <- 
   ne_countries(scale = "medium", returnclass = "sf") %>% 
   filter(sovereignt == admin) %>% 
+  drop_na() %>% 
   rename(country = sovereignt) %>% 
   left_join(joint, by = "country") %>% 
   as_tibble()
-
+names(world)
 #plot world by average math
 ggplot(data = world) +
-  geom_sf(aes(fill = pop_est)) +
+  geom_sf(aes(fill = math)) +
   scale_fill_viridis_c(option = "plasma", trans = "sqrt")
