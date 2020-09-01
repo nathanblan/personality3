@@ -29,19 +29,19 @@ r_data <- r_data %>%
   select(-c_code3) %>% 
   rename(country = countries)
 
-#code ".." as NA
-r_data[r_data == `..`] <- NA
-
-#remove "0" observations
+#remove "0" and na observations
 r_data <- r_data %>%
-  filter_all(all_vars(. != 0))
+  filter_all(all_vars(. != 0)) %>% 
+  drop_na()
 
+#check r_data stats
+str(r_data)
 names(r_data)
 count(r_data)
 
 #look for countries with a reasonable sample size
 r_data %>% 
-  count(countries) %>% 
+  count(country) %>% 
   ggplot(aes(x=n)) + 
   geom_histogram() +
   ggsave("plots/country_response_count.pdf")
@@ -49,7 +49,7 @@ r_data %>%
 # subset raw response data -----------------------------------------------------
 raw <- 
   r_data %>% 
-  select(EXT1:OPN10, countries) %>% 
+  select(EXT1:OPN10, country) %>% 
   rename(
     EXT01 = EXT1,
     EXT02 = EXT2,
@@ -113,7 +113,7 @@ raw <-
 
 #aggregate raw to find average and median scores per trait per country
 raw_sums <- raw %>% 
-  group_by(countries) %>% 
+  group_by(country) %>% 
   summarise(
     avg_EXT = mean(c(EXT01:EXT10)),
     med_EXT = median(c(EXT01:EXT10)),
@@ -163,14 +163,10 @@ world <-
 #   vars(avg_EXT:science),
 #   ~ . != "..") %>% 
   as_tibble()
-
+class(world)
 #plot world by average math
 ggplot(data = world) +
-  geom_sf(aes(fill = math, geometry = geometry)) +
+  geom_sf(aes(fill = as.factor(math), geometry = geometry)) +
   xlab("Longitude") + ylab("Latitude") +
   ggtitle("World map", 
           subtitle = paste0("(", length(unique(world$name)), " countries)"))
-
-ggplot(data = world) +
-  geom_sf(aes(fill = pop_est, geometry = geometry)) +
-  scale_fill_viridis_c(option = "plasma", trans = "sqrt")
