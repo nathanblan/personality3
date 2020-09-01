@@ -25,7 +25,9 @@ r_data <-
 r_data <- r_data %>% 
   rename(c_code2 = country) %>% 
   left_join(codes, by = "c_code2") %>% 
-  select(-c_code3)
+  select(-c_code3) %>% 
+
+r_data[r_data == 0] <- NA
 
 View(r_data)
 
