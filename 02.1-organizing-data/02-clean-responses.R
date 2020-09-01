@@ -148,19 +148,20 @@ View(joint)
 # plot world averages ----------------------------------------------------------
 # extract world data and join with joint
 world1 <- 
-  ne_countries(scale = "medium", returnclass = "sf") %>% 
-  drop_na() %>% 
+  ne_countries(scale = "medium", returnclass = "sf") %>%
+  df %>% drop_na(c(avg_EXT:science)) %>% 
   as_tibble()
 View(world1)
 
 world <- 
   ne_countries(scale = "medium", returnclass = "sf") %>% 
   filter(sovereignt == admin) %>% 
-  drop_na() %>% 
   rename(country = sovereignt) %>% 
   left_join(joint, by = "country") %>% 
+  drop_na(c(avg_EXT:science)) %>%
   as_tibble()
-world$cou
+View(world)
+
 #plot world by average math
 ggplot(data = world) +
   geom_sf(aes(fill = math)) +
