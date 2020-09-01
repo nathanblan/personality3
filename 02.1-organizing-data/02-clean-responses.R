@@ -13,6 +13,10 @@ library("rnaturalearthdata")
 
 world <- ne_countries(scale = "medium", returnclass = "sf")
 class(world)
+?ne_countries
+names(world)
+View(world)
+
 
 # prepare big5 data ------------------------------------------------------------
 #load data
@@ -147,5 +151,7 @@ joint <- raw_sums %>%
   select(-contains(c("c_code", "2013", "2014", "series", "s_code")))
 
 View(joint)
+
 ggplot(data = world) +
-  geom_sf()
+  geom_sf(aes(fill = pop_est)) +
+  scale_fill_viridis_c(option = "plasma", trans = "sqrt")

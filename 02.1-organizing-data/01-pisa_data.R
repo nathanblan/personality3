@@ -29,7 +29,6 @@ names(codes)
 names(codes)[1] <- "country"
 names(codes)[2] <- "c_code2"
 names(codes)[3] <- "c_code3"
-View(codes)
 
 #join country data w/ pisa
 pisa <- pisa %>% 
