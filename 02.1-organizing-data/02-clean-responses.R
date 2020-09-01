@@ -155,12 +155,11 @@ world <-
   filter(sovereignt == admin) %>% 
   rename(country = sovereignt) %>% 
   left_join(joint, by = "country") %>% 
-  drop_na(c(avg_EXT:science)) %>%
-  filter_at(
-    vars(avg_EXT:science),
-    ~ . != "..") %>% 
+#  drop_na(c(avg_EXT:science)) %>%
+#  filter_at(
+ #   vars(avg_EXT:science),
+  #  ~ . != "..") %>% 
   as_tibble()
-View(world)
 
 #plot world by average math
 ggplot(data = world) +
