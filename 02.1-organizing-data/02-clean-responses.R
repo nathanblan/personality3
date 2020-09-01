@@ -14,14 +14,10 @@ library("rnaturalearthdata")
 #collect world data and joint data
 world <- 
   ne_countries(scale = "medium", returnclass = "sf") %>% 
+  filter(sovereignt == admin) %>% 
   rename(country = sovereignt) %>% 
-  left_join(joint, by = "country")
-
-class(world)
-?ne_countries
-names(world)
-View(world)
-
+  left_join(joint, by = "country") %>% 
+  as_tibble()
 
 # prepare big5 data ------------------------------------------------------------
 #load data
@@ -145,7 +141,7 @@ raw %>%
 raw_sums %>% 
   write_rds("01.2-data-clean/raw_sums.rds")
 
-# join big5 and PISA data -------------------------------------------------------------------
+# join big5 and PISA data ------------------------------------------------------
 joint <- raw_sums %>% 
   left_join(pisa_math, by = "country") %>% 
   left_join(pisa_read, by = "country") %>% 
@@ -157,6 +153,16 @@ joint <- raw_sums %>%
 
 View(joint)
 
+# plot world averages ----------------------------------------------------------
+# extract world data and join with joint
+world <- 
+  ne_countries(scale = "medium", returnclass = "sf") %>% 
+  filter(sovereignt == admin) %>% 
+  rename(country = sovereignt) %>% 
+  left_join(joint, by = "country") %>% 
+  as_tibble()
+
+#plot world by average math
 ggplot(data = world) +
   geom_sf(aes(fill = pop_est)) +
   scale_fill_viridis_c(option = "plasma", trans = "sqrt")
