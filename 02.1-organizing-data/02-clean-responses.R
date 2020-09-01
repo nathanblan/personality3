@@ -169,4 +169,5 @@ ggplot(data = world) +
   geom_sf(aes(fill = as.factor(math), geometry = geometry)) +
   xlab("Longitude") + ylab("Latitude") +
   ggtitle("World map", 
-          subtitle = paste0("(", length(unique(world$name)), " countries)"))
+          subtitle = paste0("(", length(unique(world$name)), " countries)")) +
+  ggsave("plots/world-education-2015.pdf")
