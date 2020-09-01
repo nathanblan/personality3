@@ -25,7 +25,7 @@ r_data <-
 r_data <- r_data %>% 
   rename(c_code2 = country) %>% 
   left_join(codes, by = "c_code2") %>% 
-  select(-c_code3) %>% 
+  select(-c_code3) 
 
 r_data[r_data == ".."] <- NA
 
@@ -157,11 +157,11 @@ world <-
   filter(sovereignt == admin) %>% 
   rename(country = sovereignt) %>% 
   left_join(joint, by = "country") %>% 
-#  drop_na(c(avg_EXT:science)) %>%
-#  filter_at(
-#    vars(avg_EXT:science),
-#    ~ . != "..") %>% 
-   as_tibble()
+# drop_na(c(avg_EXT:science)) %>%
+# filter_at(
+#   vars(avg_EXT:science),
+#   ~ . != "..") %>% 
+  as_tibble()
 
 #plot world by average math
 ggplot(data = world) +
@@ -169,3 +169,7 @@ ggplot(data = world) +
   xlab("Longitude") + ylab("Latitude") +
   ggtitle("World map", 
           subtitle = paste0("(", length(unique(world$name)), " countries)"))
+
+ggplot(data = world) +
+  geom_sf(aes(fill = pop_est, geometry = geometry)) +
+  scale_fill_viridis_c(option = "plasma", trans = "sqrt")
