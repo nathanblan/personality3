@@ -18,8 +18,10 @@ library("rnaturalearthdata")
 #load data
 r_data <- 
   read_tsv("01.1-data-raw/data-final.csv") %>% 
+#  read_rds("01.2-data-clean/dirty-data.rds") %>% 
   mutate(id = row_number()) %>% 
-  select(id, everything())
+  select(id, everything()) %>% 
+  write_rds("01.2-data-clean/dirty-data.rds")
 
 #join country data w/ r_data 
 r_data <- r_data %>% 
@@ -28,8 +30,6 @@ r_data <- r_data %>%
   select(-c_code3) 
 
 r_data[r_data == ".."] <- NA
-
-View(r_data)
 
 #remove na observations
 r_data <- r_data %>%
