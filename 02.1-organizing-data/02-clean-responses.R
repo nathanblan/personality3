@@ -11,6 +11,9 @@ library(sf)
 library("rnaturalearth")
 library("rnaturalearthdata")
 
+#define %notin% function
+`%notin%` <- Negate(`%in%`)
+
 # prepare big5 data ------------------------------------------------------------
 #load data
 r_data <- 
@@ -147,18 +150,15 @@ View(joint)
 
 # plot world averages ----------------------------------------------------------
 # extract world data and join with joint
-world1 <- 
-  ne_countries(scale = "medium", returnclass = "sf") %>%
-  df %>% drop_na(c(avg_EXT:science)) %>% 
-  as_tibble()
-View(world1)
-
 world <- 
   ne_countries(scale = "medium", returnclass = "sf") %>% 
   filter(sovereignt == admin) %>% 
   rename(country = sovereignt) %>% 
   left_join(joint, by = "country") %>% 
   drop_na(c(avg_EXT:science)) %>%
+  filter_at(
+    vars(avg_EXT:science),
+    ~ . != "..") %>% 
   as_tibble()
 View(world)
 
@@ -167,5 +167,5 @@ ggplot(data = world) +
   geom_sf(aes(fill = math)) +
   xlab("Longitude") + ylab("Latitude") +
   ggtitle("World map", 
-          subtitle = paste0("(", length(unique(world$NAME)), " countries)")) +
+          subtitle = paste0("(", length(unique(world$name)), " countries)")) +
   scale_fill_viridis_c(option = "plasma", trans = "sqrt")
