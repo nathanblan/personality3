@@ -4,7 +4,6 @@
 library(tidyverse)
 library(naniar)
 library(ggplot2)
-theme_set(theme_bw())
 library(sf)
 
 #set up ggplot world
@@ -27,8 +26,10 @@ r_data <-
 r_data <- r_data %>% 
   rename(c_code2 = country) %>% 
   left_join(codes, by = "c_code2") %>% 
-  select(-c_code3) 
+  select(-c_code3) %>% 
+  rename(country = countries)
 
+#code ".." as NA
 r_data[r_data == ".."] <- NA
 
 #remove na observations
@@ -39,16 +40,16 @@ names(r_data)
 count(r_data)
 
 #look for countries with a reasonable sample size
-#r_data %>% 
-#  count(country) %>% 
-#  ggplot(aes(x=n)) + 
-#  geom_histogram() +
-#  ggsave("plots/country_response_count.pdf")
+r_data %>% 
+  count(countries) %>% 
+  ggplot(aes(x=n)) + 
+  geom_histogram() +
+  ggsave("plots/country_response_count.pdf")
 
 # subset raw response data -----------------------------------------------------
 raw <- 
   r_data %>% 
-  select(EXT1:OPN10, country) %>% 
+  select(EXT1:OPN10, countries) %>% 
   rename(
     EXT01 = EXT1,
     EXT02 = EXT2,
@@ -112,7 +113,7 @@ raw <-
 
 #aggregate raw to find average and median scores per trait per country
 raw_sums <- raw %>% 
-  group_by(country) %>% 
+  group_by(countries) %>% 
   summarise(
     avg_EXT = mean(c(EXT01:EXT10)),
     med_EXT = median(c(EXT01:EXT10)),
