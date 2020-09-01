@@ -30,9 +30,9 @@ r_data <- r_data %>%
   rename(country = countries)
 
 #code ".." as NA
-r_data[r_data == ".."] <- NA
+r_data[r_data == `..`] <- NA
 
-#remove na observations
+#remove "0" observations
 r_data <- r_data %>%
   filter_all(all_vars(. != 0))
 

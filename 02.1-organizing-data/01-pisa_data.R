@@ -14,9 +14,7 @@ names(pisa)[1] <- "country"
 names(pisa)[2] <- "c_code3"
 names(pisa)[3] <- "series"
 names(pisa)[4] <- "s_code"
-names(pisa)[5] <- "2013"
-names(pisa)[6] <- "2014"
-names(pisa)[7] <- "2015"
+names(pisa)[5] <- "2015"
 names(pisa)
 
 #load Country Code data --------------------------------------------------------
@@ -39,7 +37,7 @@ pisa <- pisa %>%
 #pisa data ---------------------------------------------------------------------
 #filter for countries with entries
 pisa <- pisa %>% 
-  filter(2015 != "..")
+  drop_na()
 
 #separate tests
 #math
@@ -62,4 +60,3 @@ pisa %>% write_rds("01.2-data-clean/pisa.rds")
 pisa_math %>% write_rds("01.2-data-clean/pisa_math.rds")
 pisa_read %>% write_rds("01.2-data-clean/pisa_read.rds")
 pisa_sci %>% write_rds("01.2-data-clean/pisa_sci.rds")
-
