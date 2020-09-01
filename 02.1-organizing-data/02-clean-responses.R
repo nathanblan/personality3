@@ -147,6 +147,12 @@ View(joint)
 
 # plot world averages ----------------------------------------------------------
 # extract world data and join with joint
+world1 <- 
+  ne_countries(scale = "medium", returnclass = "sf") %>% 
+  drop_na() %>% 
+  as_tibble()
+View(world1)
+
 world <- 
   ne_countries(scale = "medium", returnclass = "sf") %>% 
   filter(sovereignt == admin) %>% 
@@ -154,8 +160,11 @@ world <-
   rename(country = sovereignt) %>% 
   left_join(joint, by = "country") %>% 
   as_tibble()
-names(world)
+world$cou
 #plot world by average math
 ggplot(data = world) +
   geom_sf(aes(fill = math)) +
+  xlab("Longitude") + ylab("Latitude") +
+  ggtitle("World map", 
+          subtitle = paste0("(", length(unique(world$NAME)), " countries)")) +
   scale_fill_viridis_c(option = "plasma", trans = "sqrt")
