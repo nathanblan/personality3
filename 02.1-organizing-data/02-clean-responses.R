@@ -167,5 +167,4 @@ ggplot(data = world) +
   geom_sf(aes(fill = math)) +
   xlab("Longitude") + ylab("Latitude") +
   ggtitle("World map", 
-          subtitle = paste0("(", length(unique(world$name)), " countries)")) +
-  scale_fill_viridis_c(option = "plasma", trans = "sqrt")
+          subtitle = paste0("(", length(unique(world$name)), " countries)"))
