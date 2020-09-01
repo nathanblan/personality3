@@ -164,7 +164,7 @@ View(world)
 
 #plot world by average math
 ggplot(data = world) +
-  geom_sf(aes(fill = math)) +
+  geom_sf(aes(fill = math, geometry = geometry)) +
   xlab("Longitude") + ylab("Latitude") +
   ggtitle("World map", 
           subtitle = paste0("(", length(unique(world$name)), " countries)"))
