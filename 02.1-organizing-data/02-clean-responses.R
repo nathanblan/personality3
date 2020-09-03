@@ -180,5 +180,5 @@ names(world)
 ggplot(world) +
   geom_point(aes(x = avg_EXT, y = math)) +
   geom_smooth(aes(x = avg_EXT, y = math), method = "lm") +
-  geom_text(aes(x = avg_EXT, y = math, label = country)) 
- # ggsave()
+  geom_text(aes(x = avg_EXT, y = math, label = country)) +
+  ggsave("plots/extraversion~math.pdf")
