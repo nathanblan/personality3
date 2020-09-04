@@ -288,3 +288,4 @@ s5 <- ggplot(world) +
 
 #setup plot layout
 grid.arrange(s1, s2, s3, s4, s5, nrow = 3)
+
