@@ -149,8 +149,6 @@ joint <- raw_sums %>%
          math = `2015.x`) %>% 
   select(-contains(c("c_code", "2013", "2014", "series", "s_code")))
 
-View(joint)
-
 # plot world averages ----------------------------------------------------------
 # extract world data and join with joint
 world <- 
