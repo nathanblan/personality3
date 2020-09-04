@@ -29,8 +29,6 @@ r_data <- r_data %>%
   select(-c_code3) %>% 
   rename(country = countries)
 
-"United States of America" %in% r_data$country
-
 #remove "0" and na observations
 r_data <- r_data %>%
   filter_all(all_vars(. != 0)) %>% 
