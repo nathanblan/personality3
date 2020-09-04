@@ -5,6 +5,7 @@ library(tidyverse)
 library(naniar)
 library(ggplot2)
 library(sf)
+library(gridExtra)
 
 #set up ggplot world
 library("rnaturalearth")
@@ -208,40 +209,44 @@ m5 <- ggplot(world) +
   ggsave("plots/openness~math.png")
 
 #setup plot layout
-grid.arrange(m1, m2, m3, m4, m5, nrow = 1)
+grid.arrange(m1, m2, m3, m4, m5, nrow = 3)
 
 #plot reading ------------------------------------------------------------------
 #plot average extroversion vs average reading per country
-ggplot(world) +
+r1 <- ggplot(world) +
   geom_point(aes(x = avg_EXT, y = reading)) +
   geom_smooth(aes(x = avg_EXT, y = reading), method = "lm") +
   geom_text(aes(x = avg_EXT, y = reading, label = country)) +
   ggsave("plots/extraversion~reading.png")
 
 #plot average neuroticism vs average reading per country
-ggplot(world) +
+r2 <- ggplot(world) +
   geom_point(aes(x = avg_EST, y = reading)) +
   geom_smooth(aes(x = avg_EST, y = reading), method = "lm") +
   geom_text(aes(x = avg_EST, y = reading, label = country)) +
   ggsave("plots/neuroticism~reading.png")
 
 #plot average agreeableness vs average reading per country
-ggplot(world) +
+r3 <- ggplot(world) +
   geom_point(aes(x = avg_AGR, y = reading)) +
   geom_smooth(aes(x = avg_AGR, y = reading), method = "lm") +
   geom_text(aes(x = avg_AGR, y = reading, label = country)) +
   ggsave("plots/agreeableness~reading.png")
 
 #plot average conscientiousness vs average reading per country
-ggplot(world) +
+r4 <- ggplot(world) +
   geom_point(aes(x = avg_CSN, y = reading)) +
   geom_smooth(aes(x = avg_CSN, y = reading), method = "lm") +
   geom_text(aes(x = avg_CSN, y = reading, label = country)) +
   ggsave("plots/conscientiousness~reading.png")
 
 #plot average openness vs average reading per country
-ggplot(world) +
+r5 <- ggplot(world) +
   geom_point(aes(x = avg_OPN, y = reading)) +
   geom_smooth(aes(x = avg_OPN, y = reading), method = "lm") +
-  geom_text(aes(x = avg_OPN, y = read, label = country)) +
+  geom_text(aes(x = avg_OPN, y = reading, label = country)) +
   ggsave("plots/openness~reading.png")
+
+#setup plot layout
+grid.arrange(r1, r2, r3, r4, r5, nrow = 3)
+
