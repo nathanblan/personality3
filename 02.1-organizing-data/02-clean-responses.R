@@ -35,11 +35,6 @@ r_data <- r_data %>%
   filter_all(all_vars(. != 0)) %>% 
   drop_na()
 
-#check r_data stats
-str(r_data)
-names(r_data)
-count(r_data)
-
 #look for countries with a reasonable sample size
 r_data %>% 
   count(country) %>% 
@@ -153,10 +148,9 @@ joint <- raw_sums %>%
 # plot world averages ----------------------------------------------------------
 # extract world data and join with joint
 world <- 
-  ne_countries(scale = "medium", returnclass = "sf") %>%
-  filter(sovereignt == admin) %>% 
+  ne_countries(scale = "medium", returnclass = "sf") %>% 
   rename(country = sovereignt) %>% 
-  right_join(joint, by = "country") %>%
+  left_join(joint, by = "country") %>%
 # drop_na(c(avg_EXT:science)) %>%
 # filter_at(
 #   vars(avg_EXT:science),
@@ -166,11 +160,27 @@ world <-
 #plots -------------------------------------------------------------------------
 #plot world by average math
 ggplot(data = world) +
-  geom_sf(aes(fill = as.factor(avg_EXT), geometry = geometry)) +
+  geom_sf(aes(fill = as.factor(math), geometry = geometry)) +
   xlab("Longitude") + ylab("Latitude") +
   ggtitle("World map", 
           subtitle = paste0("(", length(unique(world$name)), " countries)")) +
-  ggsave("plots/world-education-2015.png")
+  ggsave("plots/world-math-2015.png")
+
+#plot world by average reading
+ggplot(data = world) +
+  geom_sf(aes(fill = as.factor(reading), geometry = geometry)) +
+  xlab("Longitude") + ylab("Latitude") +
+  ggtitle("World map", 
+          subtitle = paste0("(", length(unique(world$name)), " countries)")) +
+  ggsave("plots/world-reading-2015.png")
+
+#plot world by average science
+ggplot(data = world) +
+  geom_sf(aes(fill = as.factor(science), geometry = geometry)) +
+  xlab("Longitude") + ylab("Latitude") +
+  ggtitle("World map", 
+          subtitle = paste0("(", length(unique(world$name)), " countries)")) +
+  ggsave("plots/world-sceince-2015.png")
 
 #plot math ---------------------------------------------------------------------
 #plot average extroversion vs average math per country
