@@ -173,74 +173,75 @@ ggplot(data = world) +
 
 #plot math ---------------------------------------------------------------------
 #plot average extroversion vs average math per country
-ggplot(world) +
+m1 <- ggplot(world) +
   geom_point(aes(x = avg_EXT, y = math)) +
   geom_smooth(aes(x = avg_EXT, y = math), method = "lm") +
   geom_text(aes(x = avg_EXT, y = math, label = country)) +
   ggsave("plots/extraversion~math.png")
 
 #plot average neuroticism vs average math per country
-ggplot(world) +
-  geom_point(aes(x = avg_EXT, y = math)) +
-  geom_smooth(aes(x = avg_EXT, y = math), method = "lm") +
-  geom_text(aes(x = avg_EXT, y = math, label = country)) +
+m2 <- ggplot(world) +
+  geom_point(aes(x = avg_EST, y = math)) +
+  geom_smooth(aes(x = avg_EST, y = math), method = "lm") +
+  geom_text(aes(x = avg_EST, y = math, label = country)) +
   ggsave("plots/neuroticism~math.png")
 
 #plot average agreeableness vs average math per country
-ggplot(world) +
-  geom_point(aes(x = avg_EXT, y = math)) +
-  geom_smooth(aes(x = avg_EXT, y = math), method = "lm") +
-  geom_text(aes(x = avg_EXT, y = math, label = country)) +
+m3 <- ggplot(world) +
+  geom_point(aes(x = avg_AGR, y = math)) +
+  geom_smooth(aes(x = avg_AGR, y = math), method = "lm") +
+  geom_text(aes(x = avg_AGR, y = math, label = country)) +
   ggsave("plots/agreeableness~math.png")
 
 #plot average conscientiousness vs average math per country
-ggplot(world) +
-  geom_point(aes(x = avg_EXT, y = math)) +
-  geom_smooth(aes(x = avg_EXT, y = math), method = "lm") +
-  geom_text(aes(x = avg_EXT, y = math, label = country)) +
+m4 <- ggplot(world) +
+  geom_point(aes(x = avg_CSN, y = math)) +
+  geom_smooth(aes(x = avg_CSN, y = math), method = "lm") +
+  geom_text(aes(x = avg_CSN, y = math, label = country)) +
   ggsave("plots/conscientiousness~math.png")
 
 #plot average openness vs average math per country
-ggplot(world) +
-  geom_point(aes(x = avg_EXT, y = math)) +
-  geom_smooth(aes(x = avg_EXT, y = math), method = "lm") +
-  geom_text(aes(x = avg_EXT, y = math, label = country)) +
+m5 <- ggplot(world) +
+  geom_point(aes(x = avg_OPN, y = math)) +
+  geom_smooth(aes(x = avg_OPN, y = math), method = "lm") +
+  geom_text(aes(x = avg_OPN, y = math, label = country)) +
   ggsave("plots/openness~math.png")
 
+#setup plot layout
+grid.arrange(m1, m2, m3, m4, m5, nrow = 1)
+
 #plot reading ------------------------------------------------------------------
-#plot average extroversion vs average math per country
+#plot average extroversion vs average reading per country
 ggplot(world) +
-  geom_point(aes(x = avg_EXT, y = math)) +
-  geom_smooth(aes(x = avg_EXT, y = math), method = "lm") +
-  geom_text(aes(x = avg_EXT, y = math, label = country)) +
+  geom_point(aes(x = avg_EXT, y = reading)) +
+  geom_smooth(aes(x = avg_EXT, y = reading), method = "lm") +
+  geom_text(aes(x = avg_EXT, y = reading, label = country)) +
   ggsave("plots/extraversion~reading.png")
 
-#plot average neuroticism vs average math per country
+#plot average neuroticism vs average reading per country
 ggplot(world) +
-  geom_point(aes(x = avg_EXT, y = math)) +
-  geom_smooth(aes(x = avg_EXT, y = math), method = "lm") +
-  geom_text(aes(x = avg_EXT, y = math, label = country)) +
+  geom_point(aes(x = avg_EST, y = reading)) +
+  geom_smooth(aes(x = avg_EST, y = reading), method = "lm") +
+  geom_text(aes(x = avg_EST, y = reading, label = country)) +
   ggsave("plots/neuroticism~reading.png")
 
-#plot average agreeableness vs average math per country
+#plot average agreeableness vs average reading per country
 ggplot(world) +
-  geom_point(aes(x = avg_EXT, y = math)) +
-  geom_smooth(aes(x = avg_EXT, y = math), method = "lm") +
-  geom_text(aes(x = avg_EXT, y = math, label = country)) +
+  geom_point(aes(x = avg_AGR, y = reading)) +
+  geom_smooth(aes(x = avg_AGR, y = reading), method = "lm") +
+  geom_text(aes(x = avg_AGR, y = reading, label = country)) +
   ggsave("plots/agreeableness~reading.png")
 
-#plot average conscientiousness vs average math per country
+#plot average conscientiousness vs average reading per country
 ggplot(world) +
-  geom_point(aes(x = avg_EXT, y = math)) +
-  geom_smooth(aes(x = avg_EXT, y = math), method = "lm") +
-  geom_text(aes(x = avg_EXT, y = math, label = country)) +
+  geom_point(aes(x = avg_CSN, y = reading)) +
+  geom_smooth(aes(x = avg_CSN, y = reading), method = "lm") +
+  geom_text(aes(x = avg_CSN, y = reading, label = country)) +
   ggsave("plots/conscientiousness~reading.png")
 
-#plot average openness vs average math per country
+#plot average openness vs average reading per country
 ggplot(world) +
-  geom_point(aes(x = avg_EXT, y = math)) +
-  geom_smooth(aes(x = avg_EXT, y = math), method = "lm") +
-  geom_text(aes(x = avg_EXT, y = read, label = country)) +
+  geom_point(aes(x = avg_OPN, y = reading)) +
+  geom_smooth(aes(x = avg_OPN, y = reading), method = "lm") +
+  geom_text(aes(x = avg_OPN, y = read, label = country)) +
   ggsave("plots/openness~reading.png")
-
-world$read
