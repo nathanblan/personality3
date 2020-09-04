@@ -250,3 +250,41 @@ r5 <- ggplot(world) +
 #setup plot layout
 grid.arrange(r1, r2, r3, r4, r5, nrow = 3)
 
+#plot science ------------------------------------------------------------------
+#plot average extroversion vs average science per country
+s1 <- ggplot(world) +
+  geom_point(aes(x = avg_EXT, y = science)) +
+  geom_smooth(aes(x = avg_EXT, y = science), method = "lm") +
+  geom_text(aes(x = avg_EXT, y = science, label = country)) +
+  ggsave("plots/extraversion~science.png")
+
+#plot average neuroticism vs average science per country
+s2 <- ggplot(world) +
+  geom_point(aes(x = avg_EST, y = science)) +
+  geom_smooth(aes(x = avg_EST, y = science), method = "lm") +
+  geom_text(aes(x = avg_EST, y = science, label = country)) +
+  ggsave("plots/neuroticism~science.png")
+
+#plot average agreeableness vs average science per country
+s3 <- ggplot(world) +
+  geom_point(aes(x = avg_AGR, y = science)) +
+  geom_smooth(aes(x = avg_AGR, y = science), method = "lm") +
+  geom_text(aes(x = avg_AGR, y = science, label = country)) +
+  ggsave("plots/agreeableness~science.png")
+
+#plot average conscientiousness vs average science per country
+s4 <- ggplot(world) +
+  geom_point(aes(x = avg_CSN, y = science)) +
+  geom_smooth(aes(x = avg_CSN, y = science), method = "lm") +
+  geom_text(aes(x = avg_CSN, y = science, label = country)) +
+  ggsave("plots/conscientiousness~science.png")
+
+#plot average openness vs average science per country
+s5 <- ggplot(world) +
+  geom_point(aes(x = avg_OPN, y = science)) +
+  geom_smooth(aes(x = avg_OPN, y = science), method = "lm") +
+  geom_text(aes(x = avg_OPN, y = science, label = country)) +
+  ggsave("plots/openness~science.png")
+
+#setup plot layout
+grid.arrange(s1, s2, s3, s4, s5, nrow = 3)
