@@ -157,6 +157,8 @@ world <-
 #   ~ . != "..") %>% 
   as_tibble()
 
+View(world)
+"Korea" %in% world
 #plots -------------------------------------------------------------------------
 #plot world by average math
 ggplot(data = world) +
