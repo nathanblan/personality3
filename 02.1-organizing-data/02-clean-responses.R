@@ -156,7 +156,7 @@ world <-
 #   vars(avg_EXT:science),
 #   ~ . != "..") %>% 
   as_tibble()
-
+"South Korea" %in% codes$countries
 #plots -------------------------------------------------------------------------
 #plot world by average math
 ggplot(data = world) +
