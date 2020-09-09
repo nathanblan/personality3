@@ -5,7 +5,7 @@ library(factoextra) # clustering algorithms & visualization
 library(broom)
 
 raw <- 
-  read_rds("data-clean/raw.rds") %>% 
+  read_rds("01.2-data-clean/raw.rds") %>% 
   na.omit()
 
 ext <- raw %>% 
@@ -34,8 +34,6 @@ tibble(
   geom_point()
 
 # K means TO DO ----------------------------------------------------------------
-names(small)
-
 # use cumsum of withiness to determine best number of clusters
 
 # small
