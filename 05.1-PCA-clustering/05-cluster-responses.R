@@ -37,7 +37,14 @@ tibble(
 # use cumsum of withiness to determine best number of clusters
 
 # small
-fit <- kmeans(raw, 6)
+fit <- kmeans(raw, 2, nstart = 20)
+assignments <- augment(fit, raw)
+
+ggplot(data = assignments) +
+  geom_point(aes(x = V1, y = V2, color = .cluster)) +
+  labs(color = "Cluster Assignment",
+       title = "K-Means Clustering Results with K = 2")
+
 fit$centers %>% 
   as_tibble() %>% 
   mutate(id = row_number()) %>% 
