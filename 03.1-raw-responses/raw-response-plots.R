@@ -1,5 +1,16 @@
 #response plots
 
+# import libraries -------------------------------------------------------------
+library(tidyverse)
+library(naniar)
+library(ggplot2)
+library(sf)
+library(gridExtra)
+
+#set up ggplot world
+library("rnaturalearth")
+library("rnaturalearthdata")
+
 # plot world averages ----------------------------------------------------------
 # extract world data and join with joint
 world <- 
