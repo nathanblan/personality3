@@ -3,10 +3,12 @@ library(tidyverse)  # data manipulation
 library(cluster)    # clustering algorithms
 library(factoextra) # clustering algorithms & visualization
 library(broom)
+library(ggbiplot)
 
 raw <- 
   read_rds("01.2-data-clean/raw.rds") %>% 
-  na.omit()
+  na.omit() %>% 
+  sample_frac(0.01)
 
 ext <- raw %>% 
   select(EXT01:EXT10)
@@ -22,90 +24,27 @@ opn <- raw %>%
 #using all data is too large
 
 # PCA 
-raw.pca <- prcomp(raw)
+raw.pca <- prcomp(raw %>% 
+                    select(-id, -country))
 names(raw.pca)
 cum_perc_var_explained <- cumsum(raw.pca$sdev / sum(raw.pca$sdev))
 
 tibble(
   component = 1:length(cum_perc_var_explained),
-  cum_perc_var_explained
-) %>% #Look for elbow, find number of components / clusters that explain large portions of the data
+  cum_perc_var_explained) %>%
+  #Look for elbow, find number of components / clusters explaining large portions of the data
   ggplot(aes(x = component, y  = cum_perc_var_explained)) +
   geom_point()
 
-# K means TO DO ----------------------------------------------------------------
-# use cumsum of withiness to determine best number of clusters
+extract_pca <- as_tibble(raw.pca$x[,1:2]) %>% 
+  mutate(country = raw$country)
 
-# small
-fit <- kmeans(raw, 2, nstart = 20)
-assignments <- augment(fit, raw)
+ggbiplot(raw.pca, alpha = 0.01, varname.size = 10) 
 
-ggplot(data = assignments) +
-  geom_point(aes(x = V1, y = V2, color = .cluster)) +
-  labs(color = "Cluster Assignment",
-       title = "K-Means Clustering Results with K = 2")
+raw.pca$rotation[,1:2] %>% View()
 
-fit$centers %>% 
-  as_tibble() %>% 
-  mutate(id = row_number()) %>% 
-  gather(var, val, -id) %>% 
-  ggplot(aes(x = var, y = val, fill = as.factor(id))) +
-  geom_col(position = "dodge") + 
-  coord_flip()
-
-# ext --------------------------------------------------------------------------
-fit.ext <- kmeans(ext, 6)
-fit.ext$centers %>% #plot means of each cluster, representing how high people each cluster scored
-  as_tibble() %>% 
-  select(EXT01:EXT10) %>% 
-  mutate(id = row_number()) %>% 
-  gather(var, val, -id) %>% 
-  ggplot(aes(x = var, y = val, fill = as.factor(id))) +
-  geom_col(position = "dodge") + 
-  coord_flip()
-
-# est --------------------------------------------------------------------------
-fit.est <- kmeans(est, 5)
-fit.est$centers %>% #plot means of each cluster, representing how high people each cluster scored
-  as_tibble() %>% 
-  select(EST01:EST10) %>% 
-  mutate(id = row_number()) %>% 
-  gather(var, val, -id) %>% 
-  ggplot(aes(x = var, y = val, fill = as.factor(id))) +
-  geom_col(position = "dodge") + 
-  coord_flip()
-
-# agr --------------------------------------------------------------------------
-fit.agr <- kmeans(agr, 5)
-fit.agr$centers %>% #plot means of each cluster, representing how high people each cluster scored
-  as_tibble() %>% 
-  select(AGR01:AGR10) %>% 
-  mutate(id = row_number()) %>% 
-  gather(var, val, -id) %>% 
-  ggplot(aes(x = var, y = val, fill = as.factor(id))) +
-  geom_col(position = "dodge") + 
-  coord_flip()
-
-# csn --------------------------------------------------------------------------
-fit.csn <- kmeans(csn, 5)
-fit.csn$centers %>% #plot means of each cluster, representing how high people each cluster scored
-  as_tibble() %>% 
-  select(CSN01:CSN10) %>% 
-  mutate(id = row_number()) %>% 
-  gather(var, val, -id) %>% 
-  ggplot(aes(x = var, y = val, fill = as.factor(id))) +
-  geom_col(position = "dodge") + 
-  coord_flip()
-
-# opn --------------------------------------------------------------------------
-fit.opn <- kmeans(opn, 5)
-fit.opn$centers %>% #plot means of each cluster, representing how high people each cluster scored
-  as_tibble() %>% 
-  select(OPN01:OPN10) %>% 
-  mutate(id = row_number()) %>% 
-  gather(var, val, -id) %>% 
-  ggplot(aes(x = var, y = val, fill = as.factor(id))) +
-  geom_col(position = "dodge") + 
-  coord_flip()
-
-# hierarchical clustering ------------------------------------------------------
+extract_pca %>% 
+  group_by(country) %>% 
+  dplyr::summarise(mean_pc1 = mean(PC1),
+            mean_pc2 = mean(PC2)) %>% 
+  ggbiplot(alpha = 0.01, varname.size = 10)

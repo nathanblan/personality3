@@ -3,9 +3,9 @@
 #plot time ---------------------------------------------------------------------
 #plot average extroversion-time vs average extroversion per country
 t1 <- ggplot(world) +
-  geom_point(aes(x = avg_EXT_E, y = avg_EXT, color = continent)) +
-  geom_smooth(aes(x = avg_EXT_E, y = avg_EXT), method = "lm") +
-  geom_text(aes(x = avg_EXT_E, y = avg_EXT, label = country)) +
+  geom_point(aes(x = log(med_EXT_E), y = avg_EXT, color = continent)) +
+  geom_smooth(aes(x = log(med_EXT_E), y = avg_EXT), method = "lm") +
+  geom_text(aes(x = log(med_EXT_E), y = avg_EXT, label = country)) +
   ggsave("plots/extraversion-time~extroversion.png")
 
 #plot average neuroticism-time vs average neuroticism per country
