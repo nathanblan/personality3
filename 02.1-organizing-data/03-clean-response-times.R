@@ -116,7 +116,11 @@ time %>%
 raw_time %>% 
   write_rds("01.2-data-clean/raw_time.rds")
 
-# plot world averages ----------------------------------------------------------
+# join joint and time data -----------------------------------------------------
+joint <- joint %>% 
+  left_join(raw_time, by = "country") 
+
+# update world averages --------------------------------------------------------
 # extract world data and join with joint
 world <- 
   ne_countries(scale = "medium", returnclass = "sf") %>% 
