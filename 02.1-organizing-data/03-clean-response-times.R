@@ -128,31 +128,6 @@ world <-
   #   ~ . != "..") %>% 
   as_tibble()
 
-#plots -------------------------------------------------------------------------
-#plot world by average math
-ggplot(data = world) +
-  geom_sf(aes(fill = as.factor(math), geometry = geometry)) +
-  xlab("Longitude") + ylab("Latitude") +
-  ggtitle("World map", 
-          subtitle = paste0("(", length(unique(world$name)), " countries)")) +
-  ggsave("plots/world-math-2015.png")
-
-#plot world by average reading
-ggplot(data = world) +
-  geom_sf(aes(fill = as.factor(reading), geometry = geometry)) +
-  xlab("Longitude") + ylab("Latitude") +
-  ggtitle("World map", 
-          subtitle = paste0("(", length(unique(world$name)), " countries)")) +
-  ggsave("plots/world-reading-2015.png")
-
-#plot world by average science
-ggplot(data = world) +
-  geom_sf(aes(fill = as.factor(science), geometry = geometry)) +
-  xlab("Longitude") + ylab("Latitude") +
-  ggtitle("World map", 
-          subtitle = paste0("(", length(unique(world$name)), " countries)")) +
-  ggsave("plots/world-sceince-2015.png")
-
 #plot math ---------------------------------------------------------------------
 #plot average extroversion-time vs average math per country
 m1 <- ggplot(world) +
