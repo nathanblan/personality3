@@ -20,10 +20,8 @@ csn <- raw %>%
   select(CSN01:CSN10)
 opn <- raw %>% 
   select(OPN01:OPN10)
-# run code below with ALL data not just small
-#using all data is too large
 
-# PCA 
+# PCA --------------------------------------------------------------------------
 raw.pca <- prcomp(raw %>% 
                     select(-id, -country))
 names(raw.pca)
@@ -46,5 +44,4 @@ raw.pca$rotation[,1:2] %>% View()
 extract_pca %>% 
   group_by(country) %>% 
   dplyr::summarise(mean_pc1 = mean(PC1),
-            mean_pc2 = mean(PC2)) %>% 
-  ggbiplot(alpha = 0.01, varname.size = 10)
+            mean_pc2 = mean(PC2))

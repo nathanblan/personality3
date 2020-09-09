@@ -12,6 +12,17 @@ r_data_small <- na.omit(r_data_small)
 r_data_small <- scale(r_data_small)
 names(r_data_small)
 
+ext <- raw %>% 
+  select(EXT01:EXT10)
+est <- raw %>% 
+  select(EST01:EST10)
+agr <- raw %>% 
+  select(AGR01:AGR10)
+csn <- raw %>% 
+  select(CSN01:CSN10)
+opn <- raw %>% 
+  select(OPN01:OPN10)
+
 #Principle Component Analysis -------------------------------------------------- 
 S <- cov(r_data_small[,52:56]) #S matrix covariance
 S.variance <- sum(diag(S)) #total variance or sum of eigenvalues of S
