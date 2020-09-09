@@ -202,41 +202,41 @@ m5 <- ggplot(world) +
 #setup plot layout
 grid.arrange(m1, m2, m3, m4, m5, nrow = 3)
 
-#plot reading ------------------------------------------------------------------
-#plot average extroversion-time vs average reading per country
+#plot time ---------------------------------------------------------------------
+#plot average extroversion-time vs average extroversion per country
 r1 <- ggplot(world) +
-  geom_point(aes(x = avg_EXT_E, y = reading, color = continent)) +
-  geom_smooth(aes(x = avg_EXT_E, y = reading), method = "lm") +
-  geom_text(aes(x = avg_EXT_E, y = reading, label = country)) +
-  ggsave("plots/extraversion-time~reading.png")
+  geom_point(aes(x = avg_EXT_E, y = avg_EXT, color = continent)) +
+  geom_smooth(aes(x = avg_EXT_E, y = avg_EXT), method = "lm") +
+  geom_text(aes(x = avg_EXT_E, y = avg_EXT, label = country)) +
+  ggsave("plots/extraversion-time~extroversion.png")
 
-#plot average neuroticism-time vs average reading per country
+#plot average neuroticism-time vs average neuroticism per country
 r2 <- ggplot(world) +
-  geom_point(aes(x = avg_EST_E, y = reading, color = continent)) +
-  geom_smooth(aes(x = avg_EST_E, y = reading), method = "lm") +
-  geom_text(aes(x = avg_EST_E, y = reading, label = country)) +
-  ggsave("plots/neuroticism-time~reading.png")
+  geom_point(aes(x = avg_EST_E, y = avg_EST, color = continent)) +
+  geom_smooth(aes(x = avg_EST_E, y = avg_EST), method = "lm") +
+  geom_text(aes(x = avg_EST_E, y = avg_EST, label = country)) +
+  ggsave("plots/neuroticism-time~neuroticism.png")
 
-#plot average agreeableness-time vs average reading per country
+#plot average agreeableness-time vs average agreeableness per country
 r3 <- ggplot(world) +
-  geom_point(aes(x = avg_AGR_E, y = reading, color = continent)) +
-  geom_smooth(aes(x = avg_AGR_E, y = reading), method = "lm") +
-  geom_text(aes(x = avg_AGR_E, y = reading, label = country)) +
-  ggsave("plots/agreeableness-time~reading.png")
+  geom_point(aes(x = avg_AGR_E, y = avg_AGR, color = continent)) +
+  geom_smooth(aes(x = avg_AGR_E, y = avg_AGR), method = "lm") +
+  geom_text(aes(x = avg_AGR_E, y = avg_AGR, label = country)) +
+  ggsave("plots/agreeableness-time~agreeableness.png")
 
-#plot average conscientiousness-time vs average reading per country
+#plot average conscientiousness-time vs average conscientiousness per country
 r4 <- ggplot(world) +
-  geom_point(aes(x = avg_CSN_E, y = reading, color = continent)) +
-  geom_smooth(aes(x = avg_CSN_E, y = reading), method = "lm") +
-  geom_text(aes(x = avg_CSN_E, y = reading, label = country)) +
-  ggsave("plots/conscientiousness-time~reading.png")
+  geom_point(aes(x = avg_CSN_E, y = avg_CSN, color = continent)) +
+  geom_smooth(aes(x = avg_CSN_E, y = avg_CSN), method = "lm") +
+  geom_text(aes(x = avg_CSN_E, y = avg_CSN, label = country)) +
+  ggsave("plots/conscientiousness-time~conscientiousness.png")
 
-#plot average openness-time vs average reading per country
+#plot average openness-time vs average openness per country
 r5 <- ggplot(world) +
-  geom_point(aes(x = avg_OPN_E, y = reading, color = continent)) +
-  geom_smooth(aes(x = avg_OPN_E, y = reading), method = "lm") +
-  geom_text(aes(x = avg_OPN_E, y = reading, label = country)) +
-  ggsave("plots/openness-time~reading.png")
+  geom_point(aes(x = avg_OPN_E, y = avg_OPN, color = continent)) +
+  geom_smooth(aes(x = avg_OPN_E, y = avg_OPN), method = "lm") +
+  geom_text(aes(x = avg_OPN_E, y = avg_OPN, label = country)) +
+  ggsave("plots/openness-time~openness.png")
 
 #setup plot layout
 grid.arrange(r1, r2, r3, r4, r5, nrow = 3)
