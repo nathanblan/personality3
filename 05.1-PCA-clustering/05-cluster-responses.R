@@ -10,21 +10,13 @@ raw <-
   na.omit() %>% 
   sample_frac(0.01)
 
-ext <- raw %>% 
-  select(EXT01:EXT10)
-est <- raw %>% 
-  select(EST01:EST10)
-agr <- raw %>% 
-  select(AGR01:AGR10)
-csn <- raw %>% 
-  select(CSN01:CSN10)
-opn <- raw %>% 
-  select(OPN01:OPN10)
 
 # PCA --------------------------------------------------------------------------
+#compute PCA on raw
 raw.pca <- prcomp(raw %>% 
                     select(-id, -country))
-names(raw.pca)
+
+#calculate cumulative std. deviation to identify amount of 
 cum_perc_var_explained <- cumsum(raw.pca$sdev / sum(raw.pca$sdev))
 
 tibble(
@@ -34,14 +26,18 @@ tibble(
   ggplot(aes(x = component, y  = cum_perc_var_explained)) +
   geom_point()
 
+#extract the first two principle components
 extract_pca <- as_tibble(raw.pca$x[,1:2]) %>% 
   mutate(country = raw$country)
 
+#plot PCA
 ggbiplot(raw.pca, alpha = 0.01, varname.size = 10) 
-
 raw.pca$rotation[,1:2] %>% View()
 
+#summarise PCA
 extract_pca %>% 
   group_by(country) %>% 
   dplyr::summarise(mean_pc1 = mean(PC1),
             mean_pc2 = mean(PC2))
+
+#join PCA and joint/world
