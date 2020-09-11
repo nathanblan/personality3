@@ -40,7 +40,19 @@ pca_sums %>%
   dplyr::summarise(mean_pc1 = mean(PC1),
             mean_pc2 = mean(PC2))
 
-#join PCA and joint/world
-world <- world %>% 
+#join PCA and joint/world ------------------------------------------------------
+joint <- joint %>% 
   left_join(pca_sums, by = "country")
 names(world)
+
+# update world averages --------------------------------------------------------
+# extract world data and join with joint
+world <- 
+  ne_countries(scale = "medium", returnclass = "sf") %>% 
+  rename(country = sovereignt) %>% 
+  left_join(joint, by = "country") %>%
+  # drop_na(c(avg_EXT:science)) %>%
+  # filter_at(
+  #   vars(avg_EXT:science),
+  #   ~ . != "..") %>% 
+  as_tibble()

@@ -89,8 +89,8 @@ time <-
   mutate(id = row_number()) %>% 
   select(id, everything())
 
-#aggregate raw_time to find average time taken to respond per country
-raw_time <- time %>% 
+#aggregate time_sums to find average time taken to respond per country
+time_sums <- time %>% 
   group_by(country) %>% 
   summarise(
     avg_EXT_E = mean(c(EXT01_E:EXT10_E)),
@@ -113,12 +113,12 @@ time %>%
   filter(id %in% r_time$id) %>% 
   write_rds("01.2-data-clean/time.rds")
 
-raw_time %>% 
-  write_rds("01.2-data-clean/raw_time.rds")
+time_sums %>% 
+  write_rds("01.2-data-clean/time_sums.rds")
 
 # join joint and time data -----------------------------------------------------
 joint <- joint %>% 
-  left_join(raw_time, by = "country") 
+  left_join(time_sums, by = "country") 
 
 # update world averages --------------------------------------------------------
 # extract world data and join with joint
