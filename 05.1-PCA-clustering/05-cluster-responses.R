@@ -41,5 +41,6 @@ pca_sums %>%
             mean_pc2 = mean(PC2))
 
 #join PCA and joint/world
-world <- raw_sums %>% 
-  left_join(by = "country")
+world <- world %>% 
+  left_join(pca_sums, by = "country")
+names(world)

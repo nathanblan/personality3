@@ -23,6 +23,7 @@ world <-
   #   ~ . != "..") %>% 
   as_tibble()
 names(world)
+
 #plots -------------------------------------------------------------------------
 #plot world by average math
 ggplot(data = world) +
