@@ -39,7 +39,7 @@ pca_sums %>%
   group_by(country) %>% 
   dplyr::summarise(mean_pc1 = mean(PC1),
             mean_pc2 = mean(PC2))
-
+pca_sums
 #plot PC1 by country 
 p1 <- ggplot(pca_sums) + 
   geom_point(aes(x = country, y= PC1)) +
@@ -55,5 +55,24 @@ grid.arrange(p1, p2, nrow = 1)
 # update world averages --------------------------------------------------------
 # extract world data and join with joint
 world <- world %>% 
-  left_join(time_sums, by = "country") %>%
+  left_join(pca_sums, by = "country") %>%
   as_tibble()
+
+#plots -------------------------------------------------------------------------
+#plot average extroversion vs average science per country
+pc1 <- ggplot(world) +
+  geom_point(aes(x = PC1, y = math, color = continent)) +
+  geom_smooth(aes(x = PC1, y = math), method = "lm") +
+  geom_text(aes(x = PC1, y = math, label = country)) +
+  ggsave("plots/extraversion~science.png")
+
+#plot average neuroticism vs average science per country
+pc2 <- ggplot(world) +
+  geom_point(aes(x = PC2, y = science, color = continent)) +
+  geom_smooth(aes(x = PC2, y = science), method = "lm") +
+  geom_text(aes(x = PC2, y = science, label = country)) +
+  ggsave("plots/neuroticism~science.png")
+
+#setup plot layout
+grid.arrange(pc1,pc2, nrow = 1)
+
