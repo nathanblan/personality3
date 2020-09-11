@@ -18,7 +18,6 @@ library("rnaturalearthdata")
 #load data
 r_data <- 
   read_tsv("01.1-data-raw/data-final.csv") %>% 
-#  read_rds("01.2-data-clean/dirty-data.rds") %>% 
   mutate(id = row_number()) %>% 
   select(id, everything()) %>% 
   write_rds("01.2-data-clean/dirty-data.rds")

@@ -16,10 +16,16 @@ library("rnaturalearthdata")
 r_time <- 
   read_rds("01.2-data-clean/dirty-data.rds") 
 
+#define function to replace with NA
 replace_with_NA <- function(x){
   x[x < 500] <- NA
   x
-} # replace_with_NA(c(1, 600, 1))
+}
+
+replace_with_300000 <- function(x){
+  x[x > 300000] <- 300000
+  x
+}
 
 #join country data w/ r_time 
 r_time <- r_time %>% 
@@ -32,6 +38,11 @@ r_time <- r_time %>%
 r_time <- r_time %>%
   filter_all(all_vars(. != 0)) %>% 
   drop_na()
+
+#filter out super low and super high times
+r_time <- r_time %>% 
+  replace_with_NA() %>% 
+  replace_with_300000
 
 # subset time data -------------------------------------------------------------
 time <- 
@@ -86,6 +97,7 @@ time <-
   ) %>% 
   mutate(id = row_number()) %>% 
   select(id, everything())
+  
 
 #aggregate time_sums to find average time taken to respond per country
 time_sums <- time %>% 
