@@ -41,3 +41,11 @@ extract_pca %>%
             mean_pc2 = mean(PC2))
 
 #join PCA and joint/world
+joint <- raw_sums %>% 
+  left_join(pisa_math, by = "country") %>% 
+  left_join(pisa_read, by = "country") %>% 
+  left_join(pisa_sci, by = "country") %>% 
+  rename(science = `2015`,
+         reading = `2015.y`,
+         math = `2015.x`) %>% 
+  select(-contains(c("c_code", "2013", "2014", "series", "s_code")))
