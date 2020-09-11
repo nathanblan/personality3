@@ -32,7 +32,7 @@ pca_sums <- as_tibble(raw.pca$x[,1:2]) %>%
 
 #plot PCA
 ggbiplot(raw.pca, alpha = 0.01, varname.size = 10) 
-raw.pca$rotation[,1:2] %>% View()
+raw.pca$rotation[,1:2]
 
 #summarise PCA
 pca_sums %>% 
@@ -40,19 +40,8 @@ pca_sums %>%
   dplyr::summarise(mean_pc1 = mean(PC1),
             mean_pc2 = mean(PC2))
 
-#join PCA and joint/world ------------------------------------------------------
-joint <- joint %>% 
-  left_join(pca_sums, by = "country")
-names(world)
-
 # update world averages --------------------------------------------------------
 # extract world data and join with joint
-world <- 
-  ne_countries(scale = "medium", returnclass = "sf") %>% 
-  rename(country = sovereignt) %>% 
-  left_join(joint, by = "country") %>%
-  # drop_na(c(avg_EXT:science)) %>%
-  # filter_at(
-  #   vars(avg_EXT:science),
-  #   ~ . != "..") %>% 
+world <- world %>% 
+  left_join(time_sums, by = "country") %>%
   as_tibble()

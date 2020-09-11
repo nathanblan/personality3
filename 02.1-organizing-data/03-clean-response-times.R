@@ -14,9 +14,7 @@ library("rnaturalearthdata")
 # prepare time data ------------------------------------------------------------
 #load data
 r_time <- 
-  read_rds("01.2-data-clean/dirty-data.rds") %>% 
-  mutate(id = row_number()) %>% 
-  select(id, everything())
+  read_rds("01.2-data-clean/dirty-data.rds") 
 
 replace_with_NA <- function(x){
   x[x < 500] <- NA
@@ -116,18 +114,8 @@ time %>%
 time_sums %>% 
   write_rds("01.2-data-clean/time_sums.rds")
 
-# join joint and time data -----------------------------------------------------
-joint <- joint %>% 
-  left_join(time_sums, by = "country") 
-
 # update world averages --------------------------------------------------------
 # extract world data and join with joint
-world <- 
-  ne_countries(scale = "medium", returnclass = "sf") %>% 
-  rename(country = sovereignt) %>% 
-  left_join(joint, by = "country") %>%
-  # drop_na(c(avg_EXT:science)) %>%
-  # filter_at(
-  #   vars(avg_EXT:science),
-  #   ~ . != "..") %>% 
+world <- world %>% 
+  left_join(time_sums, by = "country") %>%
   as_tibble()
