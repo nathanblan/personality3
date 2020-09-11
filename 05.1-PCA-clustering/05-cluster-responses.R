@@ -27,7 +27,7 @@ tibble(
   geom_point()
 
 #extract the first two principle components
-extract_pca <- as_tibble(raw.pca$x[,1:2]) %>% 
+pca_sums <- as_tibble(raw.pca$x[,1:2]) %>% 
   mutate(country = raw$country)
 
 #plot PCA
@@ -35,17 +35,11 @@ ggbiplot(raw.pca, alpha = 0.01, varname.size = 10)
 raw.pca$rotation[,1:2] %>% View()
 
 #summarise PCA
-extract_pca %>% 
+pca_sums %>% 
   group_by(country) %>% 
   dplyr::summarise(mean_pc1 = mean(PC1),
             mean_pc2 = mean(PC2))
 
 #join PCA and joint/world
-joint <- raw_sums %>% 
-  left_join(pisa_math, by = "country") %>% 
-  left_join(pisa_read, by = "country") %>% 
-  left_join(pisa_sci, by = "country") %>% 
-  rename(science = `2015`,
-         reading = `2015.y`,
-         math = `2015.x`) %>% 
-  select(-contains(c("c_code", "2013", "2014", "series", "s_code")))
+world <- raw_sums %>% 
+  left_join(by = "country")
