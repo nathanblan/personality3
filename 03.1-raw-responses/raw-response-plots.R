@@ -1,12 +1,6 @@
 #response plots
 
 # import libraries -------------------------------------------------------------
-library(tidyverse)
-library(naniar)
-library(ggplot2)
-library(sf)
-library(gridExtra)
-
 #set up ggplot world
 library("rnaturalearth")
 library("rnaturalearthdata")
@@ -17,10 +11,6 @@ world <-
   ne_countries(scale = "medium", returnclass = "sf") %>% 
   rename(country = sovereignt) %>% 
   left_join(joint, by = "country") %>%
-  # drop_na(c(avg_EXT:science)) %>%
-  # filter_at(
-  #   vars(avg_EXT:science),
-  #   ~ . != "..") %>% 
   as_tibble()
 names(world)
 

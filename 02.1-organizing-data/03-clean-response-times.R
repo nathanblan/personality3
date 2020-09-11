@@ -3,25 +3,19 @@
 # import libraries -------------------------------------------------------------
 library(tidyverse)
 library(naniar)
-library(ggplot2)
-library(sf)
-library(gridExtra)
-
-#set up ggplot world
-library("rnaturalearth")
-library("rnaturalearthdata")
 
 # prepare time data ------------------------------------------------------------
 #load data
 r_time <- 
   read_rds("01.2-data-clean/dirty-data.rds") 
 
-#define function to replace with NA
-replace_with_NA <- function(x){
-  x[x < 500] <- NA
+#define function to replace with 500
+replace_with_500 <- function(x){
+  x[x < 500] <- 500
   x
 }
 
+#define function to replace with 300000
 replace_with_300000 <- function(x){
   x[x > 300000] <- 300000
   x
@@ -38,11 +32,6 @@ r_time <- r_time %>%
 r_time <- r_time %>%
   filter_all(all_vars(. != 0)) %>% 
   drop_na()
-
-#filter out super low and super high times
-r_time <- r_time %>% 
-  replace_with_NA() %>% 
-  replace_with_300000
 
 # subset time data -------------------------------------------------------------
 time <- 
@@ -98,6 +87,13 @@ time <-
   mutate(id = row_number()) %>% 
   select(id, everything())
   
+#filter out super low and super high times
+time <- time %>% 
+  select(-id, -country) %>% 
+  replace_with_500() %>% 
+  replace_with_300000 %>% 
+  mutate(country = r_time$country, 
+         id = r_time$id)
 
 #aggregate time_sums to find average time taken to respond per country
 time_sums <- time %>% 
