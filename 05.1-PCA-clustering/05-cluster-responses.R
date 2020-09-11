@@ -60,19 +60,43 @@ world <- world %>%
 
 #plots -------------------------------------------------------------------------
 #plot average extroversion vs average science per country
-pc1 <- ggplot(world) +
+pc1.math <- ggplot(world) +
   geom_point(aes(x = PC1, y = math, color = continent)) +
   geom_smooth(aes(x = PC1, y = math), method = "lm") +
   geom_text(aes(x = PC1, y = math, label = country)) +
-  ggsave("plots/extraversion~science.png")
+  ggsave("plots/PC1~math.png")
 
-#plot average neuroticism vs average science per country
-pc2 <- ggplot(world) +
+pc1.science <- ggplot(world) +
+  geom_point(aes(x = PC1, y = science, color = continent)) +
+  geom_smooth(aes(x = PC1, y = science), method = "lm") +
+  geom_text(aes(x = PC1, y = science, label = country)) +
+  ggsave("plots/PC1~science.png")
+
+pc1.reading <- ggplot(world) +
+  geom_point(aes(x = PC1, y = reading, color = continent)) +
+  geom_smooth(aes(x = PC1, y = reading), method = "lm") +
+  geom_text(aes(x = PC1, y = reading, label = country)) +
+  ggsave("plots/PC1~reading.png")
+
+#plot PC2 vs average math per country
+pc2.math <- ggplot(world) +
+  geom_point(aes(x = PC2, y = math, color = continent)) +
+  geom_smooth(aes(x = PC2, y = math), method = "lm") +
+  geom_text(aes(x = PC2, y = math, label = country)) +
+  ggsave("plots/PC2~math.png")
+
+pc2.science <- ggplot(world) +
   geom_point(aes(x = PC2, y = science, color = continent)) +
   geom_smooth(aes(x = PC2, y = science), method = "lm") +
   geom_text(aes(x = PC2, y = science, label = country)) +
-  ggsave("plots/neuroticism~science.png")
+  ggsave("plots/PC2~science.png")
+
+pc2.reading <- ggplot(world) +
+  geom_point(aes(x = PC2, y = reading, color = continent)) +
+  geom_smooth(aes(x = PC2, y = reading), method = "lm") +
+  geom_text(aes(x = PC2, y = reading, label = country)) +
+  ggsave("plots/PC2~reading.png")
 
 #setup plot layout
-grid.arrange(pc1,pc2, nrow = 1)
+grid.arrange(pc1.math, pc1.science, pc1.reading, pc2.math, pc2.science, pc2.reading, nrow = 3)
 
