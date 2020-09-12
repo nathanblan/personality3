@@ -6,8 +6,9 @@ t1 <- ggplot(world) +
   geom_point(aes(x = log(med_EXT_E), y = avg_EXT, color = continent)) +
   geom_smooth(aes(x = log(med_EXT_E), y = avg_EXT), method = "lm") +
   geom_text(aes(x = log(med_EXT_E), y = avg_EXT, label = country)) +
+  geom_text_repel(min.segment.length = Inf, seed = 42, box.padding = 0.5) +
   ggsave("plots/extraversion-time~extroversion.png")
-t1
+
 #plot average neuroticism-time vs average neuroticism per country
 t2 <- ggplot(world) +
   geom_point(aes(x = log(avg_EST_E), y = avg_EST, color = continent)) +

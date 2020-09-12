@@ -4,6 +4,7 @@
 #set up ggplot world
 library("rnaturalearth")
 library("rnaturalearthdata")
+library(ggrepel)
 
 # plot world averages ----------------------------------------------------------
 # extract world data and join with joint

@@ -1,10 +1,10 @@
-# response clusters ------------------------------------------------------------
+# time PCA----------------------------------------------------------------------
 library(ggbiplot)
 library(tidyverse)  # data manipulation
 
 #import data -------------------------------------------------------------------
-raw <- 
-  read_rds("01.2-data-clean/raw.rds") %>% 
+time <- 
+  read_rds("01.2-data-clean/time.rds") %>% 
   na.omit() %>% 
   sample_frac(0.01)
 
@@ -32,13 +32,13 @@ pca_sums <- as_tibble(raw.pca$x[,1:2]) %>%
 ggbiplot(raw.pca, alpha = 0.01, varname.size = 10) +
   ggsave("plots/pca-loadings.png")
 raw.pca$rotation[,1:2] #each arrow is a point formed by the values in this chart
-                       #PC1 = x PC2 = y
+#PC1 = x PC2 = y
 
 #summarize PCA
 pca_sums %>% 
   group_by(country) %>% 
   dplyr::summarise(mean_pc1 = mean(PC1),
-            mean_pc2 = mean(PC2))
+                   mean_pc2 = mean(PC2))
 pca_sums
 #plot PC1 by country 
 p1 <- ggplot(pca_sums) + 
