@@ -1,0 +1,102 @@
+# response PCA -----------------------------------------------------------------
+library(ggbiplot)
+library(tidyverse)  # data manipulation
+
+#import data -------------------------------------------------------------------
+raw <- 
+  read_rds("01.2-data-clean/raw.rds") %>% 
+  na.omit() %>% 
+  sample_frac(0.01)
+
+
+# PCA --------------------------------------------------------------------------
+#compute PCA on raw
+raw.pca <- prcomp(raw %>% 
+                    select(-id, -country))
+
+#calculate cumulative std. deviation to identify useful components
+cum_perc_var_explained <- cumsum(raw.pca$sdev / sum(raw.pca$sdev))
+
+tibble(
+  component = 1:length(cum_perc_var_explained),
+  cum_perc_var_explained) %>%
+  #Look for elbow, find number of components / clusters explaining large portions of the data
+  ggplot(aes(x = component, y  = cum_perc_var_explained)) +
+  geom_point()
+
+#extract the first two principle components
+pca_sums <- as_tibble(raw.pca$x[,1:2]) %>% 
+  mutate(country = raw$country)
+
+#plot PCA
+ggbiplot(raw.pca, alpha = 0.01, varname.size = 10) +
+  ggsave("plots/pca-loadings.png")
+raw.pca$rotation[,1:2] #each arrow is a point formed by the values in this chart
+                       #PC1 = x PC2 = y
+
+#summarize PCA
+pca_sums %>% 
+  group_by(country) %>% 
+  dplyr::summarise(mean_pc1 = mean(PC1),
+            mean_pc2 = mean(PC2))
+pca_sums
+#plot PC1 by country 
+p1 <- ggplot(pca_sums) + 
+  geom_point(aes(x = country, y= PC1)) +
+  coord_flip()
+
+#plot PC2 by country 
+p2 <- ggplot(pca_sums) + 
+  geom_point(aes(x = country, y= PC2)) +
+  coord_flip()
+
+grid.arrange(p1, p2, nrow = 1)
+
+# update world averages --------------------------------------------------------
+# extract world data and join with joint
+world <- world %>% 
+  left_join(pca_sums, by = "country") %>%
+  as_tibble()
+
+#plots -------------------------------------------------------------------------
+#plot average extroversion vs average science per country
+pc1.math <- ggplot(world) +
+  geom_point(aes(x = PC1, y = math, color = continent)) +
+  geom_smooth(aes(x = PC1, y = math), method = "lm") +
+  geom_text(aes(x = PC1, y = math, label = country)) +
+  ggsave("plots/PC1~math.png")
+
+pc1.science <- ggplot(world) +
+  geom_point(aes(x = PC1, y = science, color = continent)) +
+  geom_smooth(aes(x = PC1, y = science), method = "lm") +
+  geom_text(aes(x = PC1, y = science, label = country)) +
+  ggsave("plots/PC1~science.png")
+
+pc1.reading <- ggplot(world) +
+  geom_point(aes(x = PC1, y = reading, color = continent)) +
+  geom_smooth(aes(x = PC1, y = reading), method = "lm") +
+  geom_text(aes(x = PC1, y = reading, label = country)) +
+  ggsave("plots/PC1~reading.png")
+
+#plot PC2 vs average math per country
+pc2.math <- ggplot(world) +
+  geom_point(aes(x = PC2, y = math, color = continent)) +
+  geom_smooth(aes(x = PC2, y = math), method = "lm") +
+  geom_text(aes(x = PC2, y = math, label = country)) +
+  ggsave("plots/PC2~math.png")
+
+pc2.science <- ggplot(world) +
+  geom_point(aes(x = PC2, y = science, color = continent)) +
+  geom_smooth(aes(x = PC2, y = science), method = "lm") +
+  geom_text(aes(x = PC2, y = science, label = country)) +
+  ggsave("plots/PC2~science.png")
+
+pc2.reading <- ggplot(world) +
+  geom_point(aes(x = PC2, y = reading, color = continent)) +
+  geom_smooth(aes(x = PC2, y = reading), method = "lm") +
+  geom_text(aes(x = PC2, y = reading, label = country)) +
+  ggsave("plots/PC2~reading.png")
+
+#setup plot layout
+grid.arrange(pc1.math, pc1.science, pc1.reading, pc2.math, pc2.science, pc2.reading, nrow = 3)
+
