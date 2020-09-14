@@ -39,3 +39,4 @@ t5 <- ggplot(world) +
 
 #setup plot layout
 grid.arrange(t1, t2, t3, t4, t5, nrow = 3)
+
