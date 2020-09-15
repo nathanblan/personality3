@@ -17,7 +17,7 @@ names(world)
 
 #plots -------------------------------------------------------------------------
 #plot world by average math
-ggplot(data = world) +
+w1 <- ggplot(data = world) +
   geom_sf(aes(fill = as.factor(math), geometry = geometry)) +
   xlab("Longitude") + ylab("Latitude") +
   ggtitle("World map", 
@@ -25,7 +25,7 @@ ggplot(data = world) +
   ggsave("plots/world-math-2015.png")
 
 #plot world by average reading
-ggplot(data = world) +
+w2 <- ggplot(data = world) +
   geom_sf(aes(fill = as.factor(reading), geometry = geometry)) +
   xlab("Longitude") + ylab("Latitude") +
   ggtitle("World map", 
@@ -33,12 +33,14 @@ ggplot(data = world) +
   ggsave("plots/world-reading-2015.png")
 
 #plot world by average science
-ggplot(data = world) +
+w3 <- ggplot(data = world) +
   geom_sf(aes(fill = as.factor(science), geometry = geometry)) +
   xlab("Longitude") + ylab("Latitude") +
   ggtitle("World map", 
           subtitle = paste0("(", length(unique(world$name)), " countries)")) +
   ggsave("plots/world-sceince-2015.png")
+
+grid.arrange(w1, w2, w3, nrow = 3)
 
 #plot math ---------------------------------------------------------------------
 #plot average extroversion vs average math per country
@@ -46,10 +48,10 @@ m1 <- ggplot(world) +
   geom_point(aes(x = avg_EXT, y = math, color = continent)) +
   geom_smooth(aes(x = avg_EXT, y = math), method = "lm") +
   geom_text(aes(x = avg_EXT, y = math, label = country)) +
-  geom_text_repel(aes(x = avg_EXT, y = math, label = country), 
-                  min.segment.length = 0, seed = 42, box.padding = 0.5) +
+#  geom_text_repel(aes(x = avg_EXT, y = math, label = country), 
+#                  min.segment.length = 0, seed = 42, box.padding = 0.5) +
   ggsave("plots/extraversion~math.png")
-
+m1
 #plot average neuroticism vs average math per country
 m2 <- ggplot(world) +
   geom_point(aes(x = avg_EST, y = math, color = continent)) +
@@ -82,6 +84,8 @@ m5 <- ggplot(world) +
   geom_point(aes(x = avg_OPN, y = math, color = continent)) +
   geom_smooth(aes(x = avg_OPN, y = math), method = "lm") +
   geom_text(aes(x = avg_OPN, y = math, label = country)) +
+  geom_text_repel(aes(x = avg_OPN, y = math, label = country),
+                  min.segment.length = 0, seed = 42, box.padding = 0.5) +
   ggsave("plots/openness~math.png")
 
 #setup plot layout
