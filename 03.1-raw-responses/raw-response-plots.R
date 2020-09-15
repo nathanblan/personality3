@@ -90,7 +90,7 @@ r1 <- ggplot(world) +
   geom_smooth(aes(x = avg_EXT, y = reading), method = "lm") +
   geom_text(aes(x = avg_EXT, y = reading, label = country)) +
   ggsave("plots/extraversion~reading.png")
-
+r1
 #plot average neuroticism vs average reading per country
 r2 <- ggplot(world) +
   geom_point(aes(x = avg_EST, y = reading, color = continent)) +
@@ -129,7 +129,7 @@ s1 <- ggplot(world) +
   geom_smooth(aes(x = avg_EXT, y = science), method = "lm") +
   geom_text(aes(x = avg_EXT, y = science, label = country)) +
   ggsave("plots/extraversion~science.png")
-
+s1
 #plot average neuroticism vs average science per country
 s2 <- ggplot(world) +
   geom_point(aes(x = avg_EST, y = science, color = continent)) +
@@ -161,3 +161,5 @@ s5 <- ggplot(world) +
 #setup plot layout
 grid.arrange(s1, s2, s3, s4, s5, nrow = 3)
 
+#compare graphs ----------------------------------------------------------------
+grid.arrange(m1, r1, s1, nrow = 3)
