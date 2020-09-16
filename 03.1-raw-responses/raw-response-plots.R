@@ -170,12 +170,12 @@ s1 <- ggplot(world) +
   stat_regline_equation(
     aes(x = avg_EXT, y = science, 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 3, label.y = 250
+    label.x = 3, label.y = 300
   ) +
   stat_cor(
     aes(x = avg_EXT, y = science,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 1, label.y = 250
+    label.x = 1, label.y = 300
   ) +
   ggsave("plots/extraversion~science.png")
 
@@ -187,12 +187,12 @@ s2 <- ggplot(world) +
   stat_regline_equation(
     aes(x = avg_EST, y = science, 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 3, label.y = 250
+    label.x = 3, label.y = 300
   ) +
   stat_cor(
     aes(x = avg_EST, y = science,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 1, label.y = 250
+    label.x = 1, label.y = 300
   ) +
   ggsave("plots/neuroticism~science.png")
 
@@ -204,12 +204,12 @@ s3 <- ggplot(world) +
   stat_regline_equation(
     aes(x = avg_AGR, y = science, 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 3, label.y = 250
+    label.x = 3, label.y = 300
   ) +
   stat_cor(
     aes(x = avg_AGR, y = science,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 1, label.y = 250
+    label.x = 1, label.y = 300
   ) +
   ggsave("plots/agreeableness~science.png")
 
@@ -221,12 +221,12 @@ s4 <- ggplot(world) +
   stat_regline_equation(
     aes(x = avg_CSN, y = science, 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 3, label.y = 250
+    label.x = 3, label.y = 300
   ) +
   stat_cor(
     aes(x = avg_CSN, y = science,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 1, label.y = 250
+    label.x = 1, label.y = 300
   ) +
   ggsave("plots/conscientiousness~science.png")
 
@@ -238,12 +238,12 @@ s5 <- ggplot(world) +
   stat_regline_equation(
     aes(x = avg_OPN, y = science, 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 3, label.y = 250
+    label.x = 3, label.y = 300
   ) +
   stat_cor(
     aes(x = avg_OPN, y = science,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 1, label.y = 250
+    label.x = 1, label.y = 300
   ) +
   ggsave("plots/openness~science.png")
 
