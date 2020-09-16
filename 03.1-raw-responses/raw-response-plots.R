@@ -162,4 +162,17 @@ s5 <- ggplot(world) +
 grid.arrange(s1, s2, s3, s4, s5, nrow = 3)
 
 #compare graphs ----------------------------------------------------------------
+#extroversion
 grid.arrange(m1, r1, s1, nrow = 3)
+
+#neuroticism
+grid.arrange(m2, r2, s2, nrow = 3)
+
+#agreeableness
+grid.arrange(m3, r3, s3, nrow = 3)
+
+#conscientiousness
+grid.arrange(m4, r4, s4, nrow = 3)
+
+#openness
+grid.arrange(m5, r5, s5, nrow = 3)
