@@ -169,10 +169,16 @@ s1 <- ggplot(world) +
   geom_text(aes(x = avg_EXT, y = science, label = country)) +
   stat_regline_equation(
     aes(x = avg_EXT, y = science, 
-        label =  paste(..eq.label.., ..adj.rr.label.., sep = "~~~~"))
+        label =  paste(..eq.label.., sep = "~~~~")),
+    label.x = 3, label.y = 250
+  ) +
+  stat_cor(
+    aes(x = avg_EXT, y = science,
+        label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
+    label.x = 1, label.y = 250
   ) +
   ggsave("plots/extraversion~science.png")
-s1
+
 #plot average neuroticism vs average science per country
 s2 <- ggplot(world) +
   geom_point(aes(x = avg_EST, y = science, color = continent)) +
@@ -180,7 +186,13 @@ s2 <- ggplot(world) +
   geom_text(aes(x = avg_EST, y = science, label = country)) +
   stat_regline_equation(
     aes(x = avg_EST, y = science, 
-        label =  paste(..eq.label.., ..adj.rr.label.., sep = "~~~~"))
+        label =  paste(..eq.label.., sep = "~~~~")),
+    label.x = 3, label.y = 250
+  ) +
+  stat_cor(
+    aes(x = avg_EST, y = science,
+        label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
+    label.x = 1, label.y = 250
   ) +
   ggsave("plots/neuroticism~science.png")
 
@@ -191,7 +203,13 @@ s3 <- ggplot(world) +
   geom_text(aes(x = avg_AGR, y = science, label = country)) +
   stat_regline_equation(
     aes(x = avg_AGR, y = science, 
-        label =  paste(..eq.label.., ..adj.rr.label.., sep = "~~~~"))
+        label =  paste(..eq.label.., sep = "~~~~")),
+    label.x = 3, label.y = 250
+  ) +
+  stat_cor(
+    aes(x = avg_AGR, y = science,
+        label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
+    label.x = 1, label.y = 250
   ) +
   ggsave("plots/agreeableness~science.png")
 
@@ -202,7 +220,13 @@ s4 <- ggplot(world) +
   geom_text(aes(x = avg_CSN, y = science, label = country)) +
   stat_regline_equation(
     aes(x = avg_CSN, y = science, 
-        label =  paste(..eq.label.., ..adj.rr.label.., sep = "~~~~"))
+        label =  paste(..eq.label.., sep = "~~~~")),
+    label.x = 3, label.y = 250
+  ) +
+  stat_cor(
+    aes(x = avg_CSN, y = science,
+        label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
+    label.x = 1, label.y = 250
   ) +
   ggsave("plots/conscientiousness~science.png")
 
@@ -213,13 +237,22 @@ s5 <- ggplot(world) +
   geom_text(aes(x = avg_OPN, y = science, label = country)) +
   stat_regline_equation(
     aes(x = avg_OPN, y = science, 
-        label =  paste(..eq.label.., ..adj.rr.label.., sep = "~~~~"))
+        label =  paste(..eq.label.., sep = "~~~~")),
+    label.x = 3, label.y = 250
+  ) +
+  stat_cor(
+    aes(x = avg_OPN, y = science,
+        label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
+    label.x = 1, label.y = 250
   ) +
   ggsave("plots/openness~science.png")
 
 #setup plot layout
 grid.arrange(s1, s2, s3, s4, s5, nrow = 3)
 
+#temporary
+grid.arrange(s1, s2, s3, nrow = 3)
+s1
 #compare graphs ----------------------------------------------------------------
 #extroversion
 grid.arrange(m1, r1, s1, nrow = 3)
