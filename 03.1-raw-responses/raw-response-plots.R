@@ -5,6 +5,7 @@
 library("rnaturalearth")
 library("rnaturalearthdata")
 library("ggrepel")
+library("ggpubr")
 
 # plot world averages ----------------------------------------------------------
 # extract world data and join with joint
@@ -48,6 +49,10 @@ m1 <- ggplot(world) +
   geom_point(aes(x = avg_EXT, y = math, color = continent)) +
   geom_smooth(aes(x = avg_EXT, y = math), method = "lm") +
   geom_text(aes(x = avg_EXT, y = math, label = country)) +
+  stat_regline_equation(
+    aes(x = avg_EXT, y = math, 
+        label =  paste(..eq.label.., ..adj.rr.label.., sep = "~~~~"))
+  ) +
   ggsave("plots/extraversion~math.png")
 m1
 #plot average neuroticism vs average math per country
@@ -55,6 +60,10 @@ m2 <- ggplot(world) +
   geom_point(aes(x = avg_EST, y = math, color = continent)) +
   geom_smooth(aes(x = avg_EST, y = math), method = "lm") +
   geom_text(aes(x = avg_EST, y = math, label = country)) +
+  stat_regline_equation(
+    aes(x = avg_EST, y = math, 
+        label =  paste(..eq.label.., ..adj.rr.label.., sep = "~~~~"))
+  ) +
   ggsave("plots/neuroticism~math.png")
 
 #plot average agreeableness vs average math per country
@@ -62,6 +71,10 @@ m3 <- ggplot(world) +
   geom_point(aes(x = avg_AGR, y = math, color = continent)) +
   geom_smooth(aes(x = avg_AGR, y = math), method = "lm") +
   geom_text(aes(x = avg_AGR, y = math, label = country)) +
+  stat_regline_equation(
+    aes(x = avg_AGR, y = math, 
+        label =  paste(..eq.label.., ..adj.rr.label.., sep = "~~~~"))
+  ) +
   ggsave("plots/agreeableness~math.png")
 
 #plot average conscientiousness vs average math per country
@@ -69,6 +82,10 @@ m4 <- ggplot(world) +
   geom_point(aes(x = avg_CSN, y = math, color = continent)) +
   geom_smooth(aes(x = avg_CSN, y = math), method = "lm") +
   geom_text(aes(x = avg_CSN, y = math, label = country)) +
+  stat_regline_equation(
+    aes(x = avg_CSN, y = math, 
+        label =  paste(..eq.label.., ..adj.rr.label.., sep = "~~~~"))
+  ) +
   ggsave("plots/conscientiousness~math.png")
 
 #plot average openness vs average math per country
@@ -76,6 +93,10 @@ m5 <- ggplot(world) +
   geom_point(aes(x = avg_OPN, y = math, color = continent)) +
   geom_smooth(aes(x = avg_OPN, y = math), method = "lm") +
   geom_text(aes(x = avg_OPN, y = math, label = country)) +
+  stat_regline_equation(
+    aes(x = avg_OPN, y = math, 
+        label =  paste(..eq.label.., ..adj.rr.label.., sep = "~~~~"))
+  ) +
   ggsave("plots/openness~math.png")
 
 #setup plot layout
@@ -87,6 +108,10 @@ r1 <- ggplot(world) +
   geom_point(aes(x = avg_EXT, y = reading, color = continent)) +
   geom_smooth(aes(x = avg_EXT, y = reading), method = "lm") +
   geom_text(aes(x = avg_EXT, y = reading, label = country)) +
+  stat_regline_equation(
+    aes(x = avg_EXT, y = reading, 
+        label =  paste(..eq.label.., ..adj.rr.label.., sep = "~~~~"))
+  ) +
   ggsave("plots/extraversion~reading.png")
 r1
 #plot average neuroticism vs average reading per country
@@ -94,6 +119,10 @@ r2 <- ggplot(world) +
   geom_point(aes(x = avg_EST, y = reading, color = continent)) +
   geom_smooth(aes(x = avg_EST, y = reading), method = "lm") +
   geom_text(aes(x = avg_EST, y = reading, label = country)) +
+  stat_regline_equation(
+    aes(x = avg_EST, y = reading, 
+        label =  paste(..eq.label.., ..adj.rr.label.., sep = "~~~~"))
+  ) +
   ggsave("plots/neuroticism~reading.png")
 
 #plot average agreeableness vs average reading per country
@@ -101,6 +130,10 @@ r3 <- ggplot(world) +
   geom_point(aes(x = avg_AGR, y = reading, color = continent)) +
   geom_smooth(aes(x = avg_AGR, y = reading), method = "lm") +
   geom_text(aes(x = avg_AGR, y = reading, label = country)) +
+  stat_regline_equation(
+    aes(x = avg_AGR, y = reading, 
+        label =  paste(..eq.label.., ..adj.rr.label.., sep = "~~~~"))
+  ) +
   ggsave("plots/agreeableness~reading.png")
 
 #plot average conscientiousness vs average reading per country
@@ -108,6 +141,10 @@ r4 <- ggplot(world) +
   geom_point(aes(x = avg_CSN, y = reading, color = continent)) +
   geom_smooth(aes(x = avg_CSN, y = reading), method = "lm") +
   geom_text(aes(x = avg_CSN, y = reading, label = country)) +
+  stat_regline_equation(
+    aes(x = avg_CSN, y = reading, 
+        label =  paste(..eq.label.., ..adj.rr.label.., sep = "~~~~"))
+  ) +
   ggsave("plots/conscientiousness~reading.png")
 
 #plot average openness vs average reading per country
@@ -115,6 +152,10 @@ r5 <- ggplot(world) +
   geom_point(aes(x = avg_OPN, y = reading, color = continent)) +
   geom_smooth(aes(x = avg_OPN, y = reading), method = "lm") +
   geom_text(aes(x = avg_OPN, y = reading, label = country)) +
+  stat_regline_equation(
+    aes(x = avg_OPN, y = reading, 
+        label =  paste(..eq.label.., ..adj.rr.label.., sep = "~~~~"))
+  ) +
   ggsave("plots/openness~reading.png")
 
 #setup plot layout
@@ -126,6 +167,10 @@ s1 <- ggplot(world) +
   geom_point(aes(x = avg_EXT, y = science, color = continent)) +
   geom_smooth(aes(x = avg_EXT, y = science), method = "lm") +
   geom_text(aes(x = avg_EXT, y = science, label = country)) +
+  stat_regline_equation(
+    aes(x = avg_EXT, y = science, 
+        label =  paste(..eq.label.., ..adj.rr.label.., sep = "~~~~"))
+  ) +
   ggsave("plots/extraversion~science.png")
 s1
 #plot average neuroticism vs average science per country
@@ -133,6 +178,10 @@ s2 <- ggplot(world) +
   geom_point(aes(x = avg_EST, y = science, color = continent)) +
   geom_smooth(aes(x = avg_EST, y = science), method = "lm") +
   geom_text(aes(x = avg_EST, y = science, label = country)) +
+  stat_regline_equation(
+    aes(x = avg_EST, y = science, 
+        label =  paste(..eq.label.., ..adj.rr.label.., sep = "~~~~"))
+  ) +
   ggsave("plots/neuroticism~science.png")
 
 #plot average agreeableness vs average science per country
@@ -140,6 +189,10 @@ s3 <- ggplot(world) +
   geom_point(aes(x = avg_AGR, y = science, color = continent)) +
   geom_smooth(aes(x = avg_AGR, y = science), method = "lm") +
   geom_text(aes(x = avg_AGR, y = science, label = country)) +
+  stat_regline_equation(
+    aes(x = avg_AGR, y = science, 
+        label =  paste(..eq.label.., ..adj.rr.label.., sep = "~~~~"))
+  ) +
   ggsave("plots/agreeableness~science.png")
 
 #plot average conscientiousness vs average science per country
@@ -147,6 +200,10 @@ s4 <- ggplot(world) +
   geom_point(aes(x = avg_CSN, y = science, color = continent)) +
   geom_smooth(aes(x = avg_CSN, y = science), method = "lm") +
   geom_text(aes(x = avg_CSN, y = science, label = country)) +
+  stat_regline_equation(
+    aes(x = avg_CSN, y = science, 
+        label =  paste(..eq.label.., ..adj.rr.label.., sep = "~~~~"))
+  ) +
   ggsave("plots/conscientiousness~science.png")
 
 #plot average openness vs average science per country
@@ -154,6 +211,10 @@ s5 <- ggplot(world) +
   geom_point(aes(x = avg_OPN, y = science, color = continent)) +
   geom_smooth(aes(x = avg_OPN, y = science), method = "lm") +
   geom_text(aes(x = avg_OPN, y = science, label = country)) +
+  stat_regline_equation(
+    aes(x = avg_OPN, y = science, 
+        label =  paste(..eq.label.., ..adj.rr.label.., sep = "~~~~"))
+  ) +
   ggsave("plots/openness~science.png")
 
 #setup plot layout
