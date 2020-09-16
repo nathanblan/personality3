@@ -55,8 +55,6 @@ m2 <- ggplot(world) +
   geom_point(aes(x = avg_EST, y = math, color = continent)) +
   geom_smooth(aes(x = avg_EST, y = math), method = "lm") +
   geom_text(aes(x = avg_EST, y = math, label = country)) +
-  geom_text_repel(aes(x = avg_EST, y = math, label = country),
-                  min.segment.length = 0, seed = 42, box.padding = 0.5) +
   ggsave("plots/neuroticism~math.png")
 
 #plot average agreeableness vs average math per country
