@@ -58,6 +58,9 @@ world <- world %>%
   left_join(pca_sums, by = "country") %>%
   as_tibble()
 
+#show loadings
+pca_sums.x[]
+
 #plots -------------------------------------------------------------------------
 #plot average extroversion vs average science per country
 pc1.math <- ggplot(world) +
