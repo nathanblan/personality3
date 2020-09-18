@@ -3,16 +3,16 @@
 #plot time ---------------------------------------------------------------------
 #plot average extroversion-time vs average extroversion per country
 t1 <- ggplot(world) +
-  geom_point(aes(x = med_EXT, y = avg_EXT_E, color = continent)) +
-  geom_smooth(aes(x = med_EXT, y = avg_EXT_E), method = "lm") +
-  geom_text(aes(x = med_EXT, y = avg_EXT_E, label = country)) +
+  geom_point(aes(x = med_EXT, y = log(avg_EXT_E), color = continent)) +
+  geom_smooth(aes(x = med_EXT, y = log(avg_EXT_E)), method = "lm") +
+  geom_text(aes(x = med_EXT, y = log(avg_EXT_E), label = country)) +
   stat_regline_equation(
-    aes(x = avg_EXT, y = avg_EXT_E, 
+    aes(x = avg_EXT, y = log(avg_EXT_E), 
         label =  paste(..eq.label.., sep = "~~~~")),
     label.x = 3, label.y = 300
   ) +
   stat_cor(
-    aes(x = avg_EXT, y = avg_EXT_E,
+    aes(x = avg_EXT, y = log(avg_EXT_E),
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
     label.x = 1, label.y = 300
   ) +
@@ -20,16 +20,16 @@ t1 <- ggplot(world) +
 t1
 #plot average neuroticism-time vs average neuroticism per country
 t2 <- ggplot(world) +
-  geom_point(aes(x = avg_EST, y = avg_EST_E, color = continent)) +
-  geom_smooth(aes(x = avg_EST, y = avg_EST_E), method = "lm") +
-  geom_text(aes(x = avg_EST, y = avg_EST_E, label = country)) +
+  geom_point(aes(x = avg_EST, y = log(avg_EsT_E), color = continent)) +
+  geom_smooth(aes(x = avg_EST, y = log(avg_EsT_E)), method = "lm") +
+  geom_text(aes(x = avg_EST, y = log(avg_EsT_E), label = country)) +
   stat_regline_equation(
-    aes(x = avg_EST, y = avg_EST_E, 
+    aes(x = avg_EST, y = log(avg_EsT_E), 
         label =  paste(..eq.label.., sep = "~~~~")),
     label.x = 3, label.y = 300
   ) +
   stat_cor(
-    aes(x = avg_EST, y = avg_EST_E,
+    aes(x = avg_EST, y = log(avg_EsT_E),
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
     label.x = 1, label.y = 300
   ) +
@@ -37,16 +37,16 @@ t2 <- ggplot(world) +
 t2
 #plot average agreeableness-time vs average agreeableness per country
 t3 <- ggplot(world) +
-  geom_point(aes(x = avg_AGR, y = avg_AGR_E, color = continent)) +
-  geom_smooth(aes(x = avg_AGR, y = avg_AGR_E), method = "lm") +
-  geom_text(aes(x = avg_AGR, y = avg_AGR_E, label = country)) +
+  geom_point(aes(x = avg_AGR, y = log(avg_AGR_E), color = continent)) +
+  geom_smooth(aes(x = avg_AGR, y = log(avg_AGR_E)), method = "lm") +
+  geom_text(aes(x = avg_AGR, y = log(avg_AGR_E), label = country)) +
   stat_regline_equation(
-    aes(x = avg_AGR, y = avg_AGR_E, 
+    aes(x = avg_AGR, y = log(avg_AGR_E), 
         label =  paste(..eq.label.., sep = "~~~~")),
     label.x = 3, label.y = 300
   ) +
   stat_cor(
-    aes(x = avg_AGR, y = avg_AGR_E,
+    aes(x = avg_AGR, y = log(avg_AGR_E),
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
     label.x = 1, label.y = 300
   ) +
@@ -71,16 +71,16 @@ t4 <- ggplot(world) +
 t4
 #plot average openness-time vs average openness per country
 t5 <- ggplot(world) +
-  geom_point(aes(x = avg_OPN, y = avg_OPN_E, color = continent)) +
-  geom_smooth(aes(x = avg_OPN, y = avg_OPN_E), method = "lm") +
-  geom_text(aes(x = avg_OPN, y = avg_OPN_E, label = country)) +
+  geom_point(aes(x = avg_OPN, y = log(avg_OPN_E), color = continent)) +
+  geom_smooth(aes(x = avg_OPN, y = log(avg_OPN_E)), method = "lm") +
+  geom_text(aes(x = avg_OPN, y = log(avg_OPN_E), label = country)) +
   stat_regline_equation(
-    aes(x = avg_OPN, y = avg_OPN_E, 
+    aes(x = avg_OPN, y = log(avg_OPN_E), 
         label =  paste(..eq.label.., sep = "~~~~")),
     label.x = 3, label.y = 300
   ) +
   stat_cor(
-    aes(x = avg_OPN, y = avg_OPN_E,
+    aes(x = avg_OPN, y = log(avg_OPN_E),
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
     label.x = 1, label.y = 300
   ) +

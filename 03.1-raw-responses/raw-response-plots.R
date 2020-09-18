@@ -1,5 +1,5 @@
 #response plots
-
+#p values smaller than 0.01 -> probably relationship
 # import libraries -------------------------------------------------------------
 #set up ggplot world
 library("rnaturalearth")
