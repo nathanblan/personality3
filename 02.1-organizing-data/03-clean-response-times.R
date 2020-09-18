@@ -110,6 +110,7 @@ time_sums <- time %>%
     avg_OPN_E = mean(c(OPN01_E:OPN10_E)),
     med_OPN_E = median(c(OPN01_E:OPN10_E)),
   )
+head(time_sums)# I don't think median is calculating correctly
 
 # export -----------------------------------------------------------------------
 r_time %>% 
