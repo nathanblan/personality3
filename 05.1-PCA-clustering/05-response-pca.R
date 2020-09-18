@@ -13,10 +13,14 @@ raw <-
 #compute PCA on raw
 raw.pca <- prcomp(raw %>% 
                     select(-id, -country))
+names(raw.pca)
+#show loadings
+raw.pca$x[,1:2]
 
 #calculate cumulative std. deviation to identify useful components
 cum_perc_var_explained <- cumsum(raw.pca$sdev / sum(raw.pca$sdev))
 
+#plot cum. sdev
 tibble(
   component = 1:length(cum_perc_var_explained),
   cum_perc_var_explained) %>%
@@ -59,7 +63,7 @@ world <- world %>%
   as_tibble()
 
 #show loadings
-pca_sums.x[]
+raw.pca$x[,1:2]
 
 #plots -------------------------------------------------------------------------
 #plot average extroversion vs average science per country
@@ -100,6 +104,8 @@ pc2.reading <- ggplot(world) +
   geom_text(aes(x = PC2, y = reading, label = country)) +
   ggsave("plots/PC2~reading.png")
 
-#setup plot layout
-grid.arrange(pc1.math, pc1.science, pc1.reading, pc2.math, pc2.science, pc2.reading, nrow = 3)
+#setup plot layout pc1
+grid.arrange(pc1.math, pc1.science, pc1.reading, nrow = 1)
 
+#pc2
+grid.arrange(pc2.math, pc2.science, pc2.reading, nrow = 3)
