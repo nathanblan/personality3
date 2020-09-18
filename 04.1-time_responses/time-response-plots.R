@@ -17,7 +17,7 @@ t1 <- ggplot(world) +
     label.x = 1, label.y = 300
   ) +
   ggsave("plots/extraversion-time~extroversion.png")
-
+t1
 #plot average neuroticism-time vs average neuroticism per country
 t2 <- ggplot(world) +
   geom_point(aes(x = avg_EST, y = avg_EST_E, color = continent)) +
@@ -34,7 +34,7 @@ t2 <- ggplot(world) +
     label.x = 1, label.y = 300
   ) +
   ggsave("plots/neuroticism-time~neuroticism.png")
-
+t2
 #plot average agreeableness-time vs average agreeableness per country
 t3 <- ggplot(world) +
   geom_point(aes(x = avg_AGR, y = avg_AGR_E, color = continent)) +
@@ -51,7 +51,7 @@ t3 <- ggplot(world) +
     label.x = 1, label.y = 300
   ) +
   ggsave("plots/agreeableness-time~agreeableness.png")
-
+t3
 #plot average conscientiousness-time vs average conscientiousness per country
 t4 <- ggplot(world) +
   geom_point(aes(x = avg_CSN, y = avg_CSN_E, color = continent)) +
@@ -68,7 +68,7 @@ t4 <- ggplot(world) +
     label.x = 1, label.y = 300
   ) +
   ggsave("plots/conscientiousness-time~conscientiousness.png")
-
+t4
 #plot average openness-time vs average openness per country
 t5 <- ggplot(world) +
   geom_point(aes(x = avg_OPN, y = avg_OPN_E, color = continent)) +
