@@ -310,9 +310,6 @@ s5 <- ggplot(world) +
 #setup plot layout
 grid.arrange(s1, s2, s3, s4, s5, nrow = 3)
 
-#temporary
-grid.arrange(s1, s2, s3, nrow = 3)
-s1
 #compare graphs ----------------------------------------------------------------
 #extroversion
 grid.arrange(m1, r1, s1, nrow = 3)
@@ -328,3 +325,4 @@ grid.arrange(m4, r4, s4, nrow = 3)
 
 #openness
 grid.arrange(m5, r5, s5, nrow = 3)
+
