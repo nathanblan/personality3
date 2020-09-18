@@ -112,6 +112,17 @@ time_sums <- time %>%
   )
 head(time_sums)# I don't think median is calculating correctly
 
+new_time <- time %>% 
+  select(-id) %>% 
+  gather(var, val, -country) %>% 
+  dplyr::group_by(country, question = str_sub(var, 1, 3)) %>% 
+  dplyr::summarise(mean = mean(val), 
+            median = median(val))
+
+
+new_time %>% 
+  select(-median) %>% 
+  spread(question, mean)
 # export -----------------------------------------------------------------------
 r_time %>% 
   write_rds("01.2-data-clean/r_time.rds")

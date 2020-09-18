@@ -54,18 +54,18 @@ t3 <- ggplot(world) +
 t3
 #plot average conscientiousness-time vs average conscientiousness per country
 t4 <- ggplot(world) +
-  geom_point(aes(x = avg_CSN, y = avg_CSN_E, color = continent)) +
-  geom_smooth(aes(x = avg_CSN, y = avg_CSN_E), method = "lm") +
-  geom_text(aes(x = avg_CSN, y = avg_CSN_E, label = country)) +
+  geom_point(aes(x = avg_CSN, y = log(avg_CSN_E), color = continent)) +
+  geom_smooth(aes(x = avg_CSN, y = log(avg_CSN_E)), method = "lm") +
+  geom_text(aes(x = avg_CSN, y = log(avg_CSN_E), label = country)) +
   stat_regline_equation(
-    aes(x = avg_CSN, y = avg_CSN_E, 
+    aes(x = avg_CSN, y = log(avg_CSN_E), 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 3, label.y = 300
+    label.x = 3, label.y = 11
   ) +
   stat_cor(
-    aes(x = avg_CSN, y = avg_CSN_E,
+    aes(x = avg_CSN, y = log(avg_CSN_E),
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 1, label.y = 300
+    label.x = 1, label.y = 11
   ) +
   ggsave("plots/conscientiousness-time~conscientiousness.png")
 t4
