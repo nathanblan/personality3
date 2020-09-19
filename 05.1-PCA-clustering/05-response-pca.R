@@ -34,6 +34,7 @@ pca_sums <- as_tibble(raw.pca$x[,1:2]) %>%
 
 #plot PCA
 ggbiplot(raw.pca, alpha = 0.01, varname.size = 10) +
+  geom_text_repel(min.segment.length = 0, seed = 42, box.padding = 0.5) +
   ggsave("plots/pca-loadings.png")
 raw.pca$rotation[,1:2] #each arrow is a point formed by the values in this chart
                        #PC1 = x PC2 = y
