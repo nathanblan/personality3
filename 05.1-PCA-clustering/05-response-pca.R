@@ -39,14 +39,17 @@ raw.pca$rotation[,1:2] #each arrow is a point formed by the values in this chart
                        #PC1 = x PC2 = y
 
 #summarize PCA
-pca_sums %>% 
+pca_sums <- pca_sums %>% 
   dplyr::group_by(country) %>% 
   dplyr::summarise(mean_pc1 = mean(PC1),
             mean_pc2 = mean(PC2))
 pca_sums
 
 #pca_sums biplot
-ggbiplot(pca_sums, alpha = 0.01, varname.size = 10)
+pca_sums %>% 
+  ggplot(aes(x = mean_pc1, y = mean_pc2, label = country)) +
+  geom_point() +
+  geom_text(label = pca_sums$country)
 #plot PC1 by country 
 p1 <- ggplot(pca_sums) + 
   geom_point(aes(x = country, y= PC1)) +
