@@ -31,20 +31,22 @@ tibble(
 #extract the first two principle components
 pca_sums <- as_tibble(raw.pca$x[,1:2]) %>% 
   mutate(country = raw$country)
-
+pca_sums
 #plot PCA
 ggbiplot(raw.pca, alpha = 0.01, varname.size = 10) +
-  geom_text_repel(min.segment.length = 0, seed = 42, box.padding = 0.5) +
   ggsave("plots/pca-loadings.png")
 raw.pca$rotation[,1:2] #each arrow is a point formed by the values in this chart
                        #PC1 = x PC2 = y
 
 #summarize PCA
 pca_sums %>% 
-  group_by(country) %>% 
+  dplyr::group_by(country) %>% 
   dplyr::summarise(mean_pc1 = mean(PC1),
             mean_pc2 = mean(PC2))
 pca_sums
+
+#pca_sums biplot
+ggbiplot(pca_sums, alpha = 0.01, varname.size = 10)
 #plot PC1 by country 
 p1 <- ggplot(pca_sums) + 
   geom_point(aes(x = country, y= PC1)) +
