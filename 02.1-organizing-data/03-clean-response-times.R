@@ -97,8 +97,8 @@ time <- time %>%
 
 #aggregate time_sums to find average time taken to respond per country
 time_sums <- time %>% 
-  group_by(country) %>% 
-  summarise(
+  dplyr::group_by(country) %>% 
+  dplyr::summarise(
     avg_EXT_E = mean(c(EXT01_E:EXT10_E)),
     med_EXT_E = median(c(EXT01_E:EXT10_E)),
     avg_EST_E = mean(c(EST01_E:EST10_E)),
@@ -119,10 +119,11 @@ new_time <- time %>%
   dplyr::summarise(mean = mean(val), 
             median = median(val))
 
-
+#summary of counties by average
 new_time %>% 
   select(-median) %>% 
   spread(question, mean)
+
 # export -----------------------------------------------------------------------
 r_time %>% 
   write_rds("01.2-data-clean/r_time.rds")
