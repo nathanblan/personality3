@@ -9,12 +9,12 @@ t1 <- ggplot(world) +
   stat_regline_equation(
     aes(x = avg_EXT, y = log(avg_EXT_E), 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 3, label.y = 5
+    label.x = 3, label.y = 8
   ) +
   stat_cor(
     aes(x = avg_EXT, y = log(avg_EXT_E),
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 1, label.y = 5
+    label.x = 2, label.y = 8
   ) +
   ggsave("plots/extraversion-time~extroversion.png")
 t1
@@ -26,12 +26,12 @@ t2 <- ggplot(world) +
   stat_regline_equation(
     aes(x = avg_EST, y = log(avg_EST_E), 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 3, label.y = 5
+    label.x = 3, label.y = 7.5
   ) +
   stat_cor(
     aes(x = avg_EST, y = log(avg_EST_E),
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 1, label.y = 5
+    label.x = 2, label.y = 7.5
   ) +
   ggsave("plots/neuroticism-time~neuroticism.png")
 t2
@@ -43,12 +43,12 @@ t3 <- ggplot(world) +
   stat_regline_equation(
     aes(x = avg_AGR, y = log(avg_AGR_E), 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 3, label.y = 5
+    label.x = 4, label.y = 8
   ) +
   stat_cor(
     aes(x = avg_AGR, y = log(avg_AGR_E),
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 1, label.y = 5
+    label.x = 3.5, label.y = 8
   ) +
   ggsave("plots/agreeableness-time~agreeableness.png")
 t3
@@ -60,12 +60,12 @@ t4 <- ggplot(world) +
   stat_regline_equation(
     aes(x = avg_CSN, y = log(avg_CSN_E), 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 3, label.y = 5
+    label.x = 3, label.y = 8
   ) +
   stat_cor(
     aes(x = avg_CSN, y = log(avg_CSN_E),
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 1, label.y = 5
+    label.x = 1.5, label.y = 8
   ) +
   ggsave("plots/conscientiousness-time~conscientiousness.png")
 t4
@@ -77,12 +77,12 @@ t5 <- ggplot(world) +
   stat_regline_equation(
     aes(x = avg_OPN, y = log(avg_OPN_E), 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 3, label.y = 5
+    label.x = 4, label.y = 8
   ) +
   stat_cor(
     aes(x = avg_OPN, y = log(avg_OPN_E),
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 1, label.y = 5
+    label.x = 3.5, label.y = 8
   ) +
   ggsave("plots/openness-time~openness.png")
 t5
