@@ -326,3 +326,285 @@ grid.arrange(m4, r4, s4, nrow = 3)
 #openness
 grid.arrange(m5, r5, s5, nrow = 3)
 
+#plot math ---------------------------------------------------------------------
+#plot median extroversion vs average math per country
+mm1 <- ggplot(world) +
+  geom_point(aes(x = med_EXT, y = math, color = continent)) +
+  geom_smooth(aes(x = med_EXT, y = math), method = "lm") +
+  geom_text(aes(x = med_EXT, y = math, label = country)) +
+  stat_regline_equation(
+    aes(x = med_EXT, y = math, 
+        label =  paste(..eq.label.., sep = "~~~~")),
+    label.x = 3, label.y = 300
+  ) +
+  stat_cor(
+    aes(x = med_EXT, y = math,
+        label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
+    label.x = 1, label.y = 300
+  ) +
+  ggsave("plots/extraversion~math.png")
+mm1
+#plot median neuroticism vs average math per country
+mm2 <- ggplot(world) +
+  geom_point(aes(x = med_EST, y = math, color = continent)) +
+  geom_smooth(aes(x = med_EST, y = math), method = "lm") +
+  geom_text(aes(x = med_EST, y = math, label = country)) +
+  stat_regline_equation(
+    aes(x = med_EST, y = math, 
+        label =  paste(..eq.label.., sep = "~~~~")),
+    label.x = 3, label.y = 300
+  ) +
+  stat_cor(
+    aes(x = med_EST, y = math,
+        label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
+    label.x = 1, label.y = 300
+  ) +
+  ggsave("plots/neuroticism~math.png")
+
+#plot median agreeableness vs average math per country
+mm3 <- ggplot(world) +
+  geom_point(aes(x = med_AGR, y = math, color = continent)) +
+  geom_smooth(aes(x = med_AGR, y = math), method = "lm") +
+  geom_text(aes(x = med_AGR, y = math, label = country)) +
+  stat_regline_equation(
+    aes(x = med_AGR, y = math, 
+        label =  paste(..eq.label.., sep = "~~~~")),
+    label.x = 3, label.y = 300
+  ) +
+  stat_cor(
+    aes(x = med_AGR, y = math,
+        label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
+    label.x = 1, label.y = 300
+  ) +
+  ggsave("plots/agreeableness~math.png")
+
+#plot median conscientiousness vs average math per country
+mm4 <- ggplot(world) +
+  geom_point(aes(x = med_CSN, y = math, color = continent)) +
+  geom_smooth(aes(x = med_CSN, y = math), method = "lm") +
+  geom_text(aes(x = med_CSN, y = math, label = country)) +
+  stat_regline_equation(
+    aes(x = med_CSN, y = math, 
+        label =  paste(..eq.label.., sep = "~~~~")),
+    label.x = 3, label.y = 300
+  ) +
+  stat_cor(
+    aes(x = med_CSN, y = math,
+        label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
+    label.x = 1, label.y = 300
+  ) +
+  ggsave("plots/conscientiousness~math.png")
+
+#plot median openness vs average math per country
+mm5 <- ggplot(world) +
+  geom_point(aes(x = med_OPN, y = math, color = continent)) +
+  geom_smooth(aes(x = med_OPN, y = math), method = "lm") +
+  geom_text(aes(x = med_OPN, y = math, label = country)) +
+  stat_regline_equation(
+    aes(x = med_OPN, y = math, 
+        label =  paste(..eq.label.., sep = "~~~~")),
+    label.x = 3, label.y = 300
+  ) +
+  stat_cor(
+    aes(x = med_OPN, y = math,
+        label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
+    label.x = 1, label.y = 300
+  ) +
+  ggsave("plots/openness~math.png")
+
+#setup plot layout
+grid.arrange(mm1, mm2, mm3, mm4, mm5, nrow = 3)
+
+#plot reading ------------------------------------------------------------------
+#plot median extroversion vs average reading per country
+mr1 <- ggplot(world) +
+  geom_point(aes(x = med_EXT, y = reading, color = continent)) +
+  geom_smooth(aes(x = med_EXT, y = reading), method = "lm") +
+  geom_text(aes(x = med_EXT, y = reading, label = country)) +
+  stat_regline_equation(
+    aes(x = med_EXT, y = reading, 
+        label =  paste(..eq.label.., sep = "~~~~")),
+    label.x = 3, label.y = 300
+  ) +
+  stat_cor(
+    aes(x = med_EXT, y = reading,
+        label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
+    label.x = 1, label.y = 300
+  ) +
+  ggsave("plots/extraversion~reading.png")
+mr1
+#plot median neuroticism vs average reading per country
+mr2 <- ggplot(world) +
+  geom_point(aes(x = med_EST, y = reading, color = continent)) +
+  geom_smooth(aes(x = med_EST, y = reading), method = "lm") +
+  geom_text(aes(x = med_EST, y = reading, label = country)) +
+  stat_regline_equation(
+    aes(x = med_EST, y = reading, 
+        label =  paste(..eq.label.., sep = "~~~~")),
+    label.x = 3, label.y = 300
+  ) +
+  stat_cor(
+    aes(x = med_EST, y = reading,
+        label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
+    label.x = 1, label.y = 300
+  ) +
+  ggsave("plots/neuroticism~reading.png")
+
+#plot median agreeableness vs average reading per country
+mr3 <- ggplot(world) +
+  geom_point(aes(x = med_AGR, y = reading, color = continent)) +
+  geom_smooth(aes(x = med_AGR, y = reading), method = "lm") +
+  geom_text(aes(x = med_AGR, y = reading, label = country)) +
+  stat_regline_equation(
+    aes(x = med_AGR, y = reading, 
+        label =  paste(..eq.label.., sep = "~~~~")),
+    label.x = 3, label.y = 300
+  ) +
+  stat_cor(
+    aes(x = med_AGR, y = reading,
+        label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
+    label.x = 1, label.y = 300
+  ) +
+  ggsave("plots/agreeableness~reading.png")
+
+#plot median conscientiousness vs average reading per country
+mr4 <- ggplot(world) +
+  geom_point(aes(x = med_CSN, y = reading, color = continent)) +
+  geom_smooth(aes(x = med_CSN, y = reading), method = "lm") +
+  geom_text(aes(x = med_CSN, y = reading, label = country)) +
+  stat_regline_equation(
+    aes(x = med_CSN, y = reading, 
+        label =  paste(..eq.label.., sep = "~~~~")),
+    label.x = 3, label.y = 300
+  ) +
+  stat_cor(
+    aes(x = med_CSN, y = reading,
+        label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
+    label.x = 1, label.y = 300
+  ) +
+  ggsave("plots/conscientiousness~reading.png")
+
+#plot median openness vs average reading per country
+mr5 <- ggplot(world) +
+  geom_point(aes(x = med_OPN, y = reading, color = continent)) +
+  geom_smooth(aes(x = med_OPN, y = reading), method = "lm") +
+  geom_text(aes(x = med_OPN, y = reading, label = country)) +
+  stat_regline_equation(
+    aes(x = med_OPN, y = reading, 
+        label =  paste(..eq.label.., sep = "~~~~")),
+    label.x = 3, label.y = 300
+  ) +
+  stat_cor(
+    aes(x = med_OPN, y = reading,
+        label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
+    label.x = 1, label.y = 300
+  ) +
+  ggsave("plots/openness~reading.png")
+
+#setup plot layout
+grid.arrange(mr1, mr2, mr3, mr4, mr5, nrow = 3)
+
+#plot science ------------------------------------------------------------------
+#plot median extroversion vs average science per country
+ms1 <- ggplot(world) +
+  geom_point(aes(x = med_EXT, y = science, color = continent)) +
+  geom_smooth(aes(x = med_EXT, y = science), method = "lm") +
+  geom_text(aes(x = med_EXT, y = science, label = country)) +
+  stat_regline_equation(
+    aes(x = med_EXT, y = science, 
+        label =  paste(..eq.label.., sep = "~~~~")),
+    label.x = 3, label.y = 300
+  ) +
+  stat_cor(
+    aes(x = med_EXT, y = science,
+        label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
+    label.x = 1, label.y = 300
+  ) +
+  ggsave("plots/extraversion~science.png")
+
+#plot median neuroticism vs average science per country
+ms2 <- ggplot(world) +
+  geom_point(aes(x = med_EST, y = science, color = continent)) +
+  geom_smooth(aes(x = med_EST, y = science), method = "lm") +
+  geom_text(aes(x = med_EST, y = science, label = country)) +
+  stat_regline_equation(
+    aes(x = med_EST, y = science, 
+        label =  paste(..eq.label.., sep = "~~~~")),
+    label.x = 3, label.y = 300
+  ) +
+  stat_cor(
+    aes(x = med_EST, y = science,
+        label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
+    label.x = 1, label.y = 300
+  ) +
+  ggsave("plots/neuroticism~science.png")
+
+#plot median agreeableness vs average science per country
+ms3 <- ggplot(world) +
+  geom_point(aes(x = med_AGR, y = science, color = continent)) +
+  geom_smooth(aes(x = med_AGR, y = science), method = "lm") +
+  geom_text(aes(x = med_AGR, y = science, label = country)) +
+  stat_regline_equation(
+    aes(x = med_AGR, y = science, 
+        label =  paste(..eq.label.., sep = "~~~~")),
+    label.x = 3, label.y = 300
+  ) +
+  stat_cor(
+    aes(x = med_AGR, y = science,
+        label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
+    label.x = 1, label.y = 300
+  ) +
+  ggsave("plots/agreeableness~science.png")
+
+#plot median conscientiousness vs average science per country
+ms4 <- ggplot(world) +
+  geom_point(aes(x = med_CSN, y = science, color = continent)) +
+  geom_smooth(aes(x = med_CSN, y = science), method = "lm") +
+  geom_text(aes(x = med_CSN, y = science, label = country)) +
+  stat_regline_equation(
+    aes(x = med_CSN, y = science, 
+        label =  paste(..eq.label.., sep = "~~~~")),
+    label.x = 3, label.y = 300
+  ) +
+  stat_cor(
+    aes(x = med_CSN, y = science,
+        label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
+    label.x = 1, label.y = 300
+  ) +
+  ggsave("plots/conscientiousness~science.png")
+
+#plot median openness vs average science per country
+ms5 <- ggplot(world) +
+  geom_point(aes(x = med_OPN, y = science, color = continent)) +
+  geom_smooth(aes(x = med_OPN, y = science), method = "lm") +
+  geom_text(aes(x = med_OPN, y = science, label = country)) +
+  stat_regline_equation(
+    aes(x = med_OPN, y = science, 
+        label =  paste(..eq.label.., sep = "~~~~")),
+    label.x = 3, label.y = 300
+  ) +
+  stat_cor(
+    aes(x = med_OPN, y = science,
+        label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
+    label.x = 1, label.y = 300
+  ) +
+  ggsave("plots/openness~science.png")
+
+#setup plot layout
+grid.arrange(ms1, ms2, ms3, ms4, ms5, nrow = 3)
+
+#compare graphs ----------------------------------------------------------------
+#extroversion
+grid.arrange(mm1, mr1, ms1, nrow = 3)
+
+#neuroticism
+grid.arrange(mm2, mr2, ms2, nrow = 3)
+
+#agreeableness
+grid.arrange(mm3, mr3, ms3, nrow = 3)
+
+#conscientiousness
+grid.arrange(mm4, mr4, ms4, nrow = 3)
+
+#openness
+grid.arrange(mm5, mr5, ms5, nrow = 3)
