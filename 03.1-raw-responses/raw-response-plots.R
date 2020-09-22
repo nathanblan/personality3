@@ -11,7 +11,7 @@ library("ggpubr")
 # extract world data and join with joint
 world <- 
   ne_countries(scale = "medium", returnclass = "sf") %>% 
-  rename(country = sovereignt) %>% 
+  dplyr::rename(country = sovereignt) %>% 
   left_join(joint, by = "country") %>%
   as_tibble()
 names(world)
@@ -52,12 +52,12 @@ m1 <- ggplot(world) +
   stat_regline_equation(
     aes(x = avg_EXT, y = math, 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 3, label.y = 300
+    label.x = 4, label.y = 300
   ) +
   stat_cor(
     aes(x = avg_EXT, y = math,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 1, label.y = 300
+    label.x = 3.5, label.y = 300
   ) +
   ggsave("plots/extraversion~math.png")
 m1
@@ -69,12 +69,12 @@ m2 <- ggplot(world) +
   stat_regline_equation(
     aes(x = avg_EST, y = math, 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 3, label.y = 300
+    label.x = 4, label.y = 300
   ) +
   stat_cor(
     aes(x = avg_EST, y = math,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 1, label.y = 300
+    label.x = 3.5, label.y = 300
   ) +
   ggsave("plots/neuroticism~math.png")
 
@@ -86,12 +86,12 @@ m3 <- ggplot(world) +
   stat_regline_equation(
     aes(x = avg_AGR, y = math, 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 3, label.y = 300
+    label.x = 4, label.y = 300
   ) +
   stat_cor(
     aes(x = avg_AGR, y = math,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 1, label.y = 300
+    label.x = 3.5, label.y = 300
   ) +
   ggsave("plots/agreeableness~math.png")
 
@@ -103,12 +103,12 @@ m4 <- ggplot(world) +
   stat_regline_equation(
     aes(x = avg_CSN, y = math, 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 3, label.y = 300
+    label.x = 4, label.y = 300
   ) +
   stat_cor(
     aes(x = avg_CSN, y = math,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 1, label.y = 300
+    label.x = 3.5, label.y = 300
   ) +
   ggsave("plots/conscientiousness~math.png")
 
@@ -120,12 +120,12 @@ m5 <- ggplot(world) +
   stat_regline_equation(
     aes(x = avg_OPN, y = math, 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 3, label.y = 300
+    label.x = 4, label.y = 300
   ) +
   stat_cor(
     aes(x = avg_OPN, y = math,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 1, label.y = 300
+    label.x = 3.5, label.y = 300
   ) +
   ggsave("plots/openness~math.png")
 
@@ -141,12 +141,12 @@ r1 <- ggplot(world) +
   stat_regline_equation(
     aes(x = avg_EXT, y = reading, 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 3, label.y = 300
+    label.x = 4, label.y = 300
   ) +
   stat_cor(
     aes(x = avg_EXT, y = reading,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 1, label.y = 300
+    label.x = 3.5, label.y = 300
   ) +
   ggsave("plots/extraversion~reading.png")
 r1
@@ -158,12 +158,12 @@ r2 <- ggplot(world) +
   stat_regline_equation(
     aes(x = avg_EST, y = reading, 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 3, label.y = 300
+    label.x = 4, label.y = 300
   ) +
   stat_cor(
     aes(x = avg_EST, y = reading,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 1, label.y = 300
+    label.x = 3.5, label.y = 300
   ) +
   ggsave("plots/neuroticism~reading.png")
 
@@ -175,12 +175,12 @@ r3 <- ggplot(world) +
   stat_regline_equation(
     aes(x = avg_AGR, y = reading, 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 3, label.y = 300
+    label.x = 4, label.y = 300
   ) +
   stat_cor(
     aes(x = avg_AGR, y = reading,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 1, label.y = 300
+    label.x = 3.5, label.y = 300
   ) +
   ggsave("plots/agreeableness~reading.png")
 
@@ -192,12 +192,12 @@ r4 <- ggplot(world) +
   stat_regline_equation(
     aes(x = avg_CSN, y = reading, 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 3, label.y = 300
+    label.x = 4, label.y = 300
   ) +
   stat_cor(
     aes(x = avg_CSN, y = reading,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 1, label.y = 300
+    label.x = 3.5, label.y = 300
   ) +
   ggsave("plots/conscientiousness~reading.png")
 
@@ -209,12 +209,12 @@ r5 <- ggplot(world) +
   stat_regline_equation(
     aes(x = avg_OPN, y = reading, 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 3, label.y = 300
+    label.x = 4, label.y = 300
   ) +
   stat_cor(
     aes(x = avg_OPN, y = reading,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 1, label.y = 300
+    label.x = 3.5, label.y = 300
   ) +
   ggsave("plots/openness~reading.png")
 
@@ -230,12 +230,12 @@ s1 <- ggplot(world) +
   stat_regline_equation(
     aes(x = avg_EXT, y = science, 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 3, label.y = 300
+    label.x = 4, label.y = 300
   ) +
   stat_cor(
     aes(x = avg_EXT, y = science,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 1, label.y = 300
+    label.x = 3.5, label.y = 300
   ) +
   ggsave("plots/extraversion~science.png")
 
@@ -247,12 +247,12 @@ s2 <- ggplot(world) +
   stat_regline_equation(
     aes(x = avg_EST, y = science, 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 3, label.y = 300
+    label.x = 4, label.y = 300
   ) +
   stat_cor(
     aes(x = avg_EST, y = science,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 1, label.y = 300
+    label.x = 3.5, label.y = 300
   ) +
   ggsave("plots/neuroticism~science.png")
 
@@ -264,12 +264,12 @@ s3 <- ggplot(world) +
   stat_regline_equation(
     aes(x = avg_AGR, y = science, 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 3, label.y = 300
+    label.x = 4, label.y = 300
   ) +
   stat_cor(
     aes(x = avg_AGR, y = science,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 1, label.y = 300
+    label.x = 3.5, label.y = 300
   ) +
   ggsave("plots/agreeableness~science.png")
 
@@ -281,12 +281,12 @@ s4 <- ggplot(world) +
   stat_regline_equation(
     aes(x = avg_CSN, y = science, 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 3, label.y = 300
+    label.x = 4, label.y = 300
   ) +
   stat_cor(
     aes(x = avg_CSN, y = science,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 1, label.y = 300
+    label.x = 3.5, label.y = 300
   ) +
   ggsave("plots/conscientiousness~science.png")
 
@@ -298,12 +298,12 @@ s5 <- ggplot(world) +
   stat_regline_equation(
     aes(x = avg_OPN, y = science, 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 3, label.y = 300
+    label.x = 4, label.y = 300
   ) +
   stat_cor(
     aes(x = avg_OPN, y = science,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 1, label.y = 300
+    label.x = 4.5, label.y = 300
   ) +
   ggsave("plots/openness~science.png")
 
@@ -335,12 +335,12 @@ mm1 <- ggplot(world) +
   stat_regline_equation(
     aes(x = med_EXT, y = math, 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 3, label.y = 300
+    label.x = 4, label.y = 300
   ) +
   stat_cor(
     aes(x = med_EXT, y = math,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 1, label.y = 300
+    label.x = 3.5, label.y = 300
   ) +
   ggsave("plots/extraversion~math.png")
 mm1
@@ -352,12 +352,12 @@ mm2 <- ggplot(world) +
   stat_regline_equation(
     aes(x = med_EST, y = math, 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 3, label.y = 300
+    label.x = 4, label.y = 300
   ) +
   stat_cor(
     aes(x = med_EST, y = math,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 1, label.y = 300
+    label.x = 3.5, label.y = 300
   ) +
   ggsave("plots/neuroticism~math.png")
 
@@ -369,12 +369,12 @@ mm3 <- ggplot(world) +
   stat_regline_equation(
     aes(x = med_AGR, y = math, 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 3, label.y = 300
+    label.x = 4, label.y = 300
   ) +
   stat_cor(
     aes(x = med_AGR, y = math,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 1, label.y = 300
+    label.x = 3.5, label.y = 300
   ) +
   ggsave("plots/agreeableness~math.png")
 
@@ -386,12 +386,12 @@ mm4 <- ggplot(world) +
   stat_regline_equation(
     aes(x = med_CSN, y = math, 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 3, label.y = 300
+    label.x = 4, label.y = 300
   ) +
   stat_cor(
     aes(x = med_CSN, y = math,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 1, label.y = 300
+    label.x = 3.5, label.y = 300
   ) +
   ggsave("plots/conscientiousness~math.png")
 
@@ -403,12 +403,12 @@ mm5 <- ggplot(world) +
   stat_regline_equation(
     aes(x = med_OPN, y = math, 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 3, label.y = 300
+    label.x = 4, label.y = 300
   ) +
   stat_cor(
     aes(x = med_OPN, y = math,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 1, label.y = 300
+    label.x = 3.5, label.y = 300
   ) +
   ggsave("plots/openness~math.png")
 
@@ -424,12 +424,12 @@ mr1 <- ggplot(world) +
   stat_regline_equation(
     aes(x = med_EXT, y = reading, 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 3, label.y = 300
+    label.x = 4, label.y = 300
   ) +
   stat_cor(
     aes(x = med_EXT, y = reading,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 1, label.y = 300
+    label.x = 3.5, label.y = 300
   ) +
   ggsave("plots/extraversion~reading.png")
 mr1
@@ -441,12 +441,12 @@ mr2 <- ggplot(world) +
   stat_regline_equation(
     aes(x = med_EST, y = reading, 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 3, label.y = 300
+    label.x = 4, label.y = 300
   ) +
   stat_cor(
     aes(x = med_EST, y = reading,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 1, label.y = 300
+    label.x = 3.5, label.y = 300
   ) +
   ggsave("plots/neuroticism~reading.png")
 
@@ -458,12 +458,12 @@ mr3 <- ggplot(world) +
   stat_regline_equation(
     aes(x = med_AGR, y = reading, 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 3, label.y = 300
+    label.x = 4, label.y = 300
   ) +
   stat_cor(
     aes(x = med_AGR, y = reading,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 1, label.y = 300
+    label.x = 3.5, label.y = 300
   ) +
   ggsave("plots/agreeableness~reading.png")
 
@@ -475,12 +475,12 @@ mr4 <- ggplot(world) +
   stat_regline_equation(
     aes(x = med_CSN, y = reading, 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 3, label.y = 300
+    label.x = 4, label.y = 300
   ) +
   stat_cor(
     aes(x = med_CSN, y = reading,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 1, label.y = 300
+    label.x = 3.5, label.y = 300
   ) +
   ggsave("plots/conscientiousness~reading.png")
 
@@ -492,12 +492,12 @@ mr5 <- ggplot(world) +
   stat_regline_equation(
     aes(x = med_OPN, y = reading, 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 3, label.y = 300
+    label.x = 4, label.y = 300
   ) +
   stat_cor(
     aes(x = med_OPN, y = reading,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 1, label.y = 300
+    label.x = 3.5, label.y = 300
   ) +
   ggsave("plots/openness~reading.png")
 
@@ -513,12 +513,12 @@ ms1 <- ggplot(world) +
   stat_regline_equation(
     aes(x = med_EXT, y = science, 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 3, label.y = 300
+    label.x = 4, label.y = 300
   ) +
   stat_cor(
     aes(x = med_EXT, y = science,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 1, label.y = 300
+    label.x = 3.5, label.y = 300
   ) +
   ggsave("plots/extraversion~science.png")
 
@@ -530,12 +530,12 @@ ms2 <- ggplot(world) +
   stat_regline_equation(
     aes(x = med_EST, y = science, 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 3, label.y = 300
+    label.x = 4, label.y = 300
   ) +
   stat_cor(
     aes(x = med_EST, y = science,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 1, label.y = 300
+    label.x = 3.5, label.y = 300
   ) +
   ggsave("plots/neuroticism~science.png")
 
@@ -547,12 +547,12 @@ ms3 <- ggplot(world) +
   stat_regline_equation(
     aes(x = med_AGR, y = science, 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 3, label.y = 300
+    label.x = 4, label.y = 300
   ) +
   stat_cor(
     aes(x = med_AGR, y = science,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 1, label.y = 300
+    label.x = 3.5, label.y = 300
   ) +
   ggsave("plots/agreeableness~science.png")
 
@@ -564,12 +564,12 @@ ms4 <- ggplot(world) +
   stat_regline_equation(
     aes(x = med_CSN, y = science, 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 3, label.y = 300
+    label.x = 4, label.y = 300
   ) +
   stat_cor(
     aes(x = med_CSN, y = science,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 1, label.y = 300
+    label.x = 3.5, label.y = 300
   ) +
   ggsave("plots/conscientiousness~science.png")
 
@@ -581,12 +581,12 @@ ms5 <- ggplot(world) +
   stat_regline_equation(
     aes(x = med_OPN, y = science, 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 3, label.y = 300
+    label.x = 4, label.y = 300
   ) +
   stat_cor(
     aes(x = med_OPN, y = science,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 1, label.y = 300
+    label.x = 3.5, label.y = 300
   ) +
   ggsave("plots/openness~science.png")
 

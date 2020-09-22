@@ -23,10 +23,10 @@ replace_with_300000 <- function(x){
 
 #join country data w/ r_time 
 r_time <- r_time %>% 
-  rename(c_code2 = country) %>% 
+  dplyr::rename(c_code2 = country) %>% 
   left_join(codes, by = "c_code2") %>% 
-  select(-c_code3) %>% 
-  rename(country = countries)
+  dplyr::select(-c_code3) %>% 
+  dplyr::rename(country = countries)
 
 #remove "0" and na observations
 r_time <- r_time %>%
@@ -36,8 +36,8 @@ r_time <- r_time %>%
 # subset time data -------------------------------------------------------------
 time <- 
   r_time %>% 
-  select(EXT1_E:OPN10_E, country) %>% 
-  rename(
+  dplyr::select(EXT1_E:OPN10_E, country) %>% 
+  dplyr::rename(
     EXT01_E = EXT1_E,
     EXT02_E = EXT2_E,
     EXT03_E = EXT3_E,
@@ -84,20 +84,20 @@ time <-
     CSN08_E = CSN8_E,
     CSN09_E = CSN9_E
   ) %>% 
-  mutate(id = row_number()) %>% 
-  select(id, everything())
+  dplyr::mutate(id = row_number()) %>% 
+  dplyr::select(id, everything())
   
 #filter out super low and super high times
 time <- time %>% 
-  select(-id, -country) %>% 
+  dplyr::select(-id, -country) %>% 
   replace_with_500() %>% 
   replace_with_300000 %>% 
-  mutate(country = r_time$country, 
+  dplyr::mutate(country = r_time$country, 
          id = r_time$id)
 
 #aggregate time_sums to find average/median time taken to respond per country
 new_time <- time %>% 
-  select(-id) %>% 
+  dplyr::select(-id) %>% 
   gather(var, val, -country) %>% 
   dplyr::group_by(country, question = str_sub(var, 1, 3)) %>% 
   dplyr::summarise(mean = mean(val), 
@@ -105,9 +105,9 @@ new_time <- time %>%
 
 #summary of countries by average
 avg_time <- new_time %>% 
-  select(-median) %>% 
+  dplyr::select(-median) %>% 
   spread(question, mean) %>% 
-  rename(avg_EXT_E = EXT,
+  dplyr::rename(avg_EXT_E = EXT,
          avg_EST_E = EST,
          avg_AGR_E = AGR,
          avg_CSN_E = CSN,
@@ -115,9 +115,9 @@ avg_time <- new_time %>%
 
 #summary of countries by median
 med_time <- new_time %>% 
-  select(-mean) %>% 
+  dplyr::select(-mean) %>% 
   spread(question, median) %>% 
-  rename(med_EXT_E = EXT,
+  dplyr::rename(med_EXT_E = EXT,
          med_EST_E = EST,
          med_AGR_E = AGR,
          med_CSN_E = CSN,

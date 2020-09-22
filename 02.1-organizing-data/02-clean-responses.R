@@ -14,16 +14,17 @@ library(tidyverse)
 #load data
 r_data <- 
   read_tsv("01.1-data-raw/data-final.csv") %>% 
-  mutate(id = row_number()) %>% 
-  select(id, everything()) %>% 
+  dplyr::mutate(id = row_number()) %>% 
+  dplyr::select(id, everything()) %>% 
   write_rds("01.2-data-clean/dirty-data.rds")
+names(r_data)
 
 #join country data w/ r_data 
 r_data <- r_data %>% 
-  rename(c_code2 = country) %>% 
+  dplyr::rename(c_code2 = country) %>% 
   left_join(codes, by = "c_code2") %>% 
   select(-c_code3) %>% 
-  rename(country = countries)
+  dplyr::rename(country = countries)
 
 #remove "0" and na observations
 r_data <- r_data %>%
@@ -32,7 +33,7 @@ r_data <- r_data %>%
 
 #look for countries with a reasonable sample size
 r_data %>% 
-  count(country) %>% 
+  dplyr::count(country) %>% 
   ggplot(aes(x=n)) + 
   geom_histogram() +
   ggsave("plots/country_response_count.png")
@@ -40,8 +41,8 @@ r_data %>%
 # subset raw response data -----------------------------------------------------
 raw <- 
   r_data %>% 
-  select(EXT1:OPN10, country) %>% 
-  rename(
+  dplyr::select(EXT1:OPN10, country) %>% 
+  dplyr::rename(
     EXT01 = EXT1,
     EXT02 = EXT2,
     EXT03 = EXT3,
@@ -88,9 +89,9 @@ raw <-
     CSN08 = CSN8,
     CSN09 = CSN9
   ) %>% 
-  mutate(id = row_number()) %>% 
-  select(id, everything()) %>% 
-  mutate_at( # mutate_at applies a function to each column you tell it to
+  dplyr::mutate(id = row_number()) %>% 
+  dplyr::select(id, everything()) %>% 
+  dplyr::mutate_at( # mutate_at applies a function to each column you tell it to
     vars(EXT02, EXT04, EXT06,
          EXT08, EXT10, EST01,
          EST03, EST05, EST06,
@@ -104,7 +105,7 @@ raw <-
 
 #aggregate raw to find average and median scores per trait per country
 new_raw <- raw %>% 
-  select(-id) %>% 
+  dplyr::select(-id) %>% 
   gather(var, val, -country) %>% 
   dplyr::group_by(country, question = str_sub(var, 1, 3)) %>% 
   dplyr::summarise(mean = mean(val), 
@@ -112,9 +113,9 @@ new_raw <- raw %>%
 
 #summary of countries by average
 avg_raw <- new_raw %>% 
-  select(-median) %>% 
+  dplyr::select(-median) %>% 
   spread(question, mean) %>% 
-  rename(avg_EXT = EXT,
+  dplyr::rename(avg_EXT = EXT,
          avg_EST = EST,
          avg_AGR = AGR,
          avg_CSN = CSN,
@@ -122,9 +123,9 @@ avg_raw <- new_raw %>%
 
 #summary of countries by median
 med_raw <- new_raw %>% 
-  select(-mean) %>% 
+  dplyr::select(-mean) %>% 
   spread(question, median) %>% 
-  rename(med_EXT = EXT,
+  dplyr::rename(med_EXT = EXT,
          med_EST = EST,
          med_AGR = AGR,
          med_CSN = CSN,
@@ -150,9 +151,9 @@ joint <- raw_sums %>%
   left_join(pisa_math, by = "country") %>% 
   left_join(pisa_read, by = "country") %>% 
   left_join(pisa_sci, by = "country") %>% 
-  rename(science = `2015`,
+  dplyr::rename(science = `2015`,
          reading = `2015.y`,
          math = `2015.x`) %>% 
-  select(-contains(c("c_code", "2013", "2014", "series", "s_code")))
+  dplyr::select(-contains(c("c_code", "2013", "2014", "series", "s_code")))
 
 names(joint)
