@@ -38,9 +38,26 @@ head(pca_sums, 10)
 ggbiplot(raw.pca, alpha = 0.01, varname.size = 10) +
   ggsave("plots/pca-loadings.png")
 head(raw.pca$rotation[,1:2]) #each arrow is a point formed by the values in this chart
-                       #PC1 = x PC2 = y
+                             #PC1 = x PC2 = y
 
-#summarize PCA
+#loadings ----------------------------------------------------------------------
+#determine which questions are more prominent in each principle component
+v <- as_tibble(rownames(raw.pca$rotation)) #row names stored on column: value
+
+pc1_traits <- as_tibble(raw.pca$rotation[,1:2]) %>% 
+  mutate(trait = v$value) %>% 
+  select(trait, everything()) %>% 
+  arrange(desc(PC1))
+
+pc2_traits <- as_tibble(raw.pca$rotation[,1:2]) %>% 
+  mutate(trait = v$value) %>% 
+  select(trait, PC2, PC1) %>% 
+  arrange(desc(PC2))
+
+head(pc1_traits, 15) 
+head(pc2_traits, 15)
+
+#summarize PCA -----------------------------------------------------------------
 pca_sums <- pca_sums %>% 
   dplyr::group_by(country) %>% 
   dplyr::summarise(mean_pc1 = mean(PC1),
