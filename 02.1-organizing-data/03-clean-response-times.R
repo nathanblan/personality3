@@ -95,23 +95,7 @@ time <- time %>%
   mutate(country = r_time$country, 
          id = r_time$id)
 
-#aggregate time_sums to find average time taken to respond per country
-time_sums <- time %>% 
-  dplyr::group_by(country) %>% 
-  dplyr::summarise(
-    avg_EXT_E = mean(c(EXT01_E:EXT10_E)),
-    med_EXT_E = median(c(EXT01_E:EXT10_E)),
-    avg_EST_E = mean(c(EST01_E:EST10_E)),
-    med_EST_E = median(c(EST01_E:EST10_E)),
-    avg_AGR_E = mean(c(AGR01_E:AGR10_E)),
-    med_AGR_E = median(c(AGR01_E:AGR10_E)),
-    avg_CSN_E = mean(c(CSN01_E:CSN10_E)),
-    med_CSN_E = median(c(CSN01_E:CSN10_E)),
-    avg_OPN_E = mean(c(OPN01_E:OPN10_E)),
-    med_OPN_E = median(c(OPN01_E:OPN10_E)),
-  )
-head(time_sums)# I don't think median is calculating correctly
-
+#aggregate time_sums to find average/median time taken to respond per country
 new_time <- time %>% 
   select(-id) %>% 
   gather(var, val, -country) %>% 
@@ -119,10 +103,29 @@ new_time <- time %>%
   dplyr::summarise(mean = mean(val), 
             median = median(val))
 
-#summary of counties by average
-new_time <- new_time %>% 
+#summary of countries by average
+avg_time <- new_time %>% 
   select(-median) %>% 
-  spread(question, mean)
+  spread(question, mean) %>% 
+  rename(avg_EXT_E = EXT,
+         avg_EST_E = EST,
+         avg_AGR_E = AGR,
+         avg_CSN_E = CSN,
+         avg_OPN_E = OPN)
+
+#summary of countries by median
+med_time <- new_time %>% 
+  select(-mean) %>% 
+  spread(question, median) %>% 
+  rename(med_EXT_E = EXT,
+         med_EST_E = EST,
+         med_AGR_E = AGR,
+         med_CSN_E = CSN,
+         med_OPN_E = OPN)
+
+#join median and averages
+time_sums <- avg_time %>% 
+  left_join(med_time, by = "country")
 
 # export -----------------------------------------------------------------------
 r_time %>% 
