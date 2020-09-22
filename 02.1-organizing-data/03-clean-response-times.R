@@ -120,7 +120,7 @@ new_time <- time %>%
             median = median(val))
 
 #summary of counties by average
-new_time %>% 
+new_time <- new_time %>% 
   select(-median) %>% 
   spread(question, mean)
 
