@@ -103,20 +103,36 @@ raw <-
   )
 
 #aggregate raw to find average and median scores per trait per country
-raw_sums <- raw %>% 
-  group_by(country) %>% 
-  summarise(
-    avg_EXT = mean(c(EXT01:EXT10)),
-    med_EXT = median(c(EXT01:EXT10)),
-    avg_EST = mean(c(EST01:EST10)),
-    med_EST = median(c(EST01:EST10)),
-    avg_AGR = mean(c(AGR01:AGR10)),
-    med_AGR = median(c(AGR01:AGR10)),
-    avg_CSN = mean(c(CSN01:CSN10)),
-    med_CSN = median(c(CSN01:CSN10)),
-    avg_OPN = mean(c(OPN01:OPN10)),
-    med_OPN = median(c(OPN01:OPN10)),
-  )
+new_raw <- raw %>% 
+  select(-id) %>% 
+  gather(var, val, -country) %>% 
+  dplyr::group_by(country, question = str_sub(var, 1, 3)) %>% 
+  dplyr::summarise(mean = mean(val), 
+                   median = median(val))
+
+#summary of countries by average
+avg_raw <- new_raw %>% 
+  select(-median) %>% 
+  spread(question, mean) %>% 
+  rename(avg_EXT = EXT,
+         avg_EST = EST,
+         avg_AGR = AGR,
+         avg_CSN = CSN,
+         avg_OPN = OPN)
+
+#summary of countries by median
+med_raw <- new_raw %>% 
+  select(-mean) %>% 
+  spread(question, median) %>% 
+  rename(med_EXT = EXT,
+         med_EST = EST,
+         med_AGR = AGR,
+         med_CSN = CSN,
+         med_OPN = OPN)
+
+#join median and averages
+raw_sums <- avg_raw %>% 
+  left_join(med_raw, by = "country")
 
 # export -----------------------------------------------------------------------
 r_data %>% 
@@ -139,3 +155,4 @@ joint <- raw_sums %>%
          math = `2015.x`) %>% 
   select(-contains(c("c_code", "2013", "2014", "series", "s_code")))
 
+names(joint)

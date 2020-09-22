@@ -143,3 +143,4 @@ time_sums %>%
 world <- world %>% 
   left_join(time_sums, by = "country") %>%
   as_tibble()
+names(world)
