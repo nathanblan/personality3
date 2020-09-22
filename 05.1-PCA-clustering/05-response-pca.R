@@ -39,28 +39,17 @@ raw.pca$rotation[,1:2] #each arrow is a point formed by the values in this chart
                        #PC1 = x PC2 = y
 
 #summarize PCA
-pca_sums <- pca_sums %>% 
+pca_sums %>% 
   dplyr::group_by(country) %>% 
   dplyr::summarise(mean_pc1 = mean(PC1),
             mean_pc2 = mean(PC2))
 pca_sums
 
-#pca_sums biplot
+#pca_sums biplot by country
 pca_sums %>% 
   ggplot(aes(x = mean_pc1, y = mean_pc2, label = country)) +
   geom_point() +
   geom_text(label = pca_sums$country)
-#plot PC1 by country 
-p1 <- ggplot(pca_sums) + 
-  geom_point(aes(x = country, y= PC1)) +
-  coord_flip()
-
-#plot PC2 by country 
-p2 <- ggplot(pca_sums) + 
-  geom_point(aes(x = country, y= PC2)) +
-  coord_flip()
-
-grid.arrange(p1, p2, nrow = 1)
 
 # update world averages --------------------------------------------------------
 # extract world data and join with joint
@@ -69,7 +58,7 @@ world <- world %>%
   as_tibble()
 
 #show loadings
-raw.pca$x[,1:2]
+head(raw.pca$x[,1:2])
 
 #plots -------------------------------------------------------------------------
 #plot average extroversion vs average science per country
@@ -115,3 +104,4 @@ grid.arrange(pc1.math, pc1.science, pc1.reading, nrow = 1)
 
 #pc2
 grid.arrange(pc2.math, pc2.science, pc2.reading, nrow = 3)
+
