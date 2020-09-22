@@ -1,6 +1,7 @@
 # response PCA -----------------------------------------------------------------
 library(ggbiplot)
 library(tidyverse)  # data manipulation
+set.seed(1)
 
 #import data -------------------------------------------------------------------
 raw <- 
