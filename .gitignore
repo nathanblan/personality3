@@ -1,0 +1,7 @@
+.Rhistory
+.RData
+.Rproj.user
+01.1-data-raw
+01.2-data-clean
+plots
+.DS_Store
