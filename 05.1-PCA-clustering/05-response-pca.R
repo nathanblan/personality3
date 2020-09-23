@@ -61,7 +61,7 @@ head(pc2_traits, 15)
 pca_sums <- pca_sums %>% 
   dplyr::group_by(country) %>% 
   dplyr::summarise(mean_pc1 = mean(PC1),
-            mean_pc2 = mean(PC2))
+            mean_pc2 = mean(PC2)) 
 head(pca_sums, 10)
 
 #pca_sums plot by country
@@ -69,6 +69,7 @@ sums_plot <- pca_sums %>%
   ggplot(aes(x = mean_pc1, y = mean_pc2, label = country)) +
   geom_point() +
   geom_text(label = pca_sums$country)
+  #geom_text_repel(min.segment.length = 0, seed = 1, box.padding = 0.5)
 sums_plot
 
 # update world averages --------------------------------------------------------
