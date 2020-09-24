@@ -54,11 +54,7 @@ pc2_traits <- as_tibble(raw.pca$rotation[,1:2]) %>%
   select(trait, PC2, PC1) %>% 
   arrange(desc(PC2))
 
-<<<<<<< HEAD
-head(pc1_traits, 15) 
-=======
 head(pc1_traits, 15)
->>>>>>> 1559d22405c9b67f4f747bfdafd69afd9177b6f3
 head(pc2_traits, 15)
 
 #summarize PCA -----------------------------------------------------------------
