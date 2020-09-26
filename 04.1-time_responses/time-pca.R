@@ -75,7 +75,7 @@ world <- world %>%
 
 #plots -------------------------------------------------------------------------
 #plot time vs education per country
-pc1.math <- ggplot(world) +
+pc1.math_e <- ggplot(world) +
   geom_point(aes(x = mean_pc1, y = math, color = continent)) +
   geom_smooth(aes(x = mean_pc1, y = math), method = "lm") +
   geom_text(aes(x = mean_pc1, y = math, label = country)) +
@@ -91,7 +91,7 @@ pc1.math <- ggplot(world) +
   ) +
   ggsave("plots/PC1~math.png")
 
-pc1.science <- ggplot(world) +
+pc1.science_e <- ggplot(world) +
   geom_point(aes(x = mean_pc1, y = science, color = continent)) +
   geom_smooth(aes(x = mean_pc1, y = science), method = "lm") +
   geom_text(aes(x = mean_pc1, y = science, label = country)) +
@@ -107,7 +107,7 @@ pc1.science <- ggplot(world) +
   ) +
   ggsave("plots/PC1~science.png")
 
-pc1.reading <- ggplot(world) +
+pc1.reading_e <- ggplot(world) +
   geom_point(aes(x = mean_pc1, y = reading, color = continent)) +
   geom_smooth(aes(x = mean_pc1, y = reading), method = "lm") +
   geom_text(aes(x = mean_pc1, y = reading, label = country)) +
@@ -124,7 +124,7 @@ pc1.reading <- ggplot(world) +
   ggsave("plots/PC1~reading.png")
 
 #plot PC2 vs average math per country
-pc2.math <- ggplot(world) +
+pc2.math_e <- ggplot(world) +
   geom_point(aes(x = mean_pc2, y = math, color = continent)) +
   geom_smooth(aes(x = mean_pc2, y = math), method = "lm") +
   geom_text(aes(x = mean_pc2, y = math, label = country)) +
@@ -140,7 +140,7 @@ pc2.math <- ggplot(world) +
   ) +
   ggsave("plots/PC2~math.png")
 
-pc2.science <- ggplot(world) +
+pc2.science_e <- ggplot(world) +
   geom_point(aes(x = mean_pc2, y = science, color = continent)) +
   geom_smooth(aes(x = mean_pc2, y = science), method = "lm") +
   geom_text(aes(x = mean_pc2, y = science, label = country)) +
@@ -156,7 +156,7 @@ pc2.science <- ggplot(world) +
   ) +
   ggsave("plots/PC2~science.png")
 
-pc2.reading <- ggplot(world) +
+pc2.reading_e <- ggplot(world) +
   geom_point(aes(x = mean_pc2, y = reading, color = continent)) +
   geom_smooth(aes(x = mean_pc2, y = reading), method = "lm") +
   geom_text(aes(x = mean_pc2, y = reading, label = country)) +
@@ -173,7 +173,7 @@ pc2.reading <- ggplot(world) +
   ggsave("plots/PC2~reading.png")
 
 #setup plot layout pc1
-grid.arrange(pc1.math, pc1.science, pc1.reading, nrow = 3)
+grid.arrange(pc1.math_e, pc1.science_e, pc1.reading_e, nrow = 3)
 
 #pc2
-grid.arrange(pc2.math, pc2.science, pc2.reading, nrow = 3)
+grid.arrange(pc2.math_e, pc2.science_e, pc2.reading_e, nrow = 3)
