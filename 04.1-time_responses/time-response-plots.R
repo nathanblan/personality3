@@ -387,7 +387,7 @@ s5
 #compare graphs ----------------------------------------------------------------
 #extroversion
 grid.arrange(m1, r1, s1, nrow = 3)
-
+ 
 #neuroticism
 grid.arrange(m2, r2, s2, nrow = 3)
 
