@@ -3,7 +3,7 @@ library(ggbiplot)
 library(tidyverse)  # data manipulation
 
 #import data -------------------------------------------------------------------
-time <- 
+raw <- 
   read_rds("01.2-data-clean/time.rds") %>% 
   na.omit() %>% 
   sample_frac(0.01)
@@ -11,11 +11,12 @@ time <-
 
 # PCA --------------------------------------------------------------------------
 #compute PCA on raw
-raw.pca <- prcomp(raw %>% 
-                    select(-id, -country))
+time.pca <- prcomp(raw %>% 
+                    select(-id, -country) %>% 
+                    log())
 
 #calculate cumulative std. deviation to identify useful components
-cum_perc_var_explained <- cumsum(raw.pca$sdev / sum(raw.pca$sdev))
+cum_perc_var_explained <- cumsum(time.pca$sdev / sum(time.pca$sdev))
 
 tibble(
   component = 1:length(cum_perc_var_explained),
@@ -25,37 +26,51 @@ tibble(
   geom_point()
 
 #extract the first two principle components
-pca_sums <- as_tibble(raw.pca$x[,1:2]) %>% 
+pca_sums_e <- as_tibble(time.pca$x[,1:2]) %>% 
   mutate(country = raw$country)
 
 #plot PCA
-ggbiplot(raw.pca, alpha = 0.01, varname.size = 10) +
+ggbiplot(time.pca, alpha = 0.01, varname.size = 10) +
   ggsave("plots/pca-loadings.png")
-raw.pca$rotation[,1:2] #each arrow is a point formed by the values in this chart
+time.pca$rotation[,1:2] #each arrow is a point formed by the values in this chart
 #PC1 = x PC2 = y
 
-#summarize PCA
-pca_sums %>% 
-  group_by(country) %>% 
+#loadings ----------------------------------------------------------------------
+#determine which questions are more prominent in each principle component
+ve <- as_tibble(rownames(time.pca$rotation)) #row names stored on column: value
+
+pc1_E_traits <- as_tibble(time.pca$rotation[,1:2]) %>% 
+  mutate(trait = v$value) %>% 
+  select(trait, everything()) %>% 
+  arrange(desc(PC1))
+
+pc2_E_traits <- as_tibble(time.pca$rotation[,1:2]) %>% 
+  mutate(trait = v$value) %>% 
+  select(trait, PC2, PC1) %>% 
+  arrange(desc(PC2))
+
+head(pc1_traits, 15)
+head(pc2_traits, 15)
+
+#summarize PCA -----------------------------------------------------------------
+pca_sums_e <- pca_sums_e %>% 
+  dplyr::group_by(country) %>% 
   dplyr::summarise(mean_pc1 = mean(PC1),
-                   mean_pc2 = mean(PC2))
-pca_sums
-#plot PC1 by country 
-p1 <- ggplot(pca_sums) + 
-  geom_point(aes(x = country, y= PC1)) +
-  coord_flip()
+                   mean_pc2 = mean(PC2)) 
+head(pca_sums, 10)
 
-#plot PC2 by country 
-p2 <- ggplot(pca_sums) + 
-  geom_point(aes(x = country, y= PC2)) +
-  coord_flip()
-
-grid.arrange(p1, p2, nrow = 1)
+#pca_sums plot by country
+sums_plot <- pca_sums_e %>% 
+  ggplot(aes(x = mean_pc1, y = mean_pc2, label = country)) +
+  geom_point() +
+  geom_text(label = pca_sums_e$country)
+#geom_text_repel(min.segment.length = 0, seed = 1, box.padding = 0.5)
+sums_plot
 
 # update world averages --------------------------------------------------------
 # extract world data and join with joint
 world <- world %>% 
-  left_join(pca_sums, by = "country") %>%
+  left_join(pca_sums_e, by = "country") %>%
   as_tibble()
 
 #plots -------------------------------------------------------------------------
