@@ -48,8 +48,8 @@ pc2_E_traits <- as_tibble(time.pca$rotation[,1:2]) %>%
   select(trait, PC2, PC1) %>% 
   arrange(desc(PC2))
 
-head(pc1_traits, 15)
-head(pc2_traits, 15)
+head(pc1_E_traits, 15)
+head(pc2_E_traits, 15)
 
 #summarize PCA -----------------------------------------------------------------
 pca_sums_e <- pca_sums_e %>% 
@@ -60,7 +60,7 @@ head(pca_sums, 10)
 
 #pca_sums plot by country
 sums_plot <- pca_sums_e %>% 
-  ggplot(aes(x = mean_pc1_e, y = mean_pc2, label = country)) +
+  ggplot(aes(x = mean_pc1_e, y = mean_pc2_e, label = country)) +
   geom_point() +
   geom_text(label = pca_sums_e$country)
 #geom_text_repel(min.segment.length = 0, seed = 1, box.padding = 0.5)
