@@ -132,7 +132,7 @@ pc1.reading <- ggplot(world) +
   ) +
   ggsave("plots/PC1~reading.png")
 
-#plot PC2 vs average math per country
+#plot PC2 vs average math, science, and reading per country
 pc2.math <- ggplot(world) +
   geom_point(aes(x = mean_pc2, y = math, color = continent)) +
   coord_cartesian(xlim = c(-2.8, 2.5)) +
