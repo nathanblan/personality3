@@ -33,7 +33,6 @@ pca_sums_e <- as_tibble(time.pca$x[,1:2]) %>%
 ggbiplot(time.pca, alpha = 0.01, varname.size = 10) +
   ggsave("plots/pca-loadings.png")
 time.pca$rotation[,1:2] #each arrow is a point formed by the values in this chart
-#PC1 = x PC2 = y
 
 #loadings ----------------------------------------------------------------------
 #determine which questions are more prominent in each principle component
