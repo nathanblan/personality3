@@ -54,13 +54,13 @@ head(pc2_traits, 15)
 #summarize PCA -----------------------------------------------------------------
 pca_sums_e <- pca_sums_e %>% 
   dplyr::group_by(country) %>% 
-  dplyr::summarise(mean_pc1 = mean(PC1),
-                   mean_pc2 = mean(PC2)) 
+  dplyr::summarise(mean_pc1_e = mean(PC1),
+                   mean_pc2_e = mean(PC2)) 
 head(pca_sums, 10)
 
 #pca_sums plot by country
 sums_plot <- pca_sums_e %>% 
-  ggplot(aes(x = mean_pc1, y = mean_pc2, label = country)) +
+  ggplot(aes(x = mean_pc1_e, y = mean_pc2, label = country)) +
   geom_point() +
   geom_text(label = pca_sums_e$country)
 #geom_text_repel(min.segment.length = 0, seed = 1, box.padding = 0.5)
@@ -74,104 +74,104 @@ world <- world %>%
 
 #plots -------------------------------------------------------------------------
 #plot time pc1 vs average math, reading, and science per country
-pc1.math <- ggplot(world) +
-  geom_point(aes(x = mean_pc1, y = math, color = continent)) +
+pc1.math_e <- ggplot(world) +
+  geom_point(aes(x = mean_pc1_e, y = math, color = continent)) +
   coord_cartesian(xlim = c(-2.0, 3.0)) +
-  geom_smooth(aes(x = mean_pc1, y = math), method = "lm") +
-  geom_text(aes(x = mean_pc1, y = math, label = country)) +
+  geom_smooth(aes(x = mean_pc1_e, y = math), method = "lm") +
+  geom_text(aes(x = mean_pc1_e, y = math, label = country)) +
   stat_regline_equation(
-    aes(x = mean_pc1, y = math, 
+    aes(x = mean_pc1_e, y = math, 
         label =  paste(..eq.label.., sep = "~~~~")),
     label.x = 1, label.y = 350
   ) +
   stat_cor(
-    aes(x = mean_pc1, y = math,
+    aes(x = mean_pc1_e, y = math,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
     label.x = -1.5, label.y = 350
   ) +
   ggsave("plots/PC1~math.png")
 
-pc1.science <- ggplot(world) +
-  geom_point(aes(x = mean_pc1, y = science, color = continent)) +
+pc1.science_e <- ggplot(world) +
+  geom_point(aes(x = mean_pc1_e, y = science, color = continent)) +
   coord_cartesian(xlim = c(-2.0, 3.0)) +
-  geom_smooth(aes(x = mean_pc1, y = science), method = "lm") +
-  geom_text(aes(x = mean_pc1, y = science, label = country)) +
+  geom_smooth(aes(x = mean_pc1_e, y = science), method = "lm") +
+  geom_text(aes(x = mean_pc1_e, y = science, label = country)) +
   stat_regline_equation(
-    aes(x = mean_pc1, y = science, 
+    aes(x = mean_pc1_e, y = science, 
         label =  paste(..eq.label.., sep = "~~~~")),
     label.x = 1, label.y = 350
   ) +
   stat_cor(
-    aes(x = mean_pc1, y = science,
+    aes(x = mean_pc1_e, y = science,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
     label.x = -1.5, label.y = 350
   ) +
   ggsave("plots/PC1~science.png")
 
-pc1.reading <- ggplot(world) +
-  geom_point(aes(x = mean_pc1, y = reading, color = continent)) +
+pc1.reading_e <- ggplot(world) +
+  geom_point(aes(x = mean_pc1_e, y = reading, color = continent)) +
   coord_cartesian(xlim = c(-2.0, 3.0)) +
-  geom_smooth(aes(x = mean_pc1, y = reading), method = "lm") +
-  geom_text(aes(x = mean_pc1, y = reading, label = country)) +
+  geom_smooth(aes(x = mean_pc1_e, y = reading), method = "lm") +
+  geom_text(aes(x = mean_pc1_e, y = reading, label = country)) +
   stat_regline_equation(
-    aes(x = mean_pc1, y = reading, 
+    aes(x = mean_pc1_e, y = reading, 
         label =  paste(..eq.label.., sep = "~~~~")),
     label.x = 1, label.y = 350
   ) +
   stat_cor(
-    aes(x = mean_pc1, y = reading,
+    aes(x = mean_pc1_e, y = reading,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
     label.x = -1.5, label.y = 350
   ) +
   ggsave("plots/PC1~reading.png")
 
 #plot time PC2 vs math, science, and reading
-pc2.math <- ggplot(world) +
-  geom_point(aes(x = mean_pc2, y = math, color = continent)) +
+pc2.math_e <- ggplot(world) +
+  geom_point(aes(x = mean_pc1_e, y = math, color = continent)) +
   coord_cartesian(xlim = c(-2.8, 2.5)) +
-  geom_smooth(aes(x = mean_pc2, y = math), method = "lm") +
-  geom_text(aes(x = mean_pc2, y = math, label = country)) +
+  geom_smooth(aes(x = mean_pc1_e, y = math), method = "lm") +
+  geom_text(aes(x = mean_pc1_e, y = math, label = country)) +
   stat_regline_equation(
-    aes(x = mean_pc2, y = math, 
+    aes(x = mean_pc1_e, y = math, 
         label =  paste(..eq.label.., sep = "~~~~")),
     label.x = 1, label.y = 350
   ) +
   stat_cor(
-    aes(x = mean_pc2, y = math,
+    aes(x = mean_pc1_e, y = math,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
     label.x = -1.5, label.y = 350
   ) +
   ggsave("plots/PC2~math.png")
 
-pc2.science <- ggplot(world) +
-  geom_point(aes(x = mean_pc2, y = science, color = continent)) +
+pc2.science_e <- ggplot(world) +
+  geom_point(aes(x = mean_pc1_e, y = science, color = continent)) +
   coord_cartesian(xlim = c(-2.8, 2.5)) +
-  geom_smooth(aes(x = mean_pc2, y = science), method = "lm") +
-  geom_text(aes(x = mean_pc2, y = science, label = country)) +
+  geom_smooth(aes(x = mean_pc1_e, y = science), method = "lm") +
+  geom_text(aes(x = mean_pc1_e, y = science, label = country)) +
   stat_regline_equation(
-    aes(x = mean_pc2, y = science, 
+    aes(x = mean_pc1_e, y = science, 
         label =  paste(..eq.label.., sep = "~~~~")),
     label.x = 1, label.y = 350
   ) +
   stat_cor(
-    aes(x = mean_pc2, y = science,
+    aes(x = mean_pc1_e, y = science,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
     label.x = -1.5, label.y = 350
   ) +
   ggsave("plots/PC2~science.png")
 
-pc2.reading <- ggplot(world) +
-  geom_point(aes(x = mean_pc2, y = reading, color = continent)) +
+pc2.reading_e <- ggplot(world) +
+  geom_point(aes(x = mean_pc1_e, y = reading, color = continent)) +
   coord_cartesian(xlim = c(-2.8, 2.5)) +
-  geom_smooth(aes(x = mean_pc2, y = reading), method = "lm") +
-  geom_text(aes(x = mean_pc2, y = reading, label = country)) +
+  geom_smooth(aes(x = mean_pc1_e, y = reading), method = "lm") +
+  geom_text(aes(x = mean_pc1_e, y = reading, label = country)) +
   stat_regline_equation(
-    aes(x = mean_pc2, y = reading, 
+    aes(x = mean_pc1_e, y = reading, 
         label =  paste(..eq.label.., sep = "~~~~")),
     label.x = 1, label.y = 350
   ) +
   stat_cor(
-    aes(x = mean_pc2, y = reading,
+    aes(x = mean_pc1_e, y = reading,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
     label.x = -1.5, label.y = 350
   ) +
