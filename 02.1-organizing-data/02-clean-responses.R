@@ -3,7 +3,6 @@
 # import libraries -------------------------------------------------------------
 library(naniar)
 library(ggplot2)
-library(sf)
 library(gridExtra)
 library(tidyverse)
 

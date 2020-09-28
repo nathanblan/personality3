@@ -2,10 +2,10 @@
 #p values smaller than 0.01 -> probably relationship
 # import libraries -------------------------------------------------------------
 #set up ggplot world
-library("rnaturalearth")
-library("rnaturalearthdata")
-library("ggrepel")
-library("ggpubr")
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(ggrepel)
+library(ggpubr)
 
 # plot world averages ----------------------------------------------------------
 # extract world data and join with joint
