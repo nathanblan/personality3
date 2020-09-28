@@ -663,3 +663,7 @@ grid.arrange(mm4, mr4, ms4, nrow = 3)
 
 #openness
 grid.arrange(mm5, mr5, ms5, nrow = 3)
+
+# ==============================================================================
+#top graphs
+grid.arrange(m2, s2, m4, nrow = 3)
