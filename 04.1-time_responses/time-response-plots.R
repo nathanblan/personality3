@@ -2,7 +2,7 @@
 
 #plot time ---------------------------------------------------------------------
 #plot average extroversion-time vs average extroversion per country
-t1 <- ggplot(world) +
+tt1 <- ggplot(world) +
   geom_point(aes(x = log(avg_EXT_E), y = log(avg_EXT_E), color = continent)) +
   geom_smooth(aes(x = log(avg_EXT_E), y = log(avg_EXT_E)), method = "lm") +
   geom_text(aes(x = log(avg_EXT_E), y = log(avg_EXT_E), label = country)) +
@@ -17,9 +17,9 @@ t1 <- ggplot(world) +
     label.x = 2, label.y = 8
   ) +
   ggsave("plots/extraversion-time~extroversion.png")
-t1
+tt1
 #plot average neuroticism-time vs average neuroticism per country
-t2 <- ggplot(world) +
+tt2 <- ggplot(world) +
   geom_point(aes(x = log(avg_EST_E), y = log(avg_EST_E), color = continent)) +
   geom_smooth(aes(x = log(avg_EST_E), y = log(avg_EST_E)), method = "lm") +
   geom_text(aes(x = log(avg_EST_E), y = log(avg_EST_E), label = country)) +
@@ -34,9 +34,9 @@ t2 <- ggplot(world) +
     label.x = 2, label.y = 7.5
   ) +
   ggsave("plots/neuroticism-time~neuroticism.png")
-t2
+tt2
 #plot average agreeableness-time vs average agreeableness per country
-t3 <- ggplot(world) +
+tt3 <- ggplot(world) +
   geom_point(aes(x = log(avg_AGR_E), y = log(avg_AGR_E), color = continent)) +
   geom_smooth(aes(x = log(avg_AGR_E), y = log(avg_AGR_E)), method = "lm") +
   geom_text(aes(x = log(avg_AGR_E), y = log(avg_AGR_E), label = country)) +
@@ -51,9 +51,9 @@ t3 <- ggplot(world) +
     label.x = 3.5, label.y = 8
   ) +
   ggsave("plots/agreeableness-time~agreeableness.png")
-t3
+tt3
 #plot average conscientiousness-time vs average conscientiousness per country
-t4 <- ggplot(world) +
+tt4 <- ggplot(world) +
   geom_point(aes(x = log(avg_CSN_E), y = log(avg_CSN_E), color = continent)) +
   geom_smooth(aes(x = log(avg_CSN_E), y = log(avg_CSN_E)), method = "lm") +
   geom_text(aes(x = log(avg_CSN_E), y = log(avg_CSN_E), label = country)) +
@@ -68,9 +68,9 @@ t4 <- ggplot(world) +
     label.x = 1.5, label.y = 8
   ) +
   ggsave("plots/conscientiousness-time~conscientiousness.png")
-t4
+tt4
 #plot average openness-time vs average openness per country
-t5 <- ggplot(world) +
+tt5 <- ggplot(world) +
   geom_point(aes(x = log(avg_OPN_E), y = log(avg_OPN_E), color = continent)) +
   geom_smooth(aes(x = log(avg_OPN_E), y = log(avg_OPN_E)), method = "lm") +
   geom_text(aes(x = log(avg_OPN_E), y = log(avg_OPN_E), label = country)) +
@@ -85,14 +85,14 @@ t5 <- ggplot(world) +
     label.x = 3.5, label.y = 8
   ) +
   ggsave("plots/openness-time~openness.png")
-t5
+tt5
 #setup plot layout
 grid.arrange(t1, t2, t3, t4, t5, nrow = 3)
 
 ##plot time vs pisa ============================================================
 #plot math ---------------------------------------------------------------------
 #plot average extroversion time vs average math per country
-m1 <- ggplot(world) +
+tm1 <- ggplot(world) +
   geom_point(aes(x = log(avg_EXT_E), y = math, color = continent)) +
   coord_cartesian(xlim = c(8.55, 9.25)) +
   geom_smooth(aes(x = log(avg_EXT_E), y = math), method = "lm") +
@@ -108,10 +108,10 @@ m1 <- ggplot(world) +
     label.x = 8.6, label.y = 320
   ) +
   ggsave("plots/extraversion~math.png")
-m1
+tm1
 
 #plot average neuroticism time vs average math per country
-m2 <- ggplot(world) +
+tm2 <- ggplot(world) +
   geom_point(aes(x = log(avg_EST_E), y = math, color = continent)) +
   coord_cartesian(xlim = c(8.3, 9.05)) +
   geom_smooth(aes(x = log(avg_EST_E), y = math), method = "lm") +
@@ -127,10 +127,10 @@ m2 <- ggplot(world) +
     label.x = 8.4, label.y = 320
   ) +
   ggsave("plots/neuroticism~math.png")
-m2
+tm2
 
 #plot average agreeableness time vs average math per country
-m3 <- ggplot(world) +
+tm3 <- ggplot(world) +
   geom_point(aes(x = log(avg_AGR_E), y = math, color = continent)) +
   coord_cartesian(xlim = c(8.4, 9.1)) +
   geom_smooth(aes(x = log(avg_AGR_E), y = math), method = "lm") +
@@ -146,10 +146,10 @@ m3 <- ggplot(world) +
     label.x = 8.4, label.y = 320
   ) +
   ggsave("plots/agreeableness~math.png")
-m3
+tm3
 
 #plot average conscientiousness time vs average math per country
-m4 <- ggplot(world) +
+tm4 <- ggplot(world) +
   geom_point(aes(x = log(avg_CSN_E), y = math, color = continent)) +
   coord_cartesian(xlim = c(8.45, 9.2)) +
   geom_smooth(aes(x = log(avg_CSN_E), y = math), method = "lm") +
@@ -165,10 +165,10 @@ m4 <- ggplot(world) +
     label.x = 8.5, label.y = 320
   ) +
   ggsave("plots/conscientiousness~math.png")
-m4
+tm4
 
 #plot average openness time vs average math per country
-m5 <- ggplot(world) +
+tm5 <- ggplot(world) +
   geom_point(aes(x = log(avg_OPN_E), y = math, color = continent)) +
   coord_cartesian(xlim = c(8.3, 8.95)) +
   geom_smooth(aes(x = log(avg_OPN_E), y = math), method = "lm") +
@@ -184,14 +184,14 @@ m5 <- ggplot(world) +
     label.x = 8.4, label.y = 320
   ) +
   ggsave("plots/openness~math.png")
-m5
+tm5
 
 #setup plot layout
-grid.arrange(m1, m2, m3, m4, m5, nrow = 3)
+grid.arrange(tm1, tm2, tm3, tm4, tm5, nrow = 3)
 
 #plot reading ------------------------------------------------------------------
 #plot average extroversion vs average reading per country
-r1 <- ggplot(world) +
+tr1 <- ggplot(world) +
   geom_point(aes(x = log(avg_EXT_E), y = reading, color = continent)) +
   coord_cartesian(xlim = c(8.55, 9.25)) +
   geom_smooth(aes(x = log(avg_EXT_E), y = reading), method = "lm") +
@@ -207,10 +207,10 @@ r1 <- ggplot(world) +
     label.x = 8.6, label.y = 320
   ) +
   ggsave("plots/extraversion~reading.png")
-r1
+tr1
 
 #plot average neuroticism vs average reading per country
-r2 <- ggplot(world) +
+tr2 <- ggplot(world) +
   geom_point(aes(x = log(avg_EST_E), y = reading, color = continent)) +
   coord_cartesian(xlim = c(8.3, 9.05)) +
   geom_smooth(aes(x = log(avg_EST_E), y = reading), method = "lm") +
@@ -226,10 +226,10 @@ r2 <- ggplot(world) +
     label.x = 8.4, label.y = 320
   ) +
   ggsave("plots/neuroticism~reading.png")
-r2
+tr2
 
 #plot average agreeableness vs average reading per country
-r3 <- ggplot(world) +
+tr3 <- ggplot(world) +
   geom_point(aes(x = log(avg_AGR_E), y = reading, color = continent)) +
   coord_cartesian(xlim = c(8.4, 9.1)) +
   geom_smooth(aes(x = log(avg_AGR_E), y = reading), method = "lm") +
@@ -245,10 +245,10 @@ r3 <- ggplot(world) +
     label.x = 8.5, label.y = 320
   ) +
   ggsave("plots/agreeableness~reading.png")
-r3
+tr3
 
 #plot average conscientiousness vs average reading per country
-r4 <- ggplot(world) +
+tr4 <- ggplot(world) +
   geom_point(aes(x = log(avg_CSN_E), y = reading, color = continent)) +
   coord_cartesian(xlim = c(8.45, 9.2)) +
   geom_smooth(aes(x = log(avg_CSN_E), y = reading), method = "lm") +
@@ -264,10 +264,10 @@ r4 <- ggplot(world) +
     label.x = 8.5, label.y = 320
   ) +
   ggsave("plots/conscientiousness~reading.png")
-r4
+tr4
 
 #plot average openness vs average reading per country
-r5 <- ggplot(world) +
+tr5 <- ggplot(world) +
   geom_point(aes(x = log(avg_OPN_E), y = reading, color = continent)) +
   coord_cartesian(xlim = c(8.3, 8.95)) +
   geom_smooth(aes(x = log(avg_OPN_E), y = reading), method = "lm") +
@@ -283,14 +283,14 @@ r5 <- ggplot(world) +
     label.x = 8.4, label.y = 320
   ) +
   ggsave("plots/openness~reading.png")
-r5
+tr5
 
 #setup plot layout
-grid.arrange(r1, r2, r3, r4, r5, nrow = 3)
+grid.arrange(tr1, tr2, tr3, tr4, tr5, nrow = 3)
 
 #plot science ------------------------------------------------------------------
 #plot average extroversion vs average science per country
-s1 <- ggplot(world) +
+ts1 <- ggplot(world) +
   geom_point(aes(x = log(avg_EXT_E), y = science, color = continent)) +
   coord_cartesian(xlim = c(8.55, 9.25)) +
   geom_smooth(aes(x = log(avg_EXT_E), y = science), method = "lm") +
@@ -306,10 +306,10 @@ s1 <- ggplot(world) +
     label.x = 8.6, label.y = 320
   ) +
   ggsave("plots/extraversion~science.png")
-s1
+ts1
 
 #plot average neuroticism vs average science per country
-s2 <- ggplot(world) +
+ts2 <- ggplot(world) +
   geom_point(aes(x = log(avg_EST_E), y = science, color = continent)) +
   coord_cartesian(xlim = c(8.3, 9.05)) +
   geom_smooth(aes(x = log(avg_EST_E), y = science), method = "lm") +
@@ -325,10 +325,10 @@ s2 <- ggplot(world) +
     label.x = 8.4, label.y = 320
   ) +
   ggsave("plots/neuroticism~science.png")
-s2
+ts2
 
 #plot average agreeableness vs average science per country
-s3 <- ggplot(world) +
+ts3 <- ggplot(world) +
   geom_point(aes(x = log(avg_AGR_E), y = science, color = continent)) +
   coord_cartesian(xlim = c(8.4, 9.1)) +
   geom_smooth(aes(x = log(avg_AGR_E), y = science), method = "lm") +
@@ -344,10 +344,10 @@ s3 <- ggplot(world) +
     label.x = 8.5, label.y = 320
   ) +
   ggsave("plots/agreeableness~science.png")
-s3
+ts3
 
 #plot average conscientiousness vs average science per country
-s4 <- ggplot(world) +
+ts4 <- ggplot(world) +
   geom_point(aes(x = log(avg_CSN_E), y = science, color = continent)) +
   coord_cartesian(xlim = c(8.45, 9.2)) +
   geom_smooth(aes(x = log(avg_CSN_E), y = science), method = "lm") +
@@ -363,10 +363,10 @@ s4 <- ggplot(world) +
     label.x = 8.5, label.y = 320
   ) +
   ggsave("plots/conscientiousness~science.png")
-s4
+ts4
 
 #plot average openness vs average science per country
-s5 <- ggplot(world) +
+ts5 <- ggplot(world) +
   geom_point(aes(x = log(avg_OPN_E), y = science, color = continent)) +
   coord_cartesian(xlim = c(8.3, 8.95)) +
   geom_smooth(aes(x = log(avg_OPN_E), y = science), method = "lm") +
@@ -382,20 +382,20 @@ s5 <- ggplot(world) +
     label.x = 8.4, label.y = 320
   ) +
   ggsave("plots/openness~science.png")
-s5
+ts5
 
 #compare graphs ----------------------------------------------------------------
 #extroversion
-grid.arrange(m1, r1, s1, nrow = 3)
+grid.arrange(tm1, tr1, ts1, nrow = 3)
  
 #neuroticism
-grid.arrange(m2, r2, s2, nrow = 3)
+grid.arrange(tm2, tr2, ts2, nrow = 3)
 
 #agreeableness
-grid.arrange(m3, r3, s3, nrow = 3)
+grid.arrange(tm3, tr3, ts3, nrow = 3)
 
 #conscientiousness
-grid.arrange(m4, r4, s4, nrow = 3)
+grid.arrange(tm4, tr4, ts4, nrow = 3)
 
 #openness
-grid.arrange(m5, r5, s5, nrow = 3)
+grid.arrange(tm5, tr5, ts5, nrow = 3)
