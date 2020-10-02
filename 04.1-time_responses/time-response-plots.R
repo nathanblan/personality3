@@ -399,3 +399,7 @@ grid.arrange(tm4, tr4, ts4, nrow = 3)
 
 #openness
 grid.arrange(tm5, tr5, ts5, nrow = 3)
+
+# ==============================================================================
+#top graphs
+grid.arrange(tr2, ts2, tr5, nrow = 3)
