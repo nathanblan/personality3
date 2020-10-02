@@ -359,4 +359,4 @@ grid.arrange(m5, r5, s5, nrow = 3)
 
 # ==============================================================================
 #top graphs
-grid.arrange(m2, s2, m4, nrow = 3)
+grid.arrange(m1, r1, r3, nrow = 3)
