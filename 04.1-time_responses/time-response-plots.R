@@ -218,12 +218,12 @@ tr2 <- ggplot(world) +
   stat_regline_equation(
     aes(x = log(avg_EST_E), y = reading, 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 8.6, label.y = 320
+    label.x = 8.7, label.y = 320
   ) +
   stat_cor(
     aes(x = log(avg_EST_E), y = reading,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 8.4, label.y = 320
+    label.x = 8.35, label.y = 320
   ) +
   ggsave("plots/neuroticism~reading.png")
 tr2
@@ -269,18 +269,18 @@ tr4
 #plot average openness vs average reading per country
 tr5 <- ggplot(world) +
   geom_point(aes(x = log(avg_OPN_E), y = reading, color = continent)) +
-  coord_cartesian(xlim = c(8.3, 8.95)) +
+  coord_cartesian(xlim = c(8.25, 9)) +
   geom_smooth(aes(x = log(avg_OPN_E), y = reading), method = "lm") +
   geom_text(aes(x = log(avg_OPN_E), y = reading, label = country)) +
   stat_regline_equation(
     aes(x = log(avg_OPN_E), y = reading, 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 8.6, label.y = 320
+    label.x = 8.65, label.y = 320
   ) +
   stat_cor(
     aes(x = log(avg_OPN_E), y = reading,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 8.4, label.y = 320
+    label.x = 8.3, label.y = 320
   ) +
   ggsave("plots/openness~reading.png")
 tr5
@@ -311,18 +311,18 @@ ts1
 #plot average neuroticism vs average science per country
 ts2 <- ggplot(world) +
   geom_point(aes(x = log(avg_EST_E), y = science, color = continent)) +
-  coord_cartesian(xlim = c(8.3, 9.05)) +
+  coord_cartesian(xlim = c(8.25, 9.1)) +
   geom_smooth(aes(x = log(avg_EST_E), y = science), method = "lm") +
   geom_text(aes(x = log(avg_EST_E), y = science, label = country)) +
   stat_regline_equation(
     aes(x = log(avg_EST_E), y = science, 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 8.6, label.y = 320
+    label.x = 8.7, label.y = 320
   ) +
   stat_cor(
     aes(x = log(avg_EST_E), y = science,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 8.4, label.y = 320
+    label.x = 8.3, label.y = 320
   ) +
   ggsave("plots/neuroticism~science.png")
 ts2
