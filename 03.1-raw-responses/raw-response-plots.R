@@ -48,18 +48,18 @@ grid.arrange(w1, w2, w3, nrow = 3)
 #plot average extroversion vs average math per country
 m1 <- ggplot(world) +
   geom_point(aes(x = avg_EXT, y = math, color = continent)) +
-  coord_cartesian(xlim = c(2.5, 3.2)) +
+  coord_cartesian(xlim = c(2.555, 3.15)) +
   geom_smooth(aes(x = avg_EXT, y = math), method = "lm") +
   geom_text(aes(x = avg_EXT, y = math, label = country)) +
   stat_regline_equation(
     aes(x = avg_EXT, y = math, 
         label =  paste(..eq.label.., sep = "~~~~")),
-    label.x = 3, label.y = 320
+    label.x = 3, label.y = 310
   ) +
   stat_cor(
     aes(x = avg_EXT, y = math,
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
-    label.x = 2.75, label.y = 320
+    label.x = 2.65, label.y = 310
   ) +
   ggsave("plots/extraversion~math.png")
 m1
