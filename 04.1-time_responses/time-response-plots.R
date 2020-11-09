@@ -1,6 +1,8 @@
 #time plots
 
 #plot time vs raw responses ----------------------------------------------------
+
+#extroversion times ------------------------------------------------------------
 #plot average extroversion-time vs average extroversion per country
 tt1 <- ggplot(world) +
   geom_point(aes(x = avg_EXT, y = log(avg_EXT_E), color = continent)) +
@@ -87,6 +89,7 @@ ext.opn <- ggplot(world) +
   ggsave("plots/extraversion-time~extroversion.png")
 ext.opn
 
+#neuroticism times -------------------------------------------------------------
 #plot average neuroticism-time vs average neuroticism per country
 tt2 <- ggplot(world) +
   geom_point(aes(x = avg_EST, y = log(avg_EST_E), color = continent)) +
@@ -173,24 +176,26 @@ est.opn <- ggplot(world) +
   ggsave("plots/extraversion-time~extroversion.png")
 est.opn
 
+#aggressiveness times ------------------------------------------------------------
 #plot average agreeableness-time vs average agreeableness per country
 tt3 <- ggplot(world) +
-  geom_point(aes(x = avg_EST, y = log(avg_AGR_E), color = continent)) +
-  geom_smooth(aes(x = avg_EST, y = log(avg_AGR_E)), method = "lm") +
-  geom_text(aes(x = avg_EST, y = log(avg_AGR_E), label = country)) +
+  geom_point(aes(x = avg_AGR, y = log(avg_AGR_E), color = continent)) +
+  geom_smooth(aes(x = avg_AGR, y = log(avg_AGR_E)), method = "lm") +
+  geom_text(aes(x = avg_AGR, y = log(avg_AGR_E), label = country)) +
   stat_regline_equation(
-    aes(x = avg_EST, y = log(avg_AGR_E), 
+    aes(x = avg_AGR, y = log(avg_AGR_E), 
         label =  paste(..eq.label.., sep = "~~~~")),
     label.x = 4, label.y = 8
   ) +
   stat_cor(
-    aes(x = avg_EST, y = log(avg_AGR_E),
+    aes(x = avg_AGR, y = log(avg_AGR_E),
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
     label.x = 3.5, label.y = 8
   ) +
   ggsave("plots/agreeableness-time~agreeableness.png")
 tt3
 
+#conscientiousness times -------------------------------------------------------
 #plot average conscientiousness-time vs average conscientiousness per country
 tt4 <- ggplot(world) +
   geom_point(aes(x = avg_CSN, y = log(avg_CSN_E), color = continent)) +
@@ -209,6 +214,7 @@ tt4 <- ggplot(world) +
   ggsave("plots/conscientiousness-time~conscientiousness.png")
 tt4
 
+#openness times ----------------------------------------------------------------
 #plot average openness-time vs average openness per country
 tt5 <- ggplot(world) +
   geom_point(aes(x = avg_OPN, y = log(avg_OPN_E), color = continent)) +
