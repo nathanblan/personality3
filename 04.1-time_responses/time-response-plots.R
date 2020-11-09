@@ -105,73 +105,73 @@ tt2 <- ggplot(world) +
   ggsave("plots/neuroticism-time~neuroticism.png")
 tt2
 
-ext.est <- ggplot(world) +
-  geom_point(aes(x = avg_EST, y = log(avg_EXT_E), color = continent)) +
-  geom_smooth(aes(x = avg_EST, y = log(avg_EXT_E)), method = "lm") +
-  geom_text(aes(x = avg_EST, y = log(avg_EXT_E), label = country)) +
+est.ext <- ggplot(world) +
+  geom_point(aes(x = avg_EXT, y = log(avg_EST_E), color = continent)) +
+  geom_smooth(aes(x = avg_EXT, y = log(avg_EST_E)), method = "lm") +
+  geom_text(aes(x = avg_EXT, y = log(avg_EST_E), label = country)) +
   stat_regline_equation(
-    aes(x = avg_EST, y = log(avg_EXT_E), 
+    aes(x = avg_EXT, y = log(avg_EST_E), 
         label =  paste(..eq.label.., sep = "~~~~")),
     label.x = 3, label.y = 8
   ) +
   stat_cor(
-    aes(x = avg_EST, y = log(avg_EXT_E),
+    aes(x = avg_EXT, y = log(avg_EST_E),
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
     label.x = 2, label.y = 8
   ) +
   ggsave("plots/extraversion-time~extroversion.png")
-ext.est
+est.ext
 
-ext.agr <- ggplot(world) +
-  geom_point(aes(x = avg_AGR, y = log(avg_EXT_E), color = continent)) +
-  geom_smooth(aes(x = avg_AGR, y = log(avg_EXT_E)), method = "lm") +
-  geom_text(aes(x = avg_AGR, y = log(avg_EXT_E), label = country)) +
+est.agr <- ggplot(world) +
+  geom_point(aes(x = avg_AGR, y = log(avg_EST_E), color = continent)) +
+  geom_smooth(aes(x = avg_AGR, y = log(avg_EST_E)), method = "lm") +
+  geom_text(aes(x = avg_AGR, y = log(avg_EST_E), label = country)) +
   stat_regline_equation(
-    aes(x = avg_AGR, y = log(avg_EXT_E), 
+    aes(x = avg_AGR, y = log(avg_EST_E), 
         label =  paste(..eq.label.., sep = "~~~~")),
     label.x = 3, label.y = 8
   ) +
   stat_cor(
-    aes(x = avg_AGR, y = log(avg_EXT_E),
+    aes(x = avg_AGR, y = log(avg_EST_E),
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
     label.x = 2, label.y = 8
   ) +
   ggsave("plots/extraversion-time~extroversion.png")
-ext.agr
+est.agr
 
-ext.csn <- ggplot(world) +
-  geom_point(aes(x = avg_CSN, y = log(avg_EXT_E), color = continent)) +
-  geom_smooth(aes(x = avg_CSN, y = log(avg_EXT_E)), method = "lm") +
-  geom_text(aes(x = avg_CSN, y = log(avg_EXT_E), label = country)) +
+est.csn <- ggplot(world) +
+  geom_point(aes(x = avg_CSN, y = log(avg_EST_E), color = continent)) +
+  geom_smooth(aes(x = avg_CSN, y = log(avg_EST_E)), method = "lm") +
+  geom_text(aes(x = avg_CSN, y = log(avg_EST_E), label = country)) +
   stat_regline_equation(
-    aes(x = avg_CSN, y = log(avg_EXT_E), 
+    aes(x = avg_CSN, y = log(avg_EST_E), 
         label =  paste(..eq.label.., sep = "~~~~")),
     label.x = 3, label.y = 8
   ) +
   stat_cor(
-    aes(x = avg_CSN, y = log(avg_EXT_E),
+    aes(x = avg_CSN, y = log(avg_EST_E),
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
     label.x = 2, label.y = 8
   ) +
   ggsave("plots/extraversion-time~extroversion.png")
-ext.csn
+est.csn
 
-ext.opn <- ggplot(world) +
-  geom_point(aes(x = avg_OPN, y = log(avg_EXT_E), color = continent)) +
-  geom_smooth(aes(x = avg_OPN, y = log(avg_EXT_E)), method = "lm") +
-  geom_text(aes(x = avg_OPN, y = log(avg_EXT_E), label = country)) +
+est.opn <- ggplot(world) +
+  geom_point(aes(x = avg_OPN, y = log(avg_EST_E), color = continent)) +
+  geom_smooth(aes(x = avg_OPN, y = log(avg_EST_E)), method = "lm") +
+  geom_text(aes(x = avg_OPN, y = log(avg_EST_E), label = country)) +
   stat_regline_equation(
-    aes(x = avg_OPN, y = log(avg_EXT_E), 
+    aes(x = avg_OPN, y = log(avg_EST_E), 
         label =  paste(..eq.label.., sep = "~~~~")),
     label.x = 3, label.y = 8
   ) +
   stat_cor(
-    aes(x = avg_OPN, y = log(avg_EXT_E),
+    aes(x = avg_OPN, y = log(avg_EST_E),
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
     label.x = 2, label.y = 8
   ) +
   ggsave("plots/extraversion-time~extroversion.png")
-ext.opn
+est.opn
 
 #plot average agreeableness-time vs average agreeableness per country
 tt3 <- ggplot(world) +
