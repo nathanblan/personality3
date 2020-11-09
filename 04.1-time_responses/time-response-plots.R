@@ -54,16 +54,16 @@ ext.agr <- ggplot(world) +
 ext.agr
 
 ext.csn <- ggplot(world) +
-  geom_point(aes(x = avg_EXT, y = log(avg_EXT_E), color = continent)) +
-  geom_smooth(aes(x = avg_EXT, y = log(avg_EXT_E)), method = "lm") +
-  geom_text(aes(x = avg_EXT, y = log(avg_EXT_E), label = country)) +
+  geom_point(aes(x = avg_CSN, y = log(avg_EXT_E), color = continent)) +
+  geom_smooth(aes(x = avg_CSN, y = log(avg_EXT_E)), method = "lm") +
+  geom_text(aes(x = avg_CSN, y = log(avg_EXT_E), label = country)) +
   stat_regline_equation(
-    aes(x = avg_EXT, y = log(avg_EXT_E), 
+    aes(x = avg_CSN, y = log(avg_EXT_E), 
         label =  paste(..eq.label.., sep = "~~~~")),
     label.x = 3, label.y = 8
   ) +
   stat_cor(
-    aes(x = avg_EXT, y = log(avg_EXT_E),
+    aes(x = avg_CSN, y = log(avg_EXT_E),
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
     label.x = 2, label.y = 8
   ) +
@@ -71,16 +71,16 @@ ext.csn <- ggplot(world) +
 ext.csn
 
 ext.opn <- ggplot(world) +
-  geom_point(aes(x = avg_EXT, y = log(avg_EXT_E), color = continent)) +
-  geom_smooth(aes(x = avg_EXT, y = log(avg_EXT_E)), method = "lm") +
-  geom_text(aes(x = avg_EXT, y = log(avg_EXT_E), label = country)) +
+  geom_point(aes(x = avg_OPN, y = log(avg_EXT_E), color = continent)) +
+  geom_smooth(aes(x = avg_OPN, y = log(avg_EXT_E)), method = "lm") +
+  geom_text(aes(x = avg_OPN, y = log(avg_EXT_E), label = country)) +
   stat_regline_equation(
-    aes(x = avg_EXT, y = log(avg_EXT_E), 
+    aes(x = avg_OPN, y = log(avg_EXT_E), 
         label =  paste(..eq.label.., sep = "~~~~")),
     label.x = 3, label.y = 8
   ) +
   stat_cor(
-    aes(x = avg_EXT, y = log(avg_EXT_E),
+    aes(x = avg_OPN, y = log(avg_EXT_E),
         label = paste(..rr.label.., ..p.label.., sep = "~`,`~")),
     label.x = 2, label.y = 8
   ) +
