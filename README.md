@@ -1,6 +1,9 @@
 World PISA scores and the Big 5 Personality Test
 Bryson Lan
 
+Medium Publication:
+https://nathanblan.medium.com/world-pisa-scores-and-the-big-5-personality-test-b30abd1b19e3
+
 Write up: 
 Draft10.2.20
 https://docs.google.com/document/d/12syKSzcBWa2-ogh_KZg38pXxRbTtnrX1PzU40Eyytjk/edit?usp=sharing
